@@ -1,0 +1,9 @@
+---
+title: " Module 4- Multi-variable Calculus- Integration"
+jupyter: python3
+---
+
+>**Syllabus:** Multivariable Calculus - Integration
+Double integrals (Cartesian) - Reversing the order of integration - Change of coordinates (Cartesian to  polar) - Finding areas and volume using double integrals - Mass and centre of gravity of inhomogeneous laminas using double integral - Triple integrals - Volume calculated as triple integral - Triple integral in cylindrical and spherical coordinates (computations involving spheres and cylinders only).
+
+----

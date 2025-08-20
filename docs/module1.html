@@ -1,0 +1,2212 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; Module-1: Linear Systems, Properties, and its Solution – Linear Algebra and Calculus</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./module2.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-364982630eef5352dd1537128a8ed5cb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./module1.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Module-1: Linear Systems, Properties, and its Solution</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Linear Algebra and Calculus</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Linear ALgebra and Calculus</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./module1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Module-1: Linear Systems, Properties, and its Solution</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./module2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Module-2: Matrix Eigen Value Problems</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./module3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Module 3: Multivariable Calculus - Differentiation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./module4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Module 4- Multi-variable Calculus- Integration</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./module5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Module 5- Series Representation of Functions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">3</span> Introduction</a>
+  <ul class="collapse">
+  <li><a href="#the-row-picture-intersecting-lines" id="toc-the-row-picture-intersecting-lines" class="nav-link" data-scroll-target="#the-row-picture-intersecting-lines"><span class="header-section-number">3.1</span> The Row Picture: Intersecting Lines</a></li>
+  <li><a href="#the-column-picture-combining-vectors" id="toc-the-column-picture-combining-vectors" class="nav-link" data-scroll-target="#the-column-picture-combining-vectors"><span class="header-section-number">3.2</span> The Column Picture: Combining Vectors</a></li>
+  <li><a href="#the-algorithm-gauss-elimination" id="toc-the-algorithm-gauss-elimination" class="nav-link" data-scroll-target="#the-algorithm-gauss-elimination"><span class="header-section-number">3.3</span> The Algorithm: Gauss Elimination</a>
+  <ul class="collapse">
+  <li><a href="#a-full-example-solving-a-3x3-system" id="toc-a-full-example-solving-a-3x3-system" class="nav-link" data-scroll-target="#a-full-example-solving-a-3x3-system"><span class="header-section-number">3.3.1</span> A Full Example: Solving a 3x3 System</a></li>
+  <li><a href="#row-echelon-form" id="toc-row-echelon-form" class="nav-link" data-scroll-target="#row-echelon-form"><span class="header-section-number">3.3.2</span> Row Echelon Form</a></li>
+  </ul></li>
+  <li><a href="#solve-the-following-using-gauss-elimination-method." id="toc-solve-the-following-using-gauss-elimination-method." class="nav-link" data-scroll-target="#solve-the-following-using-gauss-elimination-method."><span class="header-section-number">3.4</span> Solve the following using Gauss Elimination method.</a>
+  <ul class="collapse">
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1"><span class="header-section-number">3.4.1</span> Question 1</a></li>
+  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2"><span class="header-section-number">3.4.2</span> Question 2</a></li>
+  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3"><span class="header-section-number">3.4.3</span> Question 3</a></li>
+  <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4"><span class="header-section-number">3.4.4</span> Question 4</a></li>
+  <li><a href="#question-5" id="toc-question-5" class="nav-link" data-scroll-target="#question-5"><span class="header-section-number">3.4.5</span> Question 5</a></li>
+  </ul></li>
+  <li><a href="#tutorial-questions" id="toc-tutorial-questions" class="nav-link" data-scroll-target="#tutorial-questions"><span class="header-section-number">3.5</span> Tutorial questions</a>
+  <ul class="collapse">
+  <li><a href="#problem-1-circuit-analysis-electronics-core" id="toc-problem-1-circuit-analysis-electronics-core" class="nav-link" data-scroll-target="#problem-1-circuit-analysis-electronics-core"><span class="header-section-number">3.5.1</span> Problem 1: Circuit Analysis (Electronics Core)</a></li>
+  <li><a href="#problem-2-polynomial-curve-fitting-computer-graphics" id="toc-problem-2-polynomial-curve-fitting-computer-graphics" class="nav-link" data-scroll-target="#problem-2-polynomial-curve-fitting-computer-graphics"><span class="header-section-number">3.5.2</span> Problem 2: Polynomial Curve Fitting (Computer Graphics)</a></li>
+  <li><a href="#problem-3-network-traffic-flow-computer-science" id="toc-problem-3-network-traffic-flow-computer-science" class="nav-link" data-scroll-target="#problem-3-network-traffic-flow-computer-science"><span class="header-section-number">3.5.3</span> Problem 3: Network Traffic Flow (Computer Science)</a></li>
+  </ul></li>
+  <li><a href="#rank-and-the-fundamental-theorem" id="toc-rank-and-the-fundamental-theorem" class="nav-link" data-scroll-target="#rank-and-the-fundamental-theorem"><span class="header-section-number">3.6</span> Rank and The Fundamental Theorem</a></li>
+  <li><a href="#problems-on-rank-of-a-matrix" id="toc-problems-on-rank-of-a-matrix" class="nav-link" data-scroll-target="#problems-on-rank-of-a-matrix"><span class="header-section-number">3.7</span> Problems on Rank of a Matrix</a>
+  <ul class="collapse">
+  <li><a href="#problem-1" id="toc-problem-1" class="nav-link" data-scroll-target="#problem-1"><span class="header-section-number">3.7.1</span> Problem 1</a></li>
+  <li><a href="#problem-2" id="toc-problem-2" class="nav-link" data-scroll-target="#problem-2"><span class="header-section-number">3.7.2</span> Problem 2</a></li>
+  <li><a href="#problem-3" id="toc-problem-3" class="nav-link" data-scroll-target="#problem-3"><span class="header-section-number">3.7.3</span> Problem 3</a></li>
+  <li><a href="#problem-4" id="toc-problem-4" class="nav-link" data-scroll-target="#problem-4"><span class="header-section-number">3.7.4</span> Problem 4</a></li>
+  <li><a href="#problem-5" id="toc-problem-5" class="nav-link" data-scroll-target="#problem-5"><span class="header-section-number">3.7.5</span> Problem 5</a></li>
+  </ul></li>
+  <li><a href="#application-problems" id="toc-application-problems" class="nav-link" data-scroll-target="#application-problems"><span class="header-section-number">3.8</span> Application problems</a>
+  <ul class="collapse">
+  <li><a href="#problem-1-1" id="toc-problem-1-1" class="nav-link" data-scroll-target="#problem-1-1"><span class="header-section-number">3.8.1</span> Problem 1</a></li>
+  <li><a href="#problem-2-1" id="toc-problem-2-1" class="nav-link" data-scroll-target="#problem-2-1"><span class="header-section-number">3.8.2</span> Problem 2</a></li>
+  <li><a href="#problem-3-1" id="toc-problem-3-1" class="nav-link" data-scroll-target="#problem-3-1"><span class="header-section-number">3.8.3</span> Problem 3</a></li>
+  <li><a href="#problem-4-1" id="toc-problem-4-1" class="nav-link" data-scroll-target="#problem-4-1"><span class="header-section-number">3.8.4</span> Problem 4</a></li>
+  <li><a href="#problem-5-1" id="toc-problem-5-1" class="nav-link" data-scroll-target="#problem-5-1"><span class="header-section-number">3.8.5</span> Problem 5</a></li>
+  </ul></li>
+  <li><a href="#homogeneous-and-non-homogeneous-systems" id="toc-homogeneous-and-non-homogeneous-systems" class="nav-link" data-scroll-target="#homogeneous-and-non-homogeneous-systems"><span class="header-section-number">3.9</span> Homogeneous and Non-Homogeneous Systems</a>
+  <ul class="collapse">
+  <li><a href="#homogeneous-system-ax-0" id="toc-homogeneous-system-ax-0" class="nav-link" data-scroll-target="#homogeneous-system-ax-0"><span class="header-section-number">3.9.1</span> Homogeneous System: <span class="math inline">\(Ax = 0\)</span></a></li>
+  <li><a href="#non-homogeneous-system-ax-b" id="toc-non-homogeneous-system-ax-b" class="nav-link" data-scroll-target="#non-homogeneous-system-ax-b"><span class="header-section-number">3.9.2</span> Non-Homogeneous System: <span class="math inline">\(Ax = b\)</span></a></li>
+  </ul></li>
+  <li><a href="#module-i-summary" id="toc-module-i-summary" class="nav-link" data-scroll-target="#module-i-summary"><span class="header-section-number">3.10</span> Module I Summary</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Module-1: Linear Systems, Properties, and its Solution</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p><strong>Syllabus:</strong> System of linear equations - Solution by Gauss elimination - Row Echelon form and Rank of a matrix - Fundamental theorem for linear systems of homogeneous and nonhomogeneous (statement only) - Homogeneous linear system - Non-homogeneous linear system</p>
+</blockquote>
+<section id="introduction" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Introduction</h1>
+<p>Welcome! We’re about to begin a journey into one of the most useful and beautiful subjects in mathematics. But we’re not going to start with abstract definitions. We’re going to start with a concrete problem that you’ve seen before, but we’ll look at it in a new way. The entire field of linear algebra grew from the simple need to solve systems of linear equations.</p>
+<p>Let’s consider a simple system:</p>
+<p><span class="math display">\[
+\begin{align*}
+2x - y &amp;= 1 \\
+x + y &amp;= 5
+\end{align*}
+\]</span></p>
+<p>How do we think about this? There are two fundamental viewpoints, and seeing them both is the key to understanding linear algebra.</p>
+<section id="the-row-picture-intersecting-lines" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="the-row-picture-intersecting-lines"><span class="header-section-number">3.1</span> The Row Picture: Intersecting Lines</h2>
+<p>The first way, and the one you’re probably most familiar with, is the <strong>Row Picture</strong>. Each equation represents a line on the <span class="math inline">\(xy\)</span>-plane. The solution to the system is the single point where these two lines intersect.</p>
+<p>Let’s use Python to see this. We’re not just finding the answer; we’re visualizing the problem.</p>
+<div id="cell-fig-row-picture-matplotlib" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the matrix A and vector b for the system Ax = b</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>],</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>,  <span class="dv">1</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">5</span>])  <span class="co"># Corrected</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve Ax = b</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>solution <span class="op">=</span> np.linalg.solve(A, b)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>x_sol, y_sol <span class="op">=</span> solution  <span class="co"># unpack for plotting</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># For plotting the lines</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>x_vals <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">100</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># From 2x - y = 1  =&gt; y = 2x - 1</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>y1_vals <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> x_vals <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># From x + y = 5   =&gt; y = -x + 5</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>y2_vals <span class="op">=</span> <span class="op">-</span>x_vals <span class="op">+</span> <span class="dv">5</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Matplotlib Plotting ---</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca()</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the two lines</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>ax.plot(x_vals, y1_vals, label<span class="op">=</span><span class="st">'$2x - y = 1$'</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>ax.plot(x_vals, y2_vals, label<span class="op">=</span><span class="st">'$x + y = 5$'</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the solution point</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>ax.plot(x_sol, y_sol, <span class="st">'ro'</span>, markersize<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="ss">f'Solution (</span><span class="sc">{</span>x_sol<span class="sc">:.0f}</span><span class="ss">, </span><span class="sc">{</span>y_sol<span class="sc">:.0f}</span><span class="ss">)'</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Titles and labels</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"The Row Picture"</span>)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"x-axis"</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"y-axis"</span>)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Grid, legend, limits</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">4</span>)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="dv">6</span>)</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-row-picture-matplotlib" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-row-picture-matplotlib-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="module1_files/figure-html/fig-row-picture-matplotlib-output-1.png" width="661" height="523" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-row-picture-matplotlib-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: The Row Picture (Matplotlib): The solution <span class="math inline">\((2, 3)\)</span> is the intersection of two lines.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The plot clearly shows that the two lines meet at the point <strong><span class="math inline">\((2, 3)\)</span></strong>. That’s our solution. For a <span class="math inline">\(3 \times 3\)</span> system, the row picture would be three planes intersecting at a single point. For anything larger, we can’t draw it, but the idea is the same! This is why we need a more systematic approach.</p>
+</section>
+<section id="the-column-picture-combining-vectors" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="the-column-picture-combining-vectors"><span class="header-section-number">3.2</span> The Column Picture: Combining Vectors</h2>
+<p>Now for the second way, which is completely different and incredibly powerful. This is the <strong>Column Picture</strong>. We rewrite the system in a vector form:</p>
+<p><span class="math display">\[
+x \begin{bmatrix} 2 \\ 1 \end{bmatrix} + y \begin{bmatrix} -1 \\ 1 \end{bmatrix} = \begin{bmatrix} 1 \\ 5 \end{bmatrix}
+\]</span></p>
+<p>The question now becomes: how much of the first “column vector” <span class="math inline">\(\begin{bmatrix} 2 \\ 1\end{bmatrix}\)</span> do we need to add to how much of the second “column vector” <span class="math inline">\(\begin{bmatrix} -1 \\ 1\end{bmatrix}\)</span> to get the target vector <span class="math inline">\(\begin{bmatrix} 1 \\ 5\end{bmatrix}\)</span>?</p>
+<p>We are trying to find the correct linear combination of the column vectors.</p>
+<p>Let’s see what this looks like. We need to find the numbers <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> that let us “reach” the target vector <span class="math inline">\(b\)</span>. From the row picture, we already know the answer is <span class="math inline">\(x=2\)</span> and <span class="math inline">\(y=3\)</span>. Let’s verify this with the vectors.</p>
+<div id="cell-fig-column-picture" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the vectors</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>v1 <span class="op">=</span> np.array([<span class="dv">2</span>, <span class="dv">1</span>])</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>v2 <span class="op">=</span> np.array([<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>])</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">5</span>])</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># The solution coefficients</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> <span class="dv">2</span>, <span class="dv">3</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare the figure</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca()</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw base vectors from origin</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>ax.quiver(<span class="dv">0</span>, <span class="dv">0</span>, v1[<span class="dv">0</span>], v1[<span class="dv">1</span>], angles<span class="op">=</span><span class="st">'xy'</span>, scale_units<span class="op">=</span><span class="st">'xy'</span>, scale<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>          label<span class="op">=</span><span class="st">'v1 = [2, 1]'</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>ax.quiver(<span class="dv">0</span>, <span class="dv">0</span>, v2[<span class="dv">0</span>], v2[<span class="dv">1</span>], angles<span class="op">=</span><span class="st">'xy'</span>, scale_units<span class="op">=</span><span class="st">'xy'</span>, scale<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>          label<span class="op">=</span><span class="st">'v2 = [-1, 1]'</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw scaled v1 (2 * v1) from origin</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>scaled_v1 <span class="op">=</span> x <span class="op">*</span> v1</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>ax.quiver(<span class="dv">0</span>, <span class="dv">0</span>, scaled_v1[<span class="dv">0</span>], scaled_v1[<span class="dv">1</span>], angles<span class="op">=</span><span class="st">'xy'</span>, scale_units<span class="op">=</span><span class="st">'xy'</span>, scale<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>          alpha<span class="op">=</span><span class="fl">0.7</span>, label<span class="op">=</span><span class="st">'2 * v1'</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw scaled v2 (3 * v2) starting from the tip of 2*v1</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>scaled_v2 <span class="op">=</span> y <span class="op">*</span> v2</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>ax.quiver(scaled_v1[<span class="dv">0</span>], scaled_v1[<span class="dv">1</span>], scaled_v2[<span class="dv">0</span>], scaled_v2[<span class="dv">1</span>], angles<span class="op">=</span><span class="st">'xy'</span>,</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>          scale_units<span class="op">=</span><span class="st">'xy'</span>, scale<span class="op">=</span><span class="dv">1</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, label<span class="op">=</span><span class="st">'3 * v2 (from tip of 2*v1)'</span>)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw the target vector b from origin</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>ax.quiver(<span class="dv">0</span>, <span class="dv">0</span>, b[<span class="dv">0</span>], b[<span class="dv">1</span>], angles<span class="op">=</span><span class="st">'xy'</span>, scale_units<span class="op">=</span><span class="st">'xy'</span>, scale<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'red'</span>,</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>          label<span class="op">=</span><span class="st">'b = [1, 5]'</span>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Cosmetic adjustments</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">6</span>)</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">7</span>)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"x-component"</span>)</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"y-component"</span>)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">'equal'</span>, adjustable<span class="op">=</span><span class="st">'box'</span>)  <span class="co"># preserve vector directions/lengths</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"The Column Picture"</span>)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-column-picture" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-column-picture-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="module1_files/figure-html/fig-column-picture-output-1.png" width="465" height="523" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-column-picture-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2: The Column Picture: 2<em>v1 + 3</em>v2 = b, with v1=[2,1], v2=[-1,1], b=[1,5].
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This picture shows that if you walk along the blue vector twice, and then walk along the green vector three times, you land exactly on the red target vector. We have found the right combination!</p>
+</section>
+<section id="the-algorithm-gauss-elimination" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="the-algorithm-gauss-elimination"><span class="header-section-number">3.3</span> The Algorithm: Gauss Elimination</h2>
+<p>Drawing pictures is great for intuition, but it’s not a practical way to solve a <span class="math inline">\(10 \times 10\)</span> system. We need a rock-solid algorithm. That algorithm is <strong>Gauss Elimination</strong>. The goal is simple: turn a complicated system into a simple one that is easy to solve.</p>
+<p>We do this by creating an <strong>Augmented Matrix</strong>. It’s just a way to hold all the numbers of our system without writing the variables over and over.</p>
+<p>For the system: <span class="math display">\[
+\begin{align*}
+x + 2y + z &amp;= 2 \\
+3x + 8y + z &amp;= 12 \\
+4y + z &amp;= 2
+\end{align*}
+\]</span></p>
+<p>The augmented matrix is: <span class="math display">\[
+\left[
+\begin{array}{ccc|c}
+1 &amp; 2 &amp; 1 &amp; 2 \\
+3 &amp; 8 &amp; 1 &amp; 12 \\
+0 &amp; 4 &amp; 1 &amp; 2
+\end{array}
+\right]
+\]</span></p>
+<section id="the-rules-of-the-game" class="level4" data-number="3.3.0.1">
+<h4 data-number="3.3.0.1" class="anchored" data-anchor-id="the-rules-of-the-game"><span class="header-section-number">3.3.0.1</span> The Rules of the Game</h4>
+<p>There are only three operations we are allowed to do. These operations don’t change the final solution: 1. Swap two rows. 2. Multiply a row by a non-zero constant. 3. Add a multiple of one row to another row. (<span class="math inline">\(R_i \leftarrow R_i + cR_j\)</span>)</p>
+<p>Our goal is to use these rules to create zeros below the main diagonal. This turns the matrix into <strong>Row Echelon Form</strong>.</p>
+</section>
+<section id="a-full-example-solving-a-3x3-system" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="a-full-example-solving-a-3x3-system"><span class="header-section-number">3.3.1</span> A Full Example: Solving a 3x3 System</h3>
+<p>Let’s solve the system above using Python’s symbolic math library, <code>SymPy</code>. This is great for teaching because it can show us the exact steps and avoid messy decimals.</p>
+<div id="sympy-elimination" class="cell" data-cap="The step-by-step elimination process using SymPy." data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create augmented matrix</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> sp.Matrix([</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>,  <span class="dv">2</span>],</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">12</span>],</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">1</span>,  <span class="dv">2</span>]</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Original Matrix:"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>sp.pprint(M)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>M[<span class="dv">1</span>, :] <span class="op">=</span> M[<span class="dv">1</span>, :] <span class="op">-</span> <span class="dv">3</span> <span class="op">*</span> M[<span class="dv">0</span>, :]</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">After first elimination step (R_2 &lt;- R_2 - 3*R_1):"</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>sp.pprint(M)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>M[<span class="dv">2</span>, :] <span class="op">=</span> M[<span class="dv">2</span>, :] <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> M[<span class="dv">1</span>, :]</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">After second elimination step (R_3 &lt;- R_3 - 2*R_2):"</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>sp.pprint(M)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Original Matrix:
+⎡1  2  1  2 ⎤
+⎢           ⎥
+⎢3  8  1  12⎥
+⎢           ⎥
+⎣0  4  1  2 ⎦
+
+After first elimination step (R_2 &lt;- R_2 - 3*R_1):
+⎡1  2  1   2⎤
+⎢           ⎥
+⎢0  2  -2  6⎥
+⎢           ⎥
+⎣0  4  1   2⎦
+
+After second elimination step (R_3 &lt;- R_3 - 2*R_2):
+⎡1  2  1    2 ⎤
+⎢             ⎥
+⎢0  2  -2   6 ⎥
+⎢             ⎥
+⎣0  0  5   -10⎦</code></pre>
+</div>
+</div>
+<p>Look at that final matrix! We have an upper-triangular form. This is <strong>Row Echelon Form</strong>. The first non-zero entries in each row are called <strong>pivots</strong>. Here our pivots are 1, 2, and 5.</p>
+<p>The system has now become: <span class="math display">\[
+\begin{align*}
+x + 2y + z &amp;= 2 \\
+2y - 2z &amp;= 6 \\
+5z &amp;= -10
+\end{align*}
+\]</span></p>
+<p>This is easy to solve by <em>back substitution</em>. From the last row: <span class="math inline">\(5z = -10 \implies z = -2\)</span>. Substitute into the second row: <span class="math inline">\(2y - 2(-2) = 6 \implies 2y + 4 = 6 \implies y = 1\)</span>. Substitute both into the first row: <span class="math inline">\(x + 2(1) + (-2) = 2 \implies x = 2\)</span>.</p>
+<p>So the solution is <span class="math inline">\((x, y, z) = (2, 1, -2)\)</span>.</p>
+<p>Of course, we can have a computer do this all at once. The <code>rref()</code> method will take it all the way to <em>Reduced Row Echelon Form</em>, where the pivots are 1 and there are zeros <em>above</em> them as well.</p>
+<div id="sympy-rref" class="cell" data-cap="The final Reduced Row Echelon Form (RREF)." data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>M_original <span class="op">=</span> sp.Matrix([</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>,  <span class="dv">2</span>],</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">12</span>],</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">1</span>,  <span class="dv">2</span>]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>M_rref, pivots <span class="op">=</span> M_original.rref()</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Reduced Row Echelon Form (RREF):"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>sp.pprint(M_rref)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Pivot columns are:"</span>, pivots)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reduced Row Echelon Form (RREF):
+⎡1  0  0  2 ⎤
+⎢           ⎥
+⎢0  1  0  1 ⎥
+⎢           ⎥
+⎣0  0  1  -2⎦
+
+Pivot columns are: (0, 1, 2)</code></pre>
+</div>
+</div>
+<p>The RREF form directly tells us the solution: <span class="math inline">\(1x = 2\)</span>, <span class="math inline">\(1y = 1\)</span>, <span class="math inline">\(1z = -2\)</span>.</p>
+<p>In this method the unknowns are eliminated successively and the system is reduced to an upper triangular system from which the unknowns can be found by back substitution. &gt;<strong>Problem</strong> Using Gauss elimination method, solve the system <span class="math display">\[\begin{align*}
+        4x-6y &amp;=-11\\
+        -3x+8y &amp;=10
+    \end{align*}\]</span></p>
+<p><strong>Solution:</strong> The given system is <span class="math inline">\(AX=b\)</span> where <span class="math inline">\(A=\begin{bmatrix}
+    4 &amp;-6\\
+    -3 &amp;8
+\end{bmatrix}\)</span>, <span class="math inline">\(X=\begin{bmatrix}
+x\\
+y
+\end{bmatrix}\)</span>, <span class="math inline">\(b=\begin{bmatrix}
+-11\\
+10
+\end{bmatrix}\)</span> <span class="math display">\[\begin{align*}
+    [A|b]&amp;=\begin{bmatrix}
+        4 &amp;-6 &amp;\bigm| &amp;-11\\
+        -3 &amp;8 &amp;\bigm| &amp;10
+    \end{bmatrix}\\
+&amp;\sim \begin{bmatrix}
+    4 &amp;-6 &amp;\bigm| &amp;-11\\
+    0 &amp;\frac{7}{2} &amp;\bigm| &amp;\frac{7}{4}
+\end{bmatrix}\begin{array}{c}
+R_2\rightarrow R_2+\dfrac{3}{4}R_1
+\end{array}
+\end{align*}\]</span> The system is reduced to <span class="math display">\[\begin{bmatrix}
+    4 &amp;-6\\
+    0 &amp;\frac{7}{2}
+\end{bmatrix}\begin{bmatrix}
+x\\
+y
+\end{bmatrix}=\begin{bmatrix}
+-11\\
+\frac{7}{4}
+\end{bmatrix}\]</span> <span class="math display">\[\begin{align*}
+    4x-6y &amp;=-11......(1)\\
+    \frac{7}{2}y &amp;=\frac{7}{4}.....(2)
+\end{align*}\]</span></p>
+<p><span class="math inline">\((2)\rightarrow y=\frac{1}{2}\)</span> and substituting in (1) we get <span class="math inline">\(x=-2\)</span>. <span class="math inline">\(\therefore\)</span> the solution is <span class="math display">\[x=-2,y=\frac{1}{2}\]</span></p>
+<blockquote class="blockquote">
+<p><strong>Problem:</strong> Using Gauss elimination method, find the solution of <span class="math display">\[\begin{align*}
+x-y &amp;=-3\\
+-2x+2y &amp;=6
+\end{align*}\]</span></p>
+</blockquote>
+<p><strong>Solution:</strong> The given system is <span class="math inline">\(AX=B\)</span> where <span class="math inline">\(A=\begin{bmatrix}
+    1 &amp;-1\\
+    -2 &amp;2
+\end{bmatrix}\)</span>, <span class="math inline">\(X=\begin{bmatrix}
+    x\\
+    y
+\end{bmatrix}\)</span>, <span class="math inline">\(b=\begin{bmatrix}
+    -3\\
+    6
+\end{bmatrix}\)</span> <span class="math display">\[\begin{align*}
+    [A|b]&amp;=\begin{bmatrix}
+        1 &amp;-1 &amp;\bigm| &amp;-3\\
+        -2 &amp;2 &amp;\bigm| &amp;6
+    \end{bmatrix}\\
+    &amp;\sim \begin{bmatrix}
+        1 &amp;-1 &amp;\bigm| &amp;-3\\
+        0 &amp;0 &amp;\bigm| &amp;0
+    \end{bmatrix}\begin{array}{c}
+        R_2\rightarrow R_2+2R_1
+    \end{array}
+\end{align*}\]</span> The system is reduced to <span class="math display">\[\begin{bmatrix}
+    1 &amp;-1\\
+    0 &amp;0
+\end{bmatrix}\begin{bmatrix}
+    x\\
+    y
+\end{bmatrix}=\begin{bmatrix}
+    -3\\
+    0
+\end{bmatrix}\]</span> <span class="math display">\[\begin{align*}
+    x-y &amp;=-3.....(1)\\
+    0 &amp;=0.....(2)
+\end{align*}\]</span></p>
+<p>In (1) put <span class="math inline">\(y=t\)</span> then <span class="math inline">\(x=-3+t\)</span>. <span class="math inline">\(\therefore\)</span> the solution is <span class="math display">\[x=t-3,y=t\]</span></p>
+<blockquote class="blockquote">
+<p><strong>Problem</strong> Using Gauss elimination method, find the solution of</p>
+</blockquote>
+<p><span class="math display">\[\begin{align*}
+-x-y &amp;=1\\
+-3x-3y &amp;=2
+\end{align*}\]</span></p>
+<p><strong>Solution:</strong> The given system is <span class="math inline">\(AX=b\)</span> where <span class="math inline">\(A=\begin{bmatrix}
+    -1 &amp;-1\\
+    -3 &amp;-3
+\end{bmatrix}\)</span>, <span class="math inline">\(X=\begin{bmatrix}
+    x\\
+    y
+\end{bmatrix}\)</span>, <span class="math inline">\(b=\begin{bmatrix}
+    1\\
+    2
+\end{bmatrix}\)</span> <span class="math display">\[\begin{align*}
+    [A|b]&amp;=\begin{bmatrix}
+        -1 &amp;-1 &amp;\bigm| &amp;1\\
+        -3 &amp;-3 &amp;\bigm| &amp;2
+    \end{bmatrix}\\
+    &amp;\sim \begin{bmatrix}
+        -1 &amp;-1 &amp;\bigm| &amp;1\\
+        0 &amp;0 &amp;\bigm| &amp;-1
+    \end{bmatrix}\begin{array}{c}
+        R_2\rightarrow R_2-3R_1
+    \end{array}
+\end{align*}\]</span> The system is reduced to <span class="math display">\[\begin{bmatrix}
+    -1 &amp;-1\\
+    0 &amp;0
+\end{bmatrix}\begin{bmatrix}
+    x\\
+    y
+\end{bmatrix}=\begin{bmatrix}
+    1\\
+    -1
+\end{bmatrix}\]</span> <span class="math display">\[\begin{align*}
+    -x-y &amp;=1.....(1)\\
+    0 &amp;=-1.....(2)
+\end{align*}\]</span> The false statement <span class="math inline">\(0=-1\)</span> shows that the system has no solution.</p>
+<blockquote class="blockquote">
+<p><strong>Problem:</strong> Solve the linear system <span class="math display">\[\begin{align*}
+x_1-x_2+x_3 &amp;=0\\
+-x_1+x_2-x_3 &amp;=0\\
+10x_2+25x_3 &amp;= 90\\
+20x_1+10x_2 &amp;= 80
+\end{align*}\]</span></p>
+</blockquote>
+<p><strong>Solution:</strong> The given system is <span class="math inline">\(AX=B\)</span> where <span class="math inline">\(A=\begin{bmatrix}
+    1 &amp;-1 &amp;1\\
+    -1 &amp;1 &amp;-1\\
+    0 &amp;10 &amp;25\\
+    20 &amp;10 &amp;0
+\end{bmatrix}\)</span>, <span class="math inline">\(X=\begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+\end{bmatrix}\)</span>, <span class="math inline">\(b=\begin{bmatrix}
+    0\\
+    0\\
+    90\\
+    80
+\end{bmatrix}\)</span> <span class="math display">\[\begin{align*}
+    [A|b]&amp;=\begin{bmatrix}
+        1 &amp;-1  &amp;1 &amp;\bigm| &amp;0\\
+        -1 &amp;1 &amp;-1 &amp;\bigm| &amp;0\\
+        0 &amp;10 &amp;25 &amp;\bigm| &amp;90\\
+        20 &amp;10 &amp;0 &amp;\bigm| &amp;80
+    \end{bmatrix}\\
+    &amp;\sim \begin{bmatrix}
+        1 &amp;-1  &amp;1 &amp;\bigm| &amp;0\\
+        0 &amp;0 &amp;0 &amp;\bigm| &amp;0\\
+        0 &amp;10 &amp;25 &amp;\bigm| &amp;90\\
+        0 &amp;30 &amp;-20 &amp;\bigm| &amp;80
+    \end{bmatrix}\begin{array}{c}
+        R_2\rightarrow R_2+R_1\\
+        R_4\rightarrow R_4-20R_1
+    \end{array}\\
+    &amp;\sim \begin{bmatrix}
+    1 &amp;-1  &amp;1 &amp;\bigm| &amp;0\\
+    0 &amp;30 &amp;-20 &amp;\bigm| &amp;80\\
+    0 &amp;10 &amp;25 &amp;\bigm| &amp;90\\
+    0 &amp;0 &amp;0 &amp;\bigm| &amp;0
+\end{bmatrix}\begin{array}{c}
+    R_2\leftrightarrow R_4
+\end{array}\\
+&amp;\sim \begin{bmatrix}
+    1 &amp;-1  &amp;1 &amp;\bigm| &amp;0\\
+    0 &amp;10 &amp;25 &amp;\bigm| &amp;90\\
+    0 &amp;30 &amp;-20 &amp;\bigm| &amp;80\\
+        0 &amp;0 &amp;0 &amp;\bigm| &amp;0
+\end{bmatrix}\begin{array}{c}
+    R_2\leftrightarrow R_3
+\end{array}\\
+&amp;\sim \begin{bmatrix}
+    1 &amp;-1  &amp;1 &amp;\bigm| &amp;0\\
+    0 &amp;10 &amp;25 &amp;\bigm| &amp;90\\
+    0 &amp;0 &amp;-95 &amp;\bigm| &amp;-190\\
+    0 &amp;0 &amp;0 &amp;\bigm| &amp;0
+\end{bmatrix}\begin{array}{c}
+    R_3\rightarrow R_3-3R_2
+\end{array}\\
+\end{align*}\]</span> The system is reduced to <span class="math display">\[\begin{bmatrix}
+    1 &amp;-1 &amp;1\\
+    0 &amp;10 &amp;25\\
+    0 &amp;0 &amp;-95\\
+    0 &amp;0 &amp;0
+\end{bmatrix}\begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+\end{bmatrix}=\begin{bmatrix}
+    0\\
+    90\\
+    -190\\
+    0
+\end{bmatrix}\]</span> <span class="math display">\[\begin{align*}
+    x_1-x_2+x_3 &amp;=0.....(1)\\
+    10x_2+25x_3 &amp;=90.....(2)\\
+    -95x_3 &amp;=-190........(3)\\
+    0 &amp;=0............(4)
+\end{align*}\]</span> <span class="math inline">\((3)\rightarrow x_3=2\)</span> and substituting in (2), we get <span class="math inline">\(x_2=4\)</span></p>
+<p>Substituting the value of <span class="math inline">\(x_2\)</span> and <span class="math inline">\(x_3\)</span> in (1), we get <span class="math inline">\(x_1=2\)</span>. <span class="math inline">\(\therefore\)</span> the solution is <span class="math inline">\(x_1=2, x_2=4, x_3=2\)</span>.</p>
+<blockquote class="blockquote">
+<p><strong>Problem:</strong> Using Gauss elimination method, find the solution of the system of equation <span class="math display">\[\begin{align*}
+2x+z &amp;=3\\
+x-y-z&amp;=1\\
+3x-y &amp;= 4
+\end{align*}\]</span></p>
+</blockquote>
+<p><strong>Solution:</strong> The given system is <span class="math inline">\(AX=b\)</span> where <span class="math inline">\(A=\begin{bmatrix}
+    2 &amp;0 &amp;1\\
+    1 &amp;-1 &amp;-1\\
+    3 &amp;-1 &amp;0
+\end{bmatrix}\)</span>, <span class="math inline">\(X=\begin{bmatrix}
+    x\\
+    y\\
+    z
+\end{bmatrix}\)</span>, <span class="math inline">\(b=\begin{bmatrix}
+    3\\
+    1\\
+    4
+\end{bmatrix}\)</span> <span class="math display">\[\begin{align*}
+    [A|b]&amp;=\begin{bmatrix}
+        2 &amp;0  &amp;1 &amp;\bigm| &amp;3\\
+        1 &amp;-1 &amp;-1 &amp;\bigm| &amp;1\\
+        3 &amp;-1 &amp;0 &amp;\bigm| &amp;4
+    \end{bmatrix}\\
+    &amp;\sim \begin{bmatrix}
+        1 &amp;-1  &amp;-1 &amp;\bigm| &amp;1\\
+        2 &amp;0 &amp;1 &amp;\bigm| &amp;3\\
+        3 &amp;-1 &amp;0 &amp;\bigm| &amp;4
+    \end{bmatrix}\begin{array}{c}
+        R_1\leftrightarrow R_2
+    \end{array}\\
+    &amp;\sim \begin{bmatrix}
+        1 &amp;-1  &amp;-1 &amp;\bigm| &amp;1\\
+        0 &amp;2 &amp;3 &amp;\bigm| &amp;1\\
+        0 &amp;2 &amp;3 &amp;\bigm| &amp;1
+    \end{bmatrix}\begin{array}{c}
+        R_2\rightarrow R_2-2R_1\\
+        R_3\rightarrow R_3-3R_1
+    \end{array}\\
+    &amp;\sim \begin{bmatrix}
+        1 &amp;-1  &amp;-1 &amp;\bigm| &amp;1\\
+        0 &amp;2 &amp;3 &amp;\bigm| &amp;1\\
+        0 &amp;0 &amp;0 &amp;\bigm| &amp;0
+    \end{bmatrix}\begin{array}{c}
+        R_3\rightarrow R_3-R_2
+    \end{array}
+\end{align*}\]</span> The system is reduced to <span class="math display">\[\begin{bmatrix}
+    1 &amp;-1 &amp;-1\\
+    0 &amp;2 &amp;3\\
+    0 &amp;0 &amp;0
+\end{bmatrix}\begin{bmatrix}
+    x\\
+    y\\
+    z
+\end{bmatrix}=\begin{bmatrix}
+    1\\
+    1\\
+    0
+\end{bmatrix}\]</span> <span class="math display">\[\begin{align*}
+    x-y-z &amp;=1.....(1)\\
+    2y+3z &amp;=1.....(2)\\
+    0 &amp;=0........(3)
+\end{align*}\]</span> Put <span class="math inline">\(z=t\)</span>, then <span class="math inline">\((2)\rightarrow 2y=1-3t\Rightarrow y=\frac{1}{2}-\frac{3}{2}t\)</span>\ <span class="math inline">\((1)\rightarrow x=\frac{3}{2}-\frac{1}{2}t\)</span>. <span class="math inline">\(\therefore\)</span> the solution is <span class="math inline">\(x=\frac{3}{2}-\frac{1}{2}t, y=\frac{1}{2}-\frac{3}{2}t, z=t\)</span>.</p>
+<blockquote class="blockquote">
+<p><strong>Problem:</strong> Solve the linear system<br>
+<span class="math display">\[\begin{align*}
+3x_1+2x_2+x_3 &amp;=3\\
+2x_1+x_2+x_3 &amp;=0\\
+6x_1+2x_2+4x_3 &amp;= 6
+\end{align*}\]</span></p>
+</blockquote>
+<p><strong>Solution:</strong> $The given system is <span class="math inline">\(AX=b\)</span> where <span class="math inline">\(A=\begin{bmatrix}
+    3 &amp;2 &amp;1\\
+    2 &amp;1 &amp;1\\
+    6 &amp;2 &amp;4
+\end{bmatrix}\)</span>, <span class="math inline">\(X=\begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+\end{bmatrix}\)</span>, <span class="math inline">\(b=\begin{bmatrix}
+    3\\
+    0\\
+    6
+\end{bmatrix}\)</span> <span class="math display">\[\begin{align*}
+    [A|b]&amp;=\begin{bmatrix}
+        3 &amp;2  &amp;1 &amp;\bigm| &amp;3\\
+        2 &amp;1 &amp;1 &amp;\bigm| &amp;0\\
+        6 &amp;2 &amp;4 &amp;\bigm| &amp;6
+    \end{bmatrix}\\
+    &amp;\sim \begin{bmatrix}
+        3 &amp;2  &amp;1 &amp;\bigm| &amp;3\\
+        0 &amp;-\frac{1}{3} &amp;\frac{1}{3} &amp;\bigm| &amp;-2\\
+        0 &amp;-2 &amp;2 &amp;\bigm| &amp;0
+    \end{bmatrix}\begin{array}{c}
+        R_2\rightarrow R_2-\frac{2}{3}R_1\\
+        R_3\rightarrow R_3-2R_1
+    \end{array}\\
+    &amp;\sim \begin{bmatrix}
+        3 &amp;2  &amp;1 &amp;\bigm| &amp;3\\
+        0 &amp;-\frac{1}{3} &amp;\frac{1}{3} &amp;\bigm| &amp;-2\\
+        0 &amp;0 &amp;0 &amp;\bigm| &amp;12
+    \end{bmatrix}\begin{array}{c}
+        R_3\rightarrow R_3-6R_2
+    \end{array}
+\end{align*}\]</span> The system is reduced to <span class="math display">\[\begin{bmatrix}
+    3 &amp;2 &amp;1\\
+    0 &amp;-\frac{1}{3} &amp;\frac{1}{3}\\
+    0 &amp;0 &amp;0
+\end{bmatrix}\begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+\end{bmatrix}=\begin{bmatrix}
+    3\\
+    -2\\
+    12
+\end{bmatrix}\]</span> <span class="math display">\[\begin{align*}
+    3x_1+2x_2+x_3 &amp;=3.....(1)\\
+    -\frac{1}{3}x_2+\frac{1}{3}x_3 &amp;=9-2.....(2)\\
+    0 &amp;=12........(3)
+\end{align*}\]</span></p>
+<p>The false statement <span class="math inline">\(0=12\)</span> shows that the system has no solution.</p>
+<blockquote class="blockquote">
+<p><strong>Problem:</strong> Using Gauss elimination method, find the solution of the system of equation <span class="math display">\[\begin{align*}
+x+2y+z &amp;=3\\
+2x+3y+2z&amp;=5\\
+3x-5y+5z &amp;= 2\\
+3x+9y-z &amp;=4
+\end{align*}\]</span></p>
+</blockquote>
+<p><strong>Solution:</strong> The given system is <span class="math inline">\(AX=B\)</span> where <span class="math inline">\(A=\begin{bmatrix}
+    1 &amp;2 &amp;1\\
+    2 &amp;3 &amp;2\\
+    3 &amp;-5 &amp;5\\
+    3 &amp;9 &amp;-1
+\end{bmatrix}\)</span>, <span class="math inline">\(X=\begin{bmatrix}
+    x\\
+    y\\
+    z
+\end{bmatrix}\)</span>, <span class="math inline">\(b=\begin{bmatrix}
+    3\\
+    5\\
+    2\\
+    4
+\end{bmatrix}\)</span> <span class="math display">\[\begin{align*}
+    [A|b]&amp;=\begin{bmatrix}
+        1 &amp;2  &amp;1 &amp;\bigm| &amp;3\\
+        2 &amp;3 &amp;2 &amp;\bigm| &amp;5\\
+        3 &amp;-5 &amp;5 &amp;\bigm| &amp;2\\
+        3 &amp;9 &amp;-1 &amp;\bigm| &amp;4
+    \end{bmatrix}\\
+    &amp;\sim \begin{bmatrix}
+        1 &amp;2  &amp;1 &amp;\bigm| &amp;3\\
+        0 &amp;-1 &amp;0 &amp;\bigm| &amp;-1\\
+        0 &amp;-11 &amp;2 &amp;\bigm| &amp;-7\\
+        0 &amp;3 &amp;-4 &amp;\bigm| &amp;-5
+    \end{bmatrix}\begin{array}{c}
+        R_2\rightarrow R_2-2R_1\\
+        R_3\rightarrow R_3-3R_1\\
+        R_4\rightarrow R_4-3R_1
+    \end{array}\\
+    &amp;\sim \begin{bmatrix}
+        1 &amp;2  &amp;1 &amp;\bigm| &amp;3\\
+        0 &amp;-1 &amp;0 &amp;\bigm| &amp;-1\\
+        0 &amp;0 &amp;2 &amp;\bigm| &amp;4\\
+        0 &amp;0 &amp;-4 &amp;\bigm| &amp;-8
+    \end{bmatrix}\begin{array}{c}
+        R_3\rightarrow R_3-11R_2\\
+        R_4\rightarrow R_4+3R_2
+    \end{array}\\
+    &amp;\sim \begin{bmatrix}
+        1 &amp;2  &amp;1 &amp;\bigm| &amp;3\\
+        0 &amp;-1 &amp;0 &amp;\bigm| &amp;-1\\
+        0 &amp;0 &amp;2 &amp;\bigm| &amp;4\\
+        0 &amp;0 &amp;0 &amp;\bigm| &amp;0
+    \end{bmatrix}\begin{array}{c}
+        R_4\rightarrow R4+2R_3
+    \end{array}
+\end{align*}\]</span> The system is reduced to <span class="math display">\[\begin{bmatrix}
+    1 &amp;2 &amp;1\\
+    0 &amp;-1 &amp;0\\
+    0 &amp;0 &amp;2\\
+    0 &amp;0 &amp;0
+\end{bmatrix}\begin{bmatrix}
+    x\\
+    y\\
+    z
+\end{bmatrix}=\begin{bmatrix}
+    3\\
+    -1\\
+    4\\
+    0
+\end{bmatrix}\]</span> <span class="math display">\[\begin{align*}
+    x+2y+z &amp;=3.....(1)\\
+    -y+0z &amp;=-1.....(2)\\
+    2z &amp;=4 .........(3)\\
+    0 &amp;=0........(4)
+\end{align*}\]</span> <span class="math inline">\((3)\rightarrow z=2\)</span> and substituting in (2), we get <span class="math inline">\(y=1\)</span>\ Also substituting <span class="math inline">\(y\)</span> and <span class="math inline">\(z\)</span> in (1), we get <span class="math inline">\(x=-1\)</span>. <span class="math inline">\(\therefore\)</span> the solution is <span class="math inline">\(x=-1, y=1, z=2\)</span>.</p>
+</section>
+<section id="row-echelon-form" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="row-echelon-form"><span class="header-section-number">3.3.2</span> Row Echelon Form</h3>
+<p>At the end of the Gauss elimination the form of the coefficient matrix, the augmented matrix and the system itself are called row echelon form. In it, rows of zeros, if present, are the last rows and the number of zeros before the leading nonzero element in each row is greater than the corresponding number of zeros of the preceeding rows.</p>
+</section>
+</section>
+<section id="solve-the-following-using-gauss-elimination-method." class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="solve-the-following-using-gauss-elimination-method."><span class="header-section-number">3.4</span> Solve the following using Gauss Elimination method.</h2>
+<section id="question-1" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="question-1"><span class="header-section-number">3.4.1</span> Question 1</h3>
+<p>Solve the system: <span class="math display">\[
+\begin{cases}
+2x + y - z = 8 \\
+-3x - y + 2z = -11 \\
+-2x + y + 2z = -3
+\end{cases}
+\]</span></p>
+<p><strong>Solution:</strong></p>
+<p>Start with the augmented matrix: <span class="math display">\[
+\begin{bmatrix}
+2 &amp; 1 &amp; -1 &amp; 8 \\
+-3 &amp; -1 &amp; 2 &amp; -11 \\
+-2 &amp; 1 &amp; 2 &amp; -3
+\end{bmatrix}
+\]</span></p>
+<p>Apply <span class="math inline">\(R_2 \rightarrow R_2 + \frac{3}{2}R_1\)</span> and <span class="math inline">\(R_3 \rightarrow R_3 + R_1\)</span>:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+2 &amp; 1 &amp; -1 &amp; 8 \\
+0 &amp; 0.5 &amp; 0.5 &amp; 1 \\
+0 &amp; 2 &amp; 1 &amp; 5
+\end{bmatrix}
+\]</span></p>
+<p>Next, <span class="math inline">\(R_3 \rightarrow R_3 - 4R_2\)</span>:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+2 &amp; 1 &amp; -1 &amp; 8 \\
+0 &amp; 0.5 &amp; 0.5 &amp; 1 \\
+0 &amp; 0 &amp; -1 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<p>From the last row: <span class="math inline">\(z = -1\)</span>. Substituting back: - From <span class="math inline">\(R_2\)</span>: <span class="math inline">\(0.5y + 0.5(-1) = 1 \implies y = 3\)</span> - From <span class="math inline">\(R_1\)</span>: <span class="math inline">\(2x + 3 - (-1) = 8 \implies x = 2\)</span></p>
+<p>Final solution: <span class="math inline">\(\boxed{x=2, y=3, z=-1}\)</span>.</p>
+<hr>
+</section>
+<section id="question-2" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="question-2"><span class="header-section-number">3.4.2</span> Question 2</h3>
+<p>Solve: <span class="math display">\[
+\begin{cases}
+x + 2y + 3z = 14 \\
+2x + y + z = 10 \\
+3x + 4y + 7z = 30
+\end{cases}
+\]</span></p>
+<p><strong>Solution:</strong></p>
+<p>Augmented matrix: <span class="math display">\[
+\begin{bmatrix}
+1 &amp; 2 &amp; 3 &amp; 14 \\
+2 &amp; 1 &amp; 1 &amp; 10 \\
+3 &amp; 4 &amp; 7 &amp; 30
+\end{bmatrix}
+\]</span></p>
+<p><span class="math inline">\(R_2 \rightarrow R_2 - 2R_1\)</span>, <span class="math inline">\(R_3 \rightarrow R_3 - 3R_1\)</span>:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 2 &amp; 3 &amp; 14 \\
+0 &amp; -3 &amp; -5 &amp; -18 \\
+0 &amp; -2 &amp; -2 &amp; -12
+\end{bmatrix}
+\]</span></p>
+<p><span class="math inline">\(R_3 \rightarrow R_3 - \frac{2}{3}R_2\)</span>:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 2 &amp; 3 &amp; 14 \\
+0 &amp; -3 &amp; -5 &amp; -18 \\
+0 &amp; 0 &amp; \frac{4}{3} &amp; 0
+\end{bmatrix}
+\]</span></p>
+<p>From <span class="math inline">\(R_3\)</span>: <span class="math inline">\(z = 0\)</span>.<br>
+From <span class="math inline">\(R_2\)</span>: <span class="math inline">\(-3y - 5(0) = -18 \implies y = 6\)</span>.<br>
+From <span class="math inline">\(R_1\)</span>: <span class="math inline">\(x + 2(6) + 3(0) = 14 \implies x = 2\)</span>.</p>
+<p>Solution: <span class="math inline">\(\boxed{x=2, y=6, z=0}\)</span>.</p>
+<hr>
+</section>
+<section id="question-3" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="question-3"><span class="header-section-number">3.4.3</span> Question 3</h3>
+<p>Solve: <span class="math display">\[
+\begin{cases}
+x - y + z = 4 \\
+2x + y - z = 2 \\
+3x + y + z = 10
+\end{cases}
+\]</span></p>
+<p><strong>Solution:</strong></p>
+<p>Augmented matrix: <span class="math display">\[
+\begin{bmatrix}
+1 &amp; -1 &amp; 1 &amp; 4 \\
+2 &amp; 1 &amp; -1 &amp; 2 \\
+3 &amp; 1 &amp; 1 &amp; 10
+\end{bmatrix}
+\]</span></p>
+<p><span class="math inline">\(R_2 \rightarrow R_2 - 2R_1\)</span>, <span class="math inline">\(R_3 \rightarrow R_3 - 3R_1\)</span>:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; -1 &amp; 1 &amp; 4 \\
+0 &amp; 3 &amp; -3 &amp; -6 \\
+0 &amp; 4 &amp; -2 &amp; -2
+\end{bmatrix}
+\]</span></p>
+<p><span class="math inline">\(R_3 \rightarrow R_3 - \frac{4}{3}R_2\)</span>:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; -1 &amp; 1 &amp; 4 \\
+0 &amp; 3 &amp; -3 &amp; -6 \\
+0 &amp; 0 &amp; 2 &amp; 6
+\end{bmatrix}
+\]</span></p>
+<p>From <span class="math inline">\(R_3\)</span>: <span class="math inline">\(z = 3\)</span>.<br>
+From <span class="math inline">\(R_2\)</span>: <span class="math inline">\(3y - 3(3) = -6 \implies y = 1\)</span>.<br>
+From <span class="math inline">\(R_1\)</span>: <span class="math inline">\(x - 1 + 3 = 4 \implies x = 2\)</span>.</p>
+<p>Solution: <span class="math inline">\(\boxed{x=2, y=1, z=3}\)</span>.</p>
+<hr>
+</section>
+<section id="question-4" class="level3" data-number="3.4.4">
+<h3 data-number="3.4.4" class="anchored" data-anchor-id="question-4"><span class="header-section-number">3.4.4</span> Question 4</h3>
+<p>Solve: <span class="math display">\[
+\begin{cases}
+x + y + z = 6 \\
+2x + 3y + 5z = 4 \\
+4x + 0y + 5z = 2
+\end{cases}
+\]</span></p>
+<p><strong>Solution:</strong></p>
+<p>Augmented matrix: <span class="math display">\[
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 6 \\
+2 &amp; 3 &amp; 5 &amp; 4 \\
+4 &amp; 0 &amp; 5 &amp; 2
+\end{bmatrix}
+\]</span></p>
+<p><span class="math inline">\(R_2 \rightarrow R_2 - 2R_1\)</span>, <span class="math inline">\(R_3 \rightarrow R_3 - 4R_1\)</span>:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 6 \\
+0 &amp; 1 &amp; 3 &amp; -8 \\
+0 &amp; -4 &amp; 1 &amp; -22
+\end{bmatrix}
+\]</span></p>
+<p><span class="math inline">\(R_3 \rightarrow R_3 + 4R_2\)</span>:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 6 \\
+0 &amp; 1 &amp; 3 &amp; -8 \\
+0 &amp; 0 &amp; 13 &amp; -54
+\end{bmatrix}
+\]</span></p>
+<p>From <span class="math inline">\(R_3\)</span>: <span class="math inline">\(z = -54/13\)</span>.<br>
+From <span class="math inline">\(R_2\)</span>: <span class="math inline">\(y + 3(-54/13) = -8 \implies y = -8 + 162/13 = -104/13 + 162/13 = 58/13\)</span>.<br>
+From <span class="math inline">\(R_1\)</span>: <span class="math inline">\(x + 58/13 - 54/13 = 6 \implies x = 6 - 4/13 = 74/13\)</span>.</p>
+<p>Solution: <span class="math inline">\(\boxed{x=\frac{74}{13},\ y=\frac{58}{13},\ z=-\frac{54}{13}}\)</span>.</p>
+<hr>
+</section>
+<section id="question-5" class="level3" data-number="3.4.5">
+<h3 data-number="3.4.5" class="anchored" data-anchor-id="question-5"><span class="header-section-number">3.4.5</span> Question 5</h3>
+<p>Solve: <span class="math display">\[
+\begin{cases}
+2x + 4y - 2z = 2 \\
+4x + 9y - 3z = 8 \\
+-2x - 3y + 7z = 10
+\end{cases}
+\]</span></p>
+<p><strong>Solution:</strong></p>
+<p>Augmented matrix: <span class="math display">\[
+\begin{bmatrix}
+2 &amp; 4 &amp; -2 &amp; 2 \\
+4 &amp; 9 &amp; -3 &amp; 8 \\
+-2 &amp; -3 &amp; 7 &amp; 10
+\end{bmatrix}
+\]</span></p>
+<p><span class="math inline">\(R_2 \rightarrow R_2 - 2R_1\)</span>, <span class="math inline">\(R_3 \rightarrow R_3 + R_1\)</span>:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+2 &amp; 4 &amp; -2 &amp; 2 \\
+0 &amp; 1 &amp; 1 &amp; 4 \\
+0 &amp; 1 &amp; 5 &amp; 12
+\end{bmatrix}
+\]</span></p>
+<p><span class="math inline">\(R_3 \rightarrow R_3 - R_2\)</span>:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+2 &amp; 4 &amp; -2 &amp; 2 \\
+0 &amp; 1 &amp; 1 &amp; 4 \\
+0 &amp; 0 &amp; 4 &amp; 8
+\end{bmatrix}
+\]</span></p>
+<p>From <span class="math inline">\(R_3\)</span>: <span class="math inline">\(z = 2\)</span>.<br>
+From <span class="math inline">\(R_2\)</span>: <span class="math inline">\(y + 2 = 4 \implies y = 2\)</span>.<br>
+From <span class="math inline">\(R_1\)</span>: <span class="math inline">\(2x + 8 - 4 = 2 \implies x = -1\)</span>.</p>
+<p>Solution: <span class="math inline">\(\boxed{x=-1, y=2, z=2}\)</span>.</p>
+</section>
+</section>
+<section id="tutorial-questions" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="tutorial-questions"><span class="header-section-number">3.5</span> Tutorial questions</h2>
+<section id="problem-1-circuit-analysis-electronics-core" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="problem-1-circuit-analysis-electronics-core"><span class="header-section-number">3.5.1</span> Problem 1: Circuit Analysis (Electronics Core)</h3>
+<p><strong>Scenario:</strong></p>
+<p>You are given a simple DC circuit with three loops. Using Kirchhoff’s Voltage Law (KVL), which states that the sum of voltages around any closed loop must be zero, we can set up a system of equations to find the unknown loop currents <span class="math inline">\(i_1, i_2,\)</span> and <span class="math inline">\(i_3\)</span>.</p>
+<div id="fig-circuit" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-circuit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Circuit.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-circuit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.3: Circuit
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><strong>Loop 1:</strong> The 30V source minus the voltage drops across the 4Ω and 2Ω resistors gives the equation: <span class="math inline">\(30 - 4i_1 - 2(i_1 - i_2) = 0\)</span></li>
+<li><strong>Loop 2:</strong> The voltage drops across the 2Ω, 1Ω, and 3Ω resistors give: <span class="math inline">\(-2(i_2 - i_1) - 1i_2 - 3(i_2 - i_3) = 0\)</span></li>
+<li><strong>Loop 3:</strong> The voltage drops across the 3Ω and 5Ω resistors give: <span class="math inline">\(-3(i_3 - i_2) - 5i_3 = 0\)</span></li>
+</ul>
+<p>Find the values of the three loop currents: <span class="math inline">\(i_1, i_2,\)</span> and <span class="math inline">\(i_3\)</span>.</p>
+<p><strong>Solution:</strong></p>
+<blockquote class="blockquote">
+<p>Mathematical Setup</p>
+</blockquote>
+<p>First, simplify the equations and align the variables:</p>
+<ol type="1">
+<li><p><span class="math inline">\(30 - 6i_1 + 2i_2 = 0 \implies 6i_1 - 2i_2 + 0i_3 = 30\)</span></p></li>
+<li><p><span class="math inline">\(2i_1 - 6i_2 + 3i_3 = 0\)</span></p></li>
+<li><p><span class="math inline">\(3i_2 - 8i_3 = 0 \implies 0i_1 + 3i_2 - 8i_3 = 0\)</span></p></li>
+</ol>
+<p>This gives us the system <span class="math inline">\(Ax=b\)</span>.</p>
+<blockquote class="blockquote">
+<p>Step 1: Write the Augmented Matrix <span class="math display">\[
+\left[
+\begin{array}{ccc|c}
+6 &amp; -2 &amp; 0 &amp; 30 \\
+2 &amp; -6 &amp; 3 &amp; 0 \\
+0 &amp; 3 &amp; -8 &amp; 0
+\end{array}
+\right]
+\]</span></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Step 2: Perform Gauss Elimination</p>
+</blockquote>
+<p>Let’s simplify Row 1 first by dividing by 2: <span class="math inline">\(R_1 \leftarrow R_1 / 2\)</span>. <span class="math display">\[
+\left[
+\begin{array}{ccc|c}
+3 &amp; -1 &amp; 0 &amp; 15 \\
+2 &amp; -6 &amp; 3 &amp; 0 \\
+0 &amp; 3 &amp; -8 &amp; 0
+\end{array}
+\right]
+\]</span> Now, create a zero in the first column of Row 2. The operation is <span class="math inline">\(R_2 \leftarrow R_2 - \frac{2}{3}R_1\)</span>. (To make it easier, let’s do <span class="math inline">\(R_2 \leftarrow 3R_2 - 2R_1\)</span>). <span class="math display">\[
+3 \times [2, -6, 3, 0] \rightarrow [6, -18, 9, 0]
+\]</span> <span class="math display">\[
+2 \times [3, -1, 0, 15] \rightarrow [6, -2, 0, 30]
+\]</span> <span class="math display">\[
+\text{New } R_2 = [0, -16, 9, -30]
+\]</span> Our matrix is now: <span class="math display">\[
+\left[
+\begin{array}{ccc|c}
+3 &amp; -1 &amp; 0 &amp; 15 \\
+0 &amp; -16 &amp; 9 &amp; -30 \\
+0 &amp; 3 &amp; -8 &amp; 0
+\end{array}
+\right]
+\]</span> Finally, let’s eliminate the first element in Row 3. Oh, wait, it’s already zero! So we move to the next pivot. We need to create a zero in the second column of Row 3. The operation is <span class="math inline">\(R_3 \leftarrow R_3 + \frac{3}{16}R_2\)</span> (or <span class="math inline">\(R_3 \leftarrow 16R_3 + 3R_2\)</span>). <span class="math display">\[
+16 \times [0, 3, -8, 0] \rightarrow [0, 48, -128, 0]
+\]</span> <span class="math display">\[
+3 \times [0, -16, 9, -30] \rightarrow [0, -48, 27, -90]
+\]</span> <span class="math display">\[
+\text{New } R_3 = [0, 0, -101, -90]
+\]</span> Our final Row Echelon Form is: <span class="math display">\[
+\left[
+\begin{array}{ccc|c}
+3 &amp; -1 &amp; 0 &amp; 15 \\
+0 &amp; -16 &amp; 9 &amp; -30 \\
+0 &amp; 0 &amp; -101 &amp; -90
+\end{array}
+\right]
+\]</span></p>
+<blockquote class="blockquote">
+<p>Step 3: Back Substitution</p>
+</blockquote>
+<ul>
+<li>From <span class="math inline">\(R_3\)</span>: <span class="math inline">\(-101i_3 = -90 \implies i_3 = 90/101 \approx 0.891\)</span> A.</li>
+<li>From <span class="math inline">\(R_2\)</span>: <span class="math inline">\(-16i_2 + 9i_3 = -30 \implies -16i_2 + 9(90/101) = -30 \implies i_2 \approx 2.375\)</span> A.</li>
+<li>From <span class="math inline">\(R_1\)</span>: <span class="math inline">\(3i_1 - i_2 = 15 \implies 3i_1 - 2.375 = 15 \implies i_1 \approx 5.792\)</span> A.</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Python Verification</strong></p>
+</blockquote>
+<div id="solve-circuit" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Coefficient matrix A (from KVL equations)</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">6</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">0</span>],</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">2</span>, <span class="op">-</span><span class="dv">6</span>, <span class="dv">3</span>],</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">3</span>, <span class="op">-</span><span class="dv">8</span>]</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Constants vector b (from voltage sources)</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">30</span>, <span class="dv">0</span>, <span class="dv">0</span>])   <span class="co"># &lt;-- adjust according to your circuit</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve the system Ax = b</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>currents <span class="op">=</span> np.linalg.solve(A, b)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The solution currents are:"</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"i1 = </span><span class="sc">{</span>currents[<span class="dv">0</span>]<span class="sc">:.3f}</span><span class="ss"> Amps"</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"i2 = </span><span class="sc">{</span>currents[<span class="dv">1</span>]<span class="sc">:.3f}</span><span class="ss"> Amps"</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"i3 = </span><span class="sc">{</span>currents[<span class="dv">2</span>]<span class="sc">:.3f}</span><span class="ss"> Amps"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>The solution currents are:
+i1 = 5.792 Amps
+i2 = 2.376 Amps
+i3 = 0.891 Amps</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="problem-2-polynomial-curve-fitting-computer-graphics" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="problem-2-polynomial-curve-fitting-computer-graphics"><span class="header-section-number">3.5.2</span> Problem 2: Polynomial Curve Fitting (Computer Graphics)</h3>
+<p><strong>Scenario:</strong> You are a game developer designing a smooth path for a character. You want a parabola of the form <span class="math inline">\(y = ax^2 + bx + c\)</span> to pass through three specific points: <span class="math inline">\(P_1(-1, 10)\)</span>, <span class="math inline">\(P_2(1, 4)\)</span>, and <span class="math inline">\(P_3(2, 7)\)</span>. Find the coefficients <span class="math inline">\(a, b,\)</span> and <span class="math inline">\(c\)</span> that define this unique parabola.</p>
+<p><strong>Solution</strong></p>
+<blockquote class="blockquote">
+<p>Step 1: Mathematical Setup</p>
+</blockquote>
+<p>Each point must satisfy the equation <span class="math inline">\(y = ax^2 + bx + c\)</span>. Plugging in the coordinates gives us three linear equations for the unknowns <span class="math inline">\(a, b, c\)</span>.</p>
+<ul>
+<li>For <span class="math inline">\(P_1(-1, 10)\)</span>: <span class="math inline">\(a(-1)^2 + b(-1) + c = 10 \implies a - b + c = 10\)</span></li>
+<li>For <span class="math inline">\(P_2(1, 4)\)</span>: <span class="math inline">\(a(1)^2 + b(1) + c = 4 \implies a + b + c = 4\)</span></li>
+<li>For <span class="math inline">\(P_3(2, 7)\)</span>: <span class="math inline">\(a(2)^2 + b(2) + c = 7 \implies 4a + 2b + c = 7\)</span></li>
+</ul>
+<blockquote class="blockquote">
+<p>Step 2: Gauss Elimination</p>
+</blockquote>
+<ul>
+<li><strong>Matrix:</strong> <span class="math inline">\(\left[ \begin{array}{ccc|c} 1 &amp; -1 &amp; 1 &amp; 10 \\ 1 &amp; 1 &amp; 1 &amp; 4 \\ 4 &amp; 2 &amp; 1 &amp; 7 \end{array} \right]\)</span></li>
+<li><strong><span class="math inline">\(R_2 \leftarrow R_2 - R_1\)</span> and <span class="math inline">\(R_3 \leftarrow R_3 - 4R_1\)</span>:</strong> <span class="math inline">\(\left[ \begin{array}{ccc|c} 1 &amp; -1 &amp; 1 &amp; 10 \\ 0 &amp; 2 &amp; 0 &amp; -6 \\ 0 &amp; 6 &amp; -3 &amp; -33 \end{array} \right]\)</span></li>
+<li><strong><span class="math inline">\(R_3 \leftarrow R_3 - 3R_2\)</span>:</strong> <span class="math inline">\(\left[ \begin{array}{ccc|c} 1 &amp; -1 &amp; 1 &amp; 10 \\ 0 &amp; 2 &amp; 0 &amp; -6 \\ 0 &amp; 0 &amp; -3 &amp; -15 \end{array} \right]\)</span></li>
+</ul>
+<blockquote class="blockquote">
+<p>Step 3: Back Substitution:</p>
+</blockquote>
+<ul>
+<li><p><span class="math inline">\(-3c = -15 \implies c = 5\)</span></p></li>
+<li><p><span class="math inline">\(2b = -6 \implies b = -3\)</span></p></li>
+<li><p><span class="math inline">\(a - b + c = 10 \implies a - (-3) + 5 = 10 \implies a = 2\)</span></p></li>
+<li><p>The parabola is <span class="math inline">\(y = 2x^2 - 3x + 5\)</span>.</p></li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Python Verification</strong></p>
+</blockquote>
+<div id="cell-solve-polynomial" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix for system (x^2, x, 1) at points x = -1, 1, 2</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    [(<span class="op">-</span><span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>],   <span class="co"># point (-1, 10)</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    [(<span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span>,  <span class="dv">1</span>, <span class="dv">1</span>],    <span class="co"># point (1, 4)</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    [(<span class="dv">2</span>)<span class="op">**</span><span class="dv">2</span>,  <span class="dv">2</span>, <span class="dv">1</span>]     <span class="co"># point (2, 7)</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Corresponding y-values</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">10</span>, <span class="dv">4</span>, <span class="dv">7</span>])</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve for coefficients a, b, c</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>coeffs <span class="op">=</span> np.linalg.solve(A, b)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>a, b_c, c <span class="op">=</span> coeffs</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The coefficients are a=</span><span class="sc">{</span>a<span class="sc">:.1f}</span><span class="ss">, b=</span><span class="sc">{</span>b_c<span class="sc">:.1f}</span><span class="ss">, c=</span><span class="sc">{</span>c<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The parabola is y = </span><span class="sc">{</span>a<span class="sc">:.1f}</span><span class="ss">x² + </span><span class="sc">{</span>b_c<span class="sc">:.1f}</span><span class="ss">x + </span><span class="sc">{</span>c<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>x_vals <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">200</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>y_vals <span class="op">=</span> a <span class="op">*</span> x_vals<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> b_c <span class="op">*</span> x_vals <span class="op">+</span> c</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>plt.plot(x_vals, y_vals, label<span class="op">=</span><span class="st">'Fitted Parabola'</span>)</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">10</span>, <span class="dv">4</span>, <span class="dv">7</span>], <span class="st">'ro'</span>, label<span class="op">=</span><span class="st">'Data Points'</span>)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>The coefficients are a=2.0, b=-3.0, c=5.0
+The parabola is y = 2.0x² + -3.0x + 5.0</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="module1_files/figure-html/solve-polynomial-output-2.png" id="solve-polynomial" width="566" height="411" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="problem-3-network-traffic-flow-computer-science" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="problem-3-network-traffic-flow-computer-science"><span class="header-section-number">3.5.3</span> Problem 3: Network Traffic Flow (Computer Science)</h3>
+<p><strong>Scenario:</strong> The figure below shows the traffic flow (in cars per hour) over a network of one-way streets. The total flow into any intersection must equal the total flow out of that intersection. This conservation principle gives us a system of linear equations.</p>
+<div id="fig-network" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-network-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Network.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-network-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.4: Network diagram
+</figcaption>
+</figure>
+</div>
+<p>Consider a simpler 3-node network. * <strong>Node 1:</strong> <span class="math inline">\(500 = x_1 + x_2\)</span> * <strong>Node 2:</strong> <span class="math inline">\(x_1 + x_3 = 300\)</span> * <strong>Node 3:</strong> <span class="math inline">\(x_2 = x_3 + 200\)</span></p>
+<p>Find the traffic flows <span class="math inline">\(x_1, x_2,\)</span> and <span class="math inline">\(x_3\)</span>.</p>
+<p><strong>Solution:</strong></p>
+<blockquote class="blockquote">
+<p>Step 1: Mathematical Setup</p>
+</blockquote>
+<p>Rearrange the equations: 1. <span class="math inline">\(x_1 + x_2 + 0x_3 = 500\)</span> 2. <span class="math inline">\(x_1 + 0x_2 + x_3 = 300\)</span> 3. <span class="math inline">\(0x_1 + x_2 - x_3 = 200\)</span></p>
+<blockquote class="blockquote">
+<p>Step 2: Gauss Elimination</p>
+</blockquote>
+<ul>
+<li><p>The matrix form of the system can be written as: <span class="math inline">\(\left[ \begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; 500 \\ 1 &amp; 0 &amp; 1 &amp; 300 \\ 0 &amp; 1 &amp; -1 &amp; 200 \end{array} \right]\)</span>\ Using elementory transformations;</p></li>
+<li><p><strong><span class="math inline">\(R_2 \leftarrow R_2 - R_1\)</span>:</strong> <span class="math inline">\(\left[ \begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; 500 \\ 0 &amp; -1 &amp; 1 &amp; -200 \\ 0 &amp; 1 &amp; -1 &amp; 200 \end{array} \right]\)</span></p></li>
+<li><p><strong><span class="math inline">\(R_3 \leftarrow R_3 + R_2\)</span>:</strong> <span class="math inline">\(\left[ \begin{array}{ccc|c} 1 &amp; 1 &amp; 0 &amp; 500 \\ 0 &amp; -1 &amp; 1 &amp; -200 \\ 0 &amp; 0 &amp; 0 &amp; 0 \end{array} \right]\)</span></p></li>
+<li><p>It represents a system with two equations in three variables. So the system has infinitely many solutions!</p></li>
+</ul>
+<blockquote class="blockquote">
+<p>Step 3: Back substitution</p>
+</blockquote>
+<p>From the equations; <span class="math display">\[
+\begin{cases}
+x_1 + x_2 = 500 \\
+x_2 - x_3 = 200
+\end{cases}
+\]</span></p>
+<p>Let <span class="math inline">\(x_3 = t\)</span> (free parameter). Then:</p>
+<p><span class="math display">\[
+x_2 = 200 + t, \quad
+x_1 = 500 - x_2 = 300 - t.
+\]</span></p>
+<p>Thus the solution set is:</p>
+<p><span class="math display">\[
+(x_1, x_2, x_3) = (300 - t,\; 200 + t,\; t), \qquad t \in \mathbb{R}.
+\]</span></p>
+<hr>
+<blockquote class="blockquote">
+<p><em>Non-Negative Constraints</em></p>
+</blockquote>
+<p>If the variables represent flows, they must satisfy <span class="math inline">\(x_i \geq 0\)</span>:</p>
+<p><span class="math display">\[
+\begin{align*}
+x_1 &amp;= 300 - t \geq 0 \quad \Rightarrow \quad t \leq 300\\
+x_2 &amp;= 200 + t \geq 0 \quad \Rightarrow \quad t \geq -200\\
+x_3 = t \geq 0
+\end{align*}
+\]</span> Hence the valid range is: <span class="math display">\[
+0 \leq t \leq 300
+\]</span></p>
+<hr>
+<p><em>Example Solution</em></p>
+<p>For <span class="math inline">\(t = 50\)</span>, we get one solution as given below:</p>
+<p><span class="math display">\[
+(x_1, x_2, x_3) = (250, 250, 50).
+\]</span></p>
+<blockquote class="blockquote">
+<p><em>Python code for verification</em></p>
+</blockquote>
+<div id="solve-traffic" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Coefficient matrix from the equations:</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># x1 + x2      = 500</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># x1     + x3  = 300</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#      x2 - x3 = 200</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>],</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">500</span>, <span class="dv">300</span>, <span class="dv">200</span>])</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Since this system is dependent, use least-squares solution</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>flows, residuals, rank, s <span class="op">=</span> np.linalg.lstsq(A, b, rcond<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>x1, x2, x3 <span class="op">=</span> flows</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"General traffic flow solution (with free variable t):"</span>)</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"x1 = </span><span class="sc">{</span>x1<span class="sc">:.1f}</span><span class="ss"> + t"</span>)</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"x2 = </span><span class="sc">{</span>x2<span class="sc">:.1f}</span><span class="ss"> - t"</span>)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"x3 = </span><span class="sc">{</span>x3<span class="sc">:.1f}</span><span class="ss"> + t"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>General traffic flow solution (with free variable t):
+x1 = 266.7 + t
+x2 = 233.3 - t
+x3 = 33.3 + t</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="rank-and-the-fundamental-theorem" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="rank-and-the-fundamental-theorem"><span class="header-section-number">3.6</span> Rank and The Fundamental Theorem</h2>
+<p>The number of pivots in a matrix is a fundamentally important number. It is called the <strong>Rank</strong> of the matrix.</p>
+<blockquote class="blockquote">
+<p><strong>Definition: Rank</strong> The rank of a matrix <span class="math inline">\(A\)</span> is the number of pivots in its row echelon form.</p>
+</blockquote>
+<p>In our example, the rank is 3. The rank cannot be larger than the number of rows or columns.</p>
+<p>This brings us to the <em>Fundamental Theorem for Linear Systems</em>. This theorem tells us everything about the existence and uniqueness of solutions.</p>
+<blockquote class="blockquote">
+<p><strong>The Fundamental Theorem for Linear Systems (Statement Only)</strong></p>
+<ol type="1">
+<li><p><strong>Existence:</strong> A system <span class="math inline">\(Ax = b\)</span> has a solution if and only if the rank of the coefficient matrix <span class="math inline">\(A\)</span> is equal to the rank of the augmented matrix <span class="math inline">\([A | b]\)</span>. (In other words, the elimination process doesn’t lead to an impossible equation like <span class="math inline">\(0 = 5\)</span>).</p></li>
+<li><p><strong>Uniqueness:</strong></p>
+<ul>
+<li>If a solution exists and the <span class="math inline">\(\text{rank} = \text{number of variables}\)</span>, the solution is <em>unique</em>.</li>
+<li>If a solution exists and the <span class="math inline">\(\text{rank} &lt; \text{number of variables}\)</span>, there are <em>infinitely many solutions</em>. The difference <span class="math inline">\((\text{number of variables} - \text{rank})\)</span> tells you the number of “free variables” you can choose.</li>
+</ul></li>
+</ol>
+</blockquote>
+</section>
+<section id="problems-on-rank-of-a-matrix" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="problems-on-rank-of-a-matrix"><span class="header-section-number">3.7</span> Problems on Rank of a Matrix</h2>
+<section id="problem-1" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="problem-1"><span class="header-section-number">3.7.1</span> Problem 1</h3>
+<p>Find the rank of <span class="math inline">\(A = \begin{bmatrix} 1 &amp; 2 &amp; 3 \\ 2 &amp; 4 &amp; 6 \\ 3 &amp; 6 &amp; 9 \end{bmatrix}.\)</span></p>
+<p><strong>Solution:</strong><br>
+Applying row operations: <span class="math display">\[
+R_2 \to R_2 - 2R_1, \quad R_3 \to R_3 - 3R_1
+\]</span> <span class="math display">\[
+\Rightarrow \begin{bmatrix} 1 &amp; 2 &amp; 3 \\ 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{bmatrix}
+\]</span> Only one non-zero row remains.<br>
+<strong>Rank = 1</strong>.</p>
+<hr>
+</section>
+<section id="problem-2" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="problem-2"><span class="header-section-number">3.7.2</span> Problem 2</h3>
+<p>Find the rank of <span class="math inline">\(B = \begin{bmatrix} 2 &amp; 4 &amp; 1 \\ 0 &amp; 5 &amp; 2 \\ 0 &amp; 0 &amp; 3 \end{bmatrix}.\)</span></p>
+<p><strong>Solution:</strong><br>
+The matrix is in upper triangular form. All diagonal entries are non-zero.<br>
+<strong>Rank = 3</strong>.</p>
+<hr>
+</section>
+<section id="problem-3" class="level3" data-number="3.7.3">
+<h3 data-number="3.7.3" class="anchored" data-anchor-id="problem-3"><span class="header-section-number">3.7.3</span> Problem 3</h3>
+<p>Find the rank of <span class="math inline">\(C = \begin{bmatrix} 1 &amp; 1 &amp; 1 \\ 1 &amp; 2 &amp; 3 \\ 1 &amp; 3 &amp; 6 \end{bmatrix}.\)</span></p>
+<p><strong>Solution:</strong><br>
+Applying <span class="math inline">\(R_2 \to R_2 - R_1\)</span> and <span class="math inline">\(R_3 \to R_3 - R_1\)</span>: <span class="math display">\[
+\Rightarrow \begin{bmatrix} 1 &amp; 1 &amp; 1 \\ 0 &amp; 1 &amp; 2 \\ 0 &amp; 2 &amp; 5 \end{bmatrix}
+\]</span> Now <span class="math inline">\(R_3 \to R_3 - 2R_2\)</span>: <span class="math display">\[
+\Rightarrow \begin{bmatrix} 1 &amp; 1 &amp; 1 \\ 0 &amp; 1 &amp; 2 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}
+\]</span> All rows are non-zero.<br>
+<strong>Rank = 3</strong>.</p>
+<hr>
+</section>
+<section id="problem-4" class="level3" data-number="3.7.4">
+<h3 data-number="3.7.4" class="anchored" data-anchor-id="problem-4"><span class="header-section-number">3.7.4</span> Problem 4</h3>
+<p>Find the rank of <span class="math inline">\(D = \begin{bmatrix} 1 &amp; 2 &amp; 3 &amp; 4 \\ 2 &amp; 4 &amp; 6 &amp; 8 \\ 1 &amp; 3 &amp; 4 &amp; 7 \end{bmatrix}.\)</span></p>
+<p><strong>Solution:</strong></p>
+<p><span class="math inline">\(R_2 \to R_2 - 2R_1\)</span>, <span class="math inline">\(R_3 \to R_3 - R_1\)</span>: <span class="math display">\[
+\Rightarrow \begin{bmatrix} 1 &amp; 2 &amp; 3 &amp; 4 \\ 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 1 &amp; 3 \end{bmatrix}
+\]</span> Swap <span class="math inline">\(R_2\)</span> and <span class="math inline">\(R_3\)</span>: <span class="math display">\[
+\Rightarrow \begin{bmatrix} 1 &amp; 2 &amp; 3 &amp; 4 \\ 0 &amp; 1 &amp; 1 &amp; 3 \\ 0 &amp; 0 &amp; 0 &amp; 0 \end{bmatrix}
+\]</span> Two non-zero rows.<br>
+<strong>Rank = 2</strong>.</p>
+<hr>
+</section>
+<section id="problem-5" class="level3" data-number="3.7.5">
+<h3 data-number="3.7.5" class="anchored" data-anchor-id="problem-5"><span class="header-section-number">3.7.5</span> Problem 5</h3>
+<p>Find the rank of <span class="math inline">\(A = \begin{bmatrix} 0 &amp; 2 &amp; 4 \\ 1 &amp; 3 &amp; 5 \\ 2 &amp; 4 &amp; 6 \end{bmatrix}.\)</span></p>
+<p><strong>Solution:</strong><br>
+Swap <span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_2\)</span>: <span class="math display">\[
+\Rightarrow \begin{bmatrix} 1 &amp; 3 &amp; 5 \\ 0 &amp; 2 &amp; 4 \\ 2 &amp; 4 &amp; 6 \end{bmatrix}
+\]</span> <span class="math inline">\(R_3 \to R_3 - 2R_1\)</span>: <span class="math display">\[
+\Rightarrow \begin{bmatrix} 1 &amp; 3 &amp; 5 \\ 0 &amp; 2 &amp; 4 \\ 0 &amp; -2 &amp; -4 \end{bmatrix}
+\]</span> <span class="math inline">\(R_3 \to R_3 + R_2\)</span>: <span class="math display">\[
+\Rightarrow \begin{bmatrix} 1 &amp; 3 &amp; 5 \\ 0 &amp; 2 &amp; 4 \\ 0 &amp; 0 &amp; 0 \end{bmatrix}
+\]</span> Two non-zero rows.<br>
+<strong>Rank = 2</strong>.</p>
+</section>
+</section>
+<section id="application-problems" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="application-problems"><span class="header-section-number">3.8</span> Application problems</h2>
+<section id="problem-1-1" class="level3" data-number="3.8.1">
+<h3 data-number="3.8.1" class="anchored" data-anchor-id="problem-1-1"><span class="header-section-number">3.8.1</span> Problem 1</h3>
+<p>In a digital communication system, three transmitted signals are received at three different antennas. The received signal strengths (in arbitrary units) are represented by the matrix, <span class="math display">\[
+A =
+\begin{bmatrix}
+2 &amp; 3 &amp; 1 \\
+4 &amp; 6 &amp; 2 \\
+1 &amp; 1.5 &amp; 0.5
+\end{bmatrix}
+\]</span></p>
+<p>Determine the rank of <span class="math inline">\(A\)</span> and comment on whether the received signals are linearly independent.</p>
+<p><strong>Solution:</strong><br>
+By performing Gaussian elimination: <span class="math display">\[
+R_2 \to R_2 - 2R_1,\quad R_3 \to R_3 - 0.5R_1
+\]</span> We get:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+2 &amp; 3 &amp; 1 \\
+0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0
+\end{bmatrix}
+\]</span></p>
+<p>The rank is $1$. This implies that all received signals are linearly dependent — effectively carrying the same information.</p>
+<hr>
+</section>
+<section id="problem-2-1" class="level3" data-number="3.8.2">
+<h3 data-number="3.8.2" class="anchored" data-anchor-id="problem-2-1"><span class="header-section-number">3.8.2</span> Problem 2</h3>
+<p>In a computer vision system, the transformation matrix mapping 3D world points to 2D image points is given by:</p>
+<p><span class="math display">\[
+B =
+\begin{bmatrix}
+1 &amp; 0 &amp; 2 \\
+0 &amp; 1 &amp; 3 \\
+2 &amp; 1 &amp; 7
+\end{bmatrix}
+\]</span></p>
+<p>Find the rank of <span class="math inline">\(B\)</span> and state whether the transformation is invertible.</p>
+<p><strong>Solution:</strong><br>
+Perform:</p>
+<p><span class="math display">\[
+R_3 \to R_3 - 2R_1
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 0 &amp; 2 \\
+0 &amp; 1 &amp; 3 \\
+0 &amp; 1 &amp; 3
+\end{bmatrix}
+\]</span></p>
+<p>Now:</p>
+<p><span class="math display">\[
+R_3 \to R_3 - R_2
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 0 &amp; 2 \\
+0 &amp; 1 &amp; 3 \\
+0 &amp; 0 &amp; 0
+\end{bmatrix}
+\]</span></p>
+<p>Rank = <span class="math inline">\(2\)</span>. The transformation is not invertible because it is not full rank.</p>
+<hr>
+</section>
+<section id="problem-3-1" class="level3" data-number="3.8.3">
+<h3 data-number="3.8.3" class="anchored" data-anchor-id="problem-3-1"><span class="header-section-number">3.8.3</span> Problem 3</h3>
+<p>In a microprocessor system, the current equations for three loops are given by:</p>
+<p><span class="math display">\[
+\begin{cases}
+2I_1 + I_2 + I_3 = 5 \\
+4I_1 + 2I_2 + 2I_3 = 10 \\
+3I_1 + 1.5I_2 + 1.5I_3 = 7.5
+\end{cases}
+\]</span></p>
+<p>Form the coefficient matrix and determine its rank. Comment on the uniqueness of the solution.</p>
+<p><strong>Solution:</strong><br>
+Coefficient matrix:</p>
+<p><span class="math display">\[
+C =
+\begin{bmatrix}
+2 &amp; 1 &amp; 1 \\
+4 &amp; 2 &amp; 2 \\
+3 &amp; 1.5 &amp; 1.5
+\end{bmatrix}
+\]</span></p>
+<p>Using Gaussian elimination, all rows become proportional to the first row, giving rank = <span class="math inline">\(1\)</span>.<br>
+Since the rank is less than the number of variables, the system has infinitely many solutions.</p>
+<hr>
+</section>
+<section id="problem-4-1" class="level3" data-number="3.8.4">
+<h3 data-number="3.8.4" class="anchored" data-anchor-id="problem-4-1"><span class="header-section-number">3.8.4</span> Problem 4</h3>
+<p>In a data transmission system, the coding matrix is:</p>
+<p><span class="math display">\[
+D =
+\begin{bmatrix}
+1 &amp; 2 &amp; 3 &amp; 4 \\
+2 &amp; 4 &amp; 6 &amp; 8 \\
+1 &amp; 3 &amp; 4 &amp; 7
+\end{bmatrix}
+\]</span></p>
+<p>Find the rank and explain its implication on error detection capability.</p>
+<p><strong>Solution:</strong><br>
+Perform:</p>
+<p><span class="math display">\[
+R_2 \to R_2 - 2R_1
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 2 &amp; 3 &amp; 4 \\
+0 &amp; 0 &amp; 0 &amp; 0 \\
+1 &amp; 3 &amp; 4 &amp; 7
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+R_3 \to R_3 - R_1
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 2 &amp; 3 &amp; 4 \\
+0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 3
+\end{bmatrix}
+\]</span></p>
+<p>This has two non-zero rows → rank = <span class="math inline">\(2\)</span>.<br>
+A rank less than the number of columns implies reduced ability to detect and correct transmission errors.</p>
+<hr>
+</section>
+<section id="problem-5-1" class="level3" data-number="3.8.5">
+<h3 data-number="3.8.5" class="anchored" data-anchor-id="problem-5-1"><span class="header-section-number">3.8.5</span> Problem 5</h3>
+<p>An image compression algorithm stores pixel blocks as linear combinations of a set of basis images. The matrix of basis images is:</p>
+<p><span class="math display">\[
+E =
+\begin{bmatrix}
+1 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 1 \\
+1 &amp; 1 &amp; 2
+\end{bmatrix}
+\]</span></p>
+<p>Find the rank of <span class="math inline">\(E\)</span> and comment on whether the basis set is minimal.</p>
+<p><strong>Solution:</strong><br>
+Perform: <span class="math display">\[
+R_3 \to R_3 - R_1
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 1 \\
+0 &amp; 1 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+R_3 \to R_3 - R_2
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 1 \\
+0 &amp; 0 &amp; 0
+\end{bmatrix}
+\]</span></p>
+<p>Rank = <span class="math inline">\(2\)</span>. This means the third basis image is not independent; a smaller basis can be used for compression.</p>
+</section>
+</section>
+<section id="homogeneous-and-non-homogeneous-systems" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="homogeneous-and-non-homogeneous-systems"><span class="header-section-number">3.9</span> Homogeneous and Non-Homogeneous Systems</h2>
+<p>There are two main flavors of systems we need to discuss.</p>
+<section id="homogeneous-system-ax-0" class="level3" data-number="3.9.1">
+<h3 data-number="3.9.1" class="anchored" data-anchor-id="homogeneous-system-ax-0"><span class="header-section-number">3.9.1</span> Homogeneous System: <span class="math inline">\(Ax = 0\)</span></h3>
+<p>This is a system where the right-hand side is all zeros. For example: <span class="math inline">\(x + 2y + z = 0\)</span>.</p>
+<ul>
+<li>These systems <em>always</em> have at least one solution: the <em>trivial solution</em> <span class="math inline">\(x=0, y=0, z=0\)</span>.</li>
+<li>The interesting question is whether they have <em>non-trivial</em> solutions.</li>
+<li>From the Fundamental Theorem, we will have infinitely many (non-trivial) solutions if <span class="math inline">\(\text{rank} &lt; \text{number of variables}\)</span>. The solutions form a space called the <em>nullspace</em>.</li>
+</ul>
+<p>Let’s find the nullspace of a different matrix, one that has a non-trivial nullspace.</p>
+<div id="sympy-nullspace" class="cell" data-cap="The basis for the nullspace. Any multiple of this vector is a solution to Bx=0." data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix with non-trivial nullspace</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> sp.Matrix([</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>],</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>nullspace_vectors <span class="op">=</span> B.nullspace()</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The rank of matrix B is </span><span class="sc">{</span>B<span class="sc">.</span>rank()<span class="sc">}</span><span class="ss">. It has </span><span class="sc">{</span>B<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> columns."</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The nullspace is spanned by:"</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>sp.pprint(nullspace_vectors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>The rank of matrix B is 2. It has 3 columns.
+The nullspace is spanned by:
+⎡⎡1 ⎤⎤
+⎢⎢  ⎥⎥
+⎢⎢-2⎥⎥
+⎢⎢  ⎥⎥
+⎣⎣1 ⎦⎦</code></pre>
+</div>
+</div>
+<p>For matrix <span class="math inline">\(B\)</span>, the rank (2) is less than the number of variables (3), so there is one free variable and the nullspace is a line through the origin. Any multiple of the vector <span class="math inline">\([1, -2, 1]^T\)</span> is a solution to <span class="math inline">\(Bx=0\)</span>.</p>
+</section>
+<section id="non-homogeneous-system-ax-b" class="level3" data-number="3.9.2">
+<h3 data-number="3.9.2" class="anchored" data-anchor-id="non-homogeneous-system-ax-b"><span class="header-section-number">3.9.2</span> Non-Homogeneous System: <span class="math inline">\(Ax = b\)</span></h3>
+<p>This is the general case where <span class="math inline">\(b\)</span> is not all zeros. The complete solution has a beautiful structure.</p>
+<blockquote class="blockquote">
+<p><em>Structure of the Complete Solution</em> The complete solution to <span class="math inline">\(Ax = b\)</span> is given by: <span class="math display">\[ x_{\text{complete}} = x_{\text{particular}} + x_{\text{homogeneous}} \]</span></p>
+<p>Where: * <span class="math inline">\(x_{\text{particular}}\)</span> is <strong>one</strong> particular solution to <span class="math inline">\(Ax = b\)</span>. * <span class="math inline">\(x_{\text{homogeneous}}\)</span> is <strong>all</strong> the solutions to the associated homogeneous system <span class="math inline">\(Ax = 0\)</span>.</p>
+</blockquote>
+<p>This is an amazing and deep result! It says that the set of all solutions to <span class="math inline">\(Ax = b\)</span> is just a shifted version of the nullspace. The nullspace goes through the origin, and we just shift the whole thing by one particular solution vector.</p>
+</section>
+</section>
+<section id="module-i-summary" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="module-i-summary"><span class="header-section-number">3.10</span> Module I Summary</h2>
+<ul>
+<li>We can view a linear system in two ways: the <em>Row Picture</em> (intersecting hyperplanes) and the <em>Column Picture</em> (linear combination of vectors).</li>
+<li><em>Gauss Elimination</em> is the core algorithm for solving any system. It reduces the system to <em>Row Echelon Form</em>.</li>
+<li>The <em>rank</em> of a matrix is the number of pivots, and it’s the most important number about that matrix.</li>
+<li>The <em>Fundamental Theorem</em> tells us when solutions exist and if they are unique, all based on the rank.</li>
+<li>The complete solution to <span class="math inline">\(Ax = b\)</span> is a combination of one particular solution and all solutions to <span class="math inline">\(Ax = 0\)</span> (the nullspace).</li>
+</ul>
+<p>This module has set the stage. We have the main problem (<span class="math inline">\(Ax=b\)</span>) and the main algorithm (elimination). In the next modules, we will build a much deeper understanding of the matrix <span class="math inline">\(A\)</span> itself.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Introduction to Linear ALgebra and Calculus">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Linear ALgebra and Calculus</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./module2.html" class="pagination-link" aria-label="Module-2: Matrix Eigen Value Problems">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Module-2: Matrix Eigen Value Problems</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

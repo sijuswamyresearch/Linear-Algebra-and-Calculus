@@ -1,0 +1,32 @@
+project:
+  type: book
+  output-dir: docs
+book:
+  title: "Linear Algebra and Calculus"
+  author: "Siju Swamy"
+  date: "8/11/2025"
+  chapters:
+    - index.qmd
+    - module1.qmd
+    - module2.qmd
+    - module3.qmd
+    - module4.qmd
+    - module5.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format: 
+  html:
+    toc: true
+    theme: cosmo
+    code-fold: True
+    fig-cap-location: bottom
+    mathjax: true
+  pdf:
+    include-in-header:
+      - text: |
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+jupyter: python3

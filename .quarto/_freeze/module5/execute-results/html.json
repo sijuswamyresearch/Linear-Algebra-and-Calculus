@@ -1,0 +1,12 @@
+{
+  "hash": "3a03618eb82987b36e84cc92ca2a955e",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: ' Module 5- Series Representation of Functions'\n---\n\n>**Syllabus:** Series Representation of Functions\nTaylor series and Maclaurin series - Binomial series - Fourier series - Euler formulae - Convergence of Fourier series - Half Range sine and cosine series.\n\n----\n\n",
+    "supporting": [
+      "module5_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

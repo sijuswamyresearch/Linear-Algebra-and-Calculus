@@ -1,0 +1,8 @@
+---
+title: " Module 5- Series Representation of Functions"
+jupyter: python3
+---
+>**Syllabus:** Series Representation of Functions
+Taylor series and Maclaurin series - Binomial series - Fourier series - Euler formulae - Convergence of Fourier series - Half Range sine and cosine series.
+
+----

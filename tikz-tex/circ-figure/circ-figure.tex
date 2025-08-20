@@ -1,0 +1,58 @@
+\documentclass[tikz]{standalone}
+% \usepackage{tikz} % already loaded by the documentclass
+\usepackage{adjustbox}
+
+\begin{document}
+%%| filename: circ-figure
+%%| caption: A circuit Figure
+%%| additionalPackages: \usepackage{adjustbox}
+
+\usetikzlibrary{arrows, arrows.meta}
+\begin{tikzpicture}
+\begin{circuitikz}[scale=1.4, >=stealth, every node/.style={transform shape}]
+    % Coordinates
+    \coordinate (b0) at (0,0);
+    \coordinate (t0) at (0,3);
+    \coordinate (t1) at (3,3);
+    \coordinate (b1) at (3,0);
+    \coordinate (t2) at (6,3);
+    \coordinate (b2) at (6,0);
+    \coordinate (t3) at (9,3);
+    \coordinate (b3) at (9,0);
+
+    % Top chain: battery and top resistors (labels placed ABOVE with l^=)
+    \draw (b0) to[battery,l_=$30\,\mathrm{V}$] (t0)
+          to[R,l^={$4\Omega$}] (t1)
+          to[R,l^={$1\Omega$}] (t2)
+          to[R,l^={$5\Omega$}] (t3)
+          to[short] (b3) -- (b2) -- (b1) -- (b0); % bottom wire
+
+    % Vertical shared resistors (labels placed OUTSIDE to avoid arrows)
+    \draw (t1) to[R,l^={$2\Omega$},*-*] (b1); % label to the left of the element
+    \draw (t2) to[R,l_={$3\Omega$},*-*] (b2); % label to the right of the element
+
+    % -------- Loop direction arrows (clockwise) drawn as rectangular paths inside meshes --------
+    % Mesh 1 interior rectangle (x: 0.6..2.4, y: 0.6..2.4)
+    \draw[very thick, blue, ->, shorten <=2pt, shorten >=2pt] (0.6,0.6) -- (0.6,2.4); % up
+    \draw[very thick, blue, ->, shorten <=2pt, shorten >=2pt] (0.6,2.4) -- (2.4,2.4); % right
+    \draw[very thick, blue, ->, shorten <=2pt, shorten >=2pt] (2.4,2.4) -- (2.4,0.6); % down
+    \draw[very thick, blue, ->, shorten <=2pt, shorten >=2pt] (2.4,0.6) -- (0.8,0.6); % left (slightly short to avoid overlap)
+    \node[blue] at (1.5,1.5) {$i_1$ (cw)};
+
+    % Mesh 2 interior rectangle (x: 3.6..5.4, y: 0.6..2.4)
+    \draw[very thick, blue, ->, shorten <=2pt, shorten >=2pt] (3.6,0.6) -- (3.6,2.4); % up
+    \draw[very thick, blue, ->, shorten <=2pt, shorten >=2pt] (3.6,2.4) -- (5.4,2.4); % right
+    \draw[very thick, blue, ->, shorten <=2pt, shorten >=2pt] (5.4,2.4) -- (5.4,0.6); % down
+    \draw[very thick, blue, ->, shorten <=2pt, shorten >=2pt] (5.4,0.6) -- (3.8,0.6); % left
+    \node[blue] at (4.5,1.5) {$i_2$ (cw)};
+
+    % Mesh 3 interior rectangle (x: 6.6..8.4, y: 0.6..2.4)
+    \draw[very thick, blue, ->, shorten <=2pt, shorten >=2pt] (6.6,0.6) -- (6.6,2.4); % up
+    \draw[very thick, blue, ->, shorten <=2pt, shorten >=2pt] (6.6,2.4) -- (8.4,2.4); % right
+    \draw[very thick, blue, ->, shorten <=2pt, shorten >=2pt] (8.4,2.4) -- (8.4,0.6); % down
+    \draw[very thick, blue, ->, shorten <=2pt, shorten >=2pt] (8.4,0.6) -- (6.8,0.6); % left
+    \node[blue] at (7.5,1.5) {$i_3$ (cw)};
+\end{circuitikz}
+\end{tikzpicture}
+\end{document}
+      
