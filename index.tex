@@ -857,11 +857,15 @@ The RREF form directly tells us the solution: \(1x = 2\), \(1y = 1\),
 
 In this method the unknowns are eliminated successively and the system
 is reduced to an upper triangular system from which the unknowns can be
-found by back substitution. \textgreater{}\textbf{Problem} Using Gauss
-elimination method, solve the system \begin{align*}
-        4x-6y &=-11\\
-        -3x+8y &=10
-    \end{align*}
+found by back substitution.
+
+\begin{quote}
+\textbf{Problem 1:} Using Gauss elimination method, solve the system
+\begin{align*}
+4x-6y &=-11\\
+-3x+8y &=10
+\end{align*}
+\end{quote}
 
 \textbf{Solution:} The given system is \(AX=b\) where
 \(A=\begin{bmatrix}
@@ -902,7 +906,7 @@ y
 \(x=-2\). \(\therefore\) the solution is \[x=-2,y=\frac{1}{2}\]
 
 \begin{quote}
-\textbf{Problem:} Using Gauss elimination method, find the solution of
+\textbf{Problem 2:} Using Gauss elimination method, find the solution of
 \begin{align*}
 x-y &=-3\\
 -2x+2y &=6
@@ -948,7 +952,7 @@ In (1) put \(y=t\) then \(x=-3+t\). \(\therefore\) the solution is
 \[x=t-3,y=t\]
 
 \begin{quote}
-\textbf{Problem} Using Gauss elimination method, find the solution of
+\textbf{Problem 3:} Using Gauss elimination method, find the solution of
 \end{quote}
 
 \begin{align*}
@@ -993,7 +997,7 @@ In (1) put \(y=t\) then \(x=-3+t\). \(\therefore\) the solution is
 solution.
 
 \begin{quote}
-\textbf{Problem:} Solve the linear system \begin{align*}
+\textbf{Problem 4:} Solve the linear system \begin{align*}
 x_1-x_2+x_3 &=0\\
 -x_1+x_2-x_3 &=0\\
 10x_2+25x_3 &= 90\\
@@ -1082,7 +1086,7 @@ Substituting the value of \(x_2\) and \(x_3\) in (1), we get \(x_1=2\).
 \(\therefore\) the solution is \(x_1=2, x_2=4, x_3=2\).
 
 \begin{quote}
-\textbf{Problem:} Using Gauss elimination method, find the solution of
+\textbf{Problem 5:} Using Gauss elimination method, find the solution of
 the system of equation \begin{align*}
 2x+z &=3\\
 x-y-z&=1\\
@@ -1154,8 +1158,7 @@ solution is
 \(x=\frac{3}{2}-\frac{1}{2}t, y=\frac{1}{2}-\frac{3}{2}t, z=t\).
 
 \begin{quote}
-\textbf{Problem:} Solve the linear system\\
-\begin{align*}
+\textbf{Problem 6:} Solve the linear system \begin{align*}
 3x_1+2x_2+x_3 &=3\\
 2x_1+x_2+x_3 &=0\\
 6x_1+2x_2+4x_3 &= 6
@@ -1217,7 +1220,7 @@ solution is
 The false statement \(0=12\) shows that the system has no solution.
 
 \begin{quote}
-\textbf{Problem:} Using Gauss elimination method, find the solution of
+\textbf{Problem 7:} Using Gauss elimination method, find the solution of
 the system of equation \begin{align*}
 x+2y+z &=3\\
 2x+3y+2z&=5\\
@@ -1575,7 +1578,6 @@ the unknown loop currents \(i_1, i_2,\) and \(i_3\).
 \end{figure}%
 
 \begin{itemize}
-\tightlist
 \item
   \textbf{Loop 1:} The 30V source minus the voltage drops across the 4Ω
   and 2Ω resistors gives the equation: \(30 - 4i_1 - 2(i_1 - i_2) = 0\)
@@ -1675,7 +1677,6 @@ Step 3: Back Substitution
 \end{quote}
 
 \begin{itemize}
-\tightlist
 \item
   From \(R_3\): \(-101i_3 = -90 \implies i_3 = 90/101 \approx 0.891\) A.
 \item
@@ -2502,7 +2503,7 @@ Solving this equation for \(\lambda\) gives us the eigenvalues. Then,
 for each eigenvalue, we plug it back into \((A - \lambda I)x = 0\) to
 find the corresponding eigenvector(s).
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, coltitle=black, bottomtitle=1mm, toptitle=1mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, breakable, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 2x2 Matrices}, left=2mm, opacityback=0, titlerule=0mm, arc=.35mm, bottomrule=.15mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, colback=white]
+\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6, left=2mm, breakable, leftrule=.75mm, arc=.35mm, rightrule=.15mm, opacityback=0, coltitle=black, colframe=quarto-callout-note-color-frame, bottomtitle=1mm, toptitle=1mm, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 2x2 Matrices}, colback=white, toprule=.15mm]
 
 For any 2x2 matrix \(A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}\),
 the characteristic equation is always:
@@ -2522,7 +2523,7 @@ determinant and plug them into the quadratic formula.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, coltitle=black, bottomtitle=1mm, toptitle=1mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, breakable, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 3x3 Matrices}, left=2mm, opacityback=0, titlerule=0mm, arc=.35mm, bottomrule=.15mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, colback=white]
+\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6, left=2mm, breakable, leftrule=.75mm, arc=.35mm, rightrule=.15mm, opacityback=0, coltitle=black, colframe=quarto-callout-note-color-frame, bottomtitle=1mm, toptitle=1mm, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 3x3 Matrices}, colback=white, toprule=.15mm]
 
 A similar, though more complex, shortcut exists for 3x3 matrices. The
 characteristic equation is:

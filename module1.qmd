@@ -250,7 +250,8 @@ print("\nPivot columns are:", pivots)
 The RREF form directly tells us the solution: $1x = 2$, $1y = 1$, $1z = -2$.
 
 In this method the unknowns are eliminated successively and the system is reduced to an upper triangular system from which the unknowns can be found by back substitution.
->**Problem**
+
+>**Problem 1:**
 	Using Gauss elimination method, solve the system
 	\begin{align*}
 		4x-6y &=-11\\
@@ -296,7 +297,7 @@ y
 
 $(2)\rightarrow y=\frac{1}{2}$ and substituting in (1) we get $x=-2$. $\therefore$ the solution is $$x=-2,y=\frac{1}{2}$$
 
->**Problem:**
+>**Problem 2:**
 	Using Gauss elimination method, find the solution of
 	\begin{align*}
 		x-y &=-3\\
@@ -342,7 +343,7 @@ The system is reduced to $$\begin{bmatrix}
 
 In (1) put $y=t$ then $x=-3+t$. $\therefore$ the solution is $$x=t-3,y=t$$
 
->**Problem** Using Gauss elimination method, find the solution of
+>**Problem 3:** Using Gauss elimination method, find the solution of
 
 \begin{align*}
 -x-y &=1\\
@@ -387,7 +388,7 @@ The system is reduced to $$\begin{bmatrix}
 \end{align*}
 The false statement $0=-1$ shows that the system has no solution.
 
->**Problem:** Solve the linear system
+>**Problem 4:** Solve the linear system
 \begin{align*}
 		x_1-x_2+x_3 &=0\\
 		-x_1+x_2-x_3 &=0\\
@@ -476,7 +477,7 @@ $(3)\rightarrow x_3=2$ and substituting in (2), we get $x_2=4$
 
 Substituting the value of $x_2$ and $x_3$ in (1), we get $x_1=2$. $\therefore$ the solution is $x_1=2, x_2=4, x_3=2$.
 
->**Problem:**
+>**Problem 5:**
 	Using Gauss elimination method, find the solution of the system of equation	
 \begin{align*}
 		2x+z &=3\\
@@ -547,7 +548,7 @@ The system is reduced to $$\begin{bmatrix}
 Put $z=t$, then $(2)\rightarrow 2y=1-3t\Rightarrow y=\frac{1}{2}-\frac{3}{2}t$\\
 $(1)\rightarrow x=\frac{3}{2}-\frac{1}{2}t$. $\therefore$ the solution is $x=\frac{3}{2}-\frac{1}{2}t, y=\frac{1}{2}-\frac{3}{2}t, z=t$.
 
->**Problem:** Solve the linear system	
+>**Problem 6:** Solve the linear system	
     \begin{align*}
 		3x_1+2x_2+x_3 &=3\\
 		2x_1+x_2+x_3 &=0\\
@@ -610,7 +611,7 @@ The system is reduced to $$\begin{bmatrix}
 
 The false statement $0=12$ shows that the system has no solution.
 
->**Problem:** 	Using Gauss elimination method, find the solution of the system of equation	
+>**Problem 7:** 	Using Gauss elimination method, find the solution of the system of equation	
 \begin{align*}
 		x+2y+z &=3\\
 		2x+3y+2z&=5\\
@@ -954,8 +955,10 @@ You are given a simple DC circuit with three loops. Using Kirchhoff's Voltage La
 
 *   **Loop 1:** The 30V source minus the voltage drops across the 4Ω and 2Ω resistors gives the equation:
     $30 - 4i_1 - 2(i_1 - i_2) = 0$
+
 *   **Loop 2:** The voltage drops across the 2Ω, 1Ω, and 3Ω resistors give:
     $-2(i_2 - i_1) - 1i_2 - 3(i_2 - i_3) = 0$
+
 *   **Loop 3:** The voltage drops across the 3Ω and 5Ω resistors give:
     $-3(i_3 - i_2) - 5i_3 = 0$
 
@@ -1042,7 +1045,9 @@ $$
 >Step 3: Back Substitution
 
 *   From $R_3$: $-101i_3 = -90 \implies i_3 = 90/101 \approx 0.891$ A.
+
 *   From $R_2$: $-16i_2 + 9i_3 = -30 \implies -16i_2 + 9(90/101) = -30 \implies i_2 \approx 2.375$ A.
+
 *   From $R_1$: $3i_1 - i_2 = 15 \implies 3i_1 - 2.375 = 15 \implies i_1 \approx 5.792$ A.
 
 >**Python Verification**
