@@ -1983,6 +1983,179 @@ x2 = 233.3 - t
 x3 = 33.3 + t
 \end{verbatim}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Application Challenge: Gauss Elimination for Multiple Linear
+Regression}\label{application-challenge-gauss-elimination-for-multiple-linear-regression}
+
+\begin{quote}
+\textbf{Objective}
+\end{quote}
+
+This challenge demonstrates how the \textbf{Gauss elimination method}
+from Linear Algebra can be applied to solve a \textbf{multiple linear
+regression} problem.\\
+We use the \textbf{Diabetes dataset} available in \texttt{sklearn} and
+compare our solution with the library function
+\texttt{LinearRegression}.
+
+\begin{quote}
+\textbf{Dataset:}
+\end{quote}
+
+Use the Diabetes dataset from \texttt{sklearn.datasets}. Let the
+response be the target vector \(y\). Use the first three features as
+predictors. Include an intercept term.
+
+\begin{quote}
+\textbf{Step 1:} Formulation of the regression problem
+\end{quote}
+
+For multiple linear regression, we model the response variable \(y\) as
+
+\[
+y \approx X \beta
+\]
+
+where
+
+\begin{itemize}
+\tightlist
+\item
+  \(X\) is the \textbf{design matrix} (with columns for features and an
+  intercept),\\
+\item
+  \(\beta\) is the vector of \textbf{regression coefficients},\\
+\item
+  \(y\) is the \textbf{target vector}.
+\end{itemize}
+
+The \textbf{least squares solution} is obtained from the \textbf{normal
+equations}:
+
+\[
+(X^T X) \beta = X^T y
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\textbf{Step 2:} Load the dataset and prepare \(X\) and \(y\)
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{from}\NormalTok{ sklearn.datasets }\ImportTok{import}\NormalTok{ load\_diabetes}
+
+\CommentTok{\# Load the diabetes dataset}
+\NormalTok{X, y }\OperatorTok{=}\NormalTok{ load\_diabetes(return\_X\_y}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+
+\CommentTok{\# Select the first 3 features for simplicity}
+\NormalTok{X }\OperatorTok{=}\NormalTok{ X[:, :}\DecValTok{3}\NormalTok{]}
+
+\CommentTok{\# Add a column of ones for the intercept}
+\NormalTok{X }\OperatorTok{=}\NormalTok{ np.c\_[np.ones(X.shape[}\DecValTok{0}\NormalTok{]), X]}
+
+\CommentTok{\# Normal equations}
+\NormalTok{A }\OperatorTok{=}\NormalTok{ X.T }\OperatorTok{@}\NormalTok{ X}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ X.T }\OperatorTok{@}\NormalTok{ y}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Matrix A (X\^{}T X):}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, A)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Vector b (X\^{}T y):}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, b)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Matrix A (X^T X):
+ [[ 4.42000000e+02 -1.66533454e-16  2.60902411e-15 -1.00239261e-13]
+ [-1.66533454e-16  1.00000000e+00  1.73737101e-01  1.85084666e-01]
+ [ 2.60902411e-15  1.73737101e-01  1.00000000e+00  8.81613990e-02]
+ [-1.00239261e-13  1.85084666e-01  8.81613990e-02  1.00000000e+00]]
+
+Vector b (X^T y):
+ [67243.           304.18307453    69.71535568   949.43526038]
+\end{verbatim}
+
+\begin{quote}
+\textbf{Step 3:} Solve using Gauss elimination
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ gauss\_elimination(A, b):}
+\NormalTok{    A }\OperatorTok{=}\NormalTok{ A.astype(}\BuiltInTok{float}\NormalTok{).copy()}
+\NormalTok{    b }\OperatorTok{=}\NormalTok{ b.astype(}\BuiltInTok{float}\NormalTok{).copy()}
+\NormalTok{    n }\OperatorTok{=} \BuiltInTok{len}\NormalTok{(b)}
+    
+    \CommentTok{\# Forward elimination}
+    \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(n):}
+        \CommentTok{\# Normalize the pivot row}
+\NormalTok{        pivot }\OperatorTok{=}\NormalTok{ A[i, i]}
+\NormalTok{        A[i] }\OperatorTok{=}\NormalTok{ A[i] }\OperatorTok{/}\NormalTok{ pivot}
+\NormalTok{        b[i] }\OperatorTok{=}\NormalTok{ b[i] }\OperatorTok{/}\NormalTok{ pivot}
+        
+        \CommentTok{\# Eliminate below}
+        \ControlFlowTok{for}\NormalTok{ j }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(i}\OperatorTok{+}\DecValTok{1}\NormalTok{, n):}
+\NormalTok{            factor }\OperatorTok{=}\NormalTok{ A[j, i]}
+\NormalTok{            A[j] }\OperatorTok{=}\NormalTok{ A[j] }\OperatorTok{{-}}\NormalTok{ factor }\OperatorTok{*}\NormalTok{ A[i]}
+\NormalTok{            b[j] }\OperatorTok{=}\NormalTok{ b[j] }\OperatorTok{{-}}\NormalTok{ factor }\OperatorTok{*}\NormalTok{ b[i]}
+    
+    \CommentTok{\# Back substitution}
+\NormalTok{    x }\OperatorTok{=}\NormalTok{ np.zeros(n)}
+    \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(n}\OperatorTok{{-}}\DecValTok{1}\NormalTok{, }\OperatorTok{{-}}\DecValTok{1}\NormalTok{, }\OperatorTok{{-}}\DecValTok{1}\NormalTok{):}
+\NormalTok{        x[i] }\OperatorTok{=}\NormalTok{ b[i] }\OperatorTok{{-}}\NormalTok{ np.dot(A[i, i}\OperatorTok{+}\DecValTok{1}\NormalTok{:], x[i}\OperatorTok{+}\DecValTok{1}\NormalTok{:])}
+    
+    \ControlFlowTok{return}\NormalTok{ x}
+
+\NormalTok{beta\_gauss }\OperatorTok{=}\NormalTok{ gauss\_elimination(A, b)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Regression coefficients (Gauss elimination):}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, beta\_gauss)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Regression coefficients (Gauss elimination):
+ [152.13348416 138.9039107  -36.13526678 926.91201212]
+\end{verbatim}
+
+\begin{quote}
+\textbf{Step 4:} Compare with \texttt{sklearn} LinearRegression
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.linear\_model }\ImportTok{import}\NormalTok{ LinearRegression}
+
+\NormalTok{reg }\OperatorTok{=}\NormalTok{ LinearRegression().fit(X, y)}
+
+\CommentTok{\# Collect sklearn coefficients (intercept + first 3 features)}
+\NormalTok{beta\_sklearn }\OperatorTok{=}\NormalTok{ np.r\_[reg.intercept\_, reg.coef\_[}\DecValTok{1}\NormalTok{:}\DecValTok{4}\NormalTok{]]}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Regression coefficients (sklearn):}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, beta\_sklearn)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Regression coefficients (sklearn):
+ [152.13348416 138.9039107  -36.13526678 926.91201212]
+\end{verbatim}
+
+\begin{quote}
+\textbf{Conclusions:}
+\end{quote}
+
+\begin{itemize}
+\item
+  Gauss elimination successfully solved the regression problem by
+  computing the coefficients from the normal equations.
+\item
+  The result matches the coefficients obtained from
+  \texttt{sklearn.LinearRegression()}.
+\item
+  This demonstrates how a classical linear algebra algorithm underlies a
+  modern machine learning method.
+\end{itemize}
+
 \section{Rank and The Fundamental
 Theorem}\label{rank-and-the-fundamental-theorem}
 
@@ -2503,7 +2676,7 @@ Solving this equation for \(\lambda\) gives us the eigenvalues. Then,
 for each eigenvalue, we plug it back into \((A - \lambda I)x = 0\) to
 find the corresponding eigenvector(s).
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6, left=2mm, breakable, leftrule=.75mm, arc=.35mm, rightrule=.15mm, opacityback=0, coltitle=black, colframe=quarto-callout-note-color-frame, bottomtitle=1mm, toptitle=1mm, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 2x2 Matrices}, colback=white, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, colback=white, left=2mm, opacitybacktitle=0.6, toprule=.15mm, coltitle=black, leftrule=.75mm, toptitle=1mm, colframe=quarto-callout-note-color-frame, opacityback=0, titlerule=0mm, breakable, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 2x2 Matrices}, rightrule=.15mm, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm]
 
 For any 2x2 matrix \(A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}\),
 the characteristic equation is always:
@@ -2523,7 +2696,7 @@ determinant and plug them into the quadratic formula.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6, left=2mm, breakable, leftrule=.75mm, arc=.35mm, rightrule=.15mm, opacityback=0, coltitle=black, colframe=quarto-callout-note-color-frame, bottomtitle=1mm, toptitle=1mm, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 3x3 Matrices}, colback=white, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, colback=white, left=2mm, opacitybacktitle=0.6, toprule=.15mm, coltitle=black, leftrule=.75mm, toptitle=1mm, colframe=quarto-callout-note-color-frame, opacityback=0, titlerule=0mm, breakable, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 3x3 Matrices}, rightrule=.15mm, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm]
 
 A similar, though more complex, shortcut exists for 3x3 matrices. The
 characteristic equation is:

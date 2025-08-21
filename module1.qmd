@@ -1253,6 +1253,118 @@ print(f"x2 = {x2:.1f} - t")
 print(f"x3 = {x3:.1f} + t")
 ```
 
+----
+
+## Application Challenge: Gauss Elimination for Multiple Linear Regression
+
+
+>**Objective**
+
+This challenge demonstrates how the **Gauss elimination method** from Linear Algebra can be applied to solve a **multiple linear regression** problem.  
+We use the **Diabetes dataset** available in `sklearn` and compare our solution with the library function `LinearRegression`.
+
+>**Dataset:**
+
+Use the Diabetes dataset from `sklearn.datasets`. Let the response be the target vector $y$. Use the first three features as predictors. Include an intercept term.
+
+>**Step 1:** Formulation of the regression problem
+
+For multiple linear regression, we model the response variable $y$ as
+
+$$
+y \approx X \beta
+$$
+
+where  
+
+- $X$ is the **design matrix** (with columns for features and an intercept),  
+- $\beta$ is the vector of **regression coefficients**,  
+- $y$ is the **target vector**.  
+
+The **least squares solution** is obtained from the **normal equations**:
+
+$$
+(X^T X) \beta = X^T y
+$$
+
+---
+
+>**Step 2:** Load the dataset and prepare $X$ and $y$
+
+```{python}
+import numpy as np
+from sklearn.datasets import load_diabetes
+
+# Load the diabetes dataset
+X, y = load_diabetes(return_X_y=True)
+
+# Select the first 3 features for simplicity
+X = X[:, :3]
+
+# Add a column of ones for the intercept
+X = np.c_[np.ones(X.shape[0]), X]
+
+# Normal equations
+A = X.T @ X
+b = X.T @ y
+
+print("Matrix A (X^T X):\n", A)
+print("\nVector b (X^T y):\n", b)
+```
+
+>**Step 3:** Solve using Gauss elimination
+
+```{python}
+def gauss_elimination(A, b):
+    A = A.astype(float).copy()
+    b = b.astype(float).copy()
+    n = len(b)
+    
+    # Forward elimination
+    for i in range(n):
+        # Normalize the pivot row
+        pivot = A[i, i]
+        A[i] = A[i] / pivot
+        b[i] = b[i] / pivot
+        
+        # Eliminate below
+        for j in range(i+1, n):
+            factor = A[j, i]
+            A[j] = A[j] - factor * A[i]
+            b[j] = b[j] - factor * b[i]
+    
+    # Back substitution
+    x = np.zeros(n)
+    for i in range(n-1, -1, -1):
+        x[i] = b[i] - np.dot(A[i, i+1:], x[i+1:])
+    
+    return x
+
+beta_gauss = gauss_elimination(A, b)
+print("Regression coefficients (Gauss elimination):\n", beta_gauss)
+```
+
+>**Step 4:** Compare with `sklearn` LinearRegression
+
+```{python}
+from sklearn.linear_model import LinearRegression
+
+reg = LinearRegression().fit(X, y)
+
+# Collect sklearn coefficients (intercept + first 3 features)
+beta_sklearn = np.r_[reg.intercept_, reg.coef_[1:4]]
+
+print("Regression coefficients (sklearn):\n", beta_sklearn)
+```
+
+>**Conclusions:**
+
+- Gauss elimination successfully solved the regression problem by computing the coefficients from the normal equations.
+
+- The result matches the coefficients obtained from `sklearn.LinearRegression()`.
+
+- This demonstrates how a classical linear algebra algorithm underlies a modern machine learning method.
+
 ## Rank and The Fundamental Theorem
 
 The number of pivots in a matrix is a fundamentally important number. It is called the **Rank** of the matrix.
