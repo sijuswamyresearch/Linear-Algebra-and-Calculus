@@ -1744,6 +1744,8 @@ A = \begin{bmatrix}
 b = \begin{bmatrix} 2 \\ 1 \\ 3 \end{bmatrix}.
 $$
 
+Discuss the consistency of the system design and the filter design flexibility using the FTLA.
+
 **Solution:**
 
 1. **Check rank of $A$:**
@@ -1800,6 +1802,8 @@ $$
 =
 \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}.
 $$
+
+Examine the consistency of the system and find the voltage across the circuit.
 
 **Solution**
 
@@ -1882,6 +1886,8 @@ $$
 =
 \begin{bmatrix} 2 \\ 3 \\ 7 \\ 5 \end{bmatrix}.
 $$
+
+Examine the stability of the transformation and find a representation of the parameters if possible.
 
 **Solution:** 
 

@@ -2624,6 +2624,9 @@ A = \begin{bmatrix}
 b = \begin{bmatrix} 2 \\ 1 \\ 3 \end{bmatrix}.
 \]
 
+Discuss the consistency of the system design and the filter design
+flexibility using the FTLA.
+
 \textbf{Solution:}
 
 \begin{enumerate}
@@ -2683,6 +2686,9 @@ A circuit yields the nodal equations:
 =
 \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}.
 \]
+
+Examine the consistency of the system and find the voltage across the
+circuit.
 
 \textbf{Solution}
 
@@ -2807,6 +2813,9 @@ is:
 =
 \begin{bmatrix} 2 \\ 3 \\ 7 \\ 5 \end{bmatrix}.
 \]
+
+Examine the stability of the transformation and find a representation of
+the parameters if possible.
 
 \textbf{Solution:}
 
@@ -2990,7 +2999,7 @@ Solving this equation for \(\lambda\) gives us the eigenvalues. Then,
 for each eigenvalue, we plug it back into \((A - \lambda I)x = 0\) to
 find the corresponding eigenvector(s).
 
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, colback=white, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, opacitybacktitle=0.6, breakable, bottomrule=.15mm, colframe=quarto-callout-note-color-frame, arc=.35mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 2x2 Matrices}, opacityback=0, titlerule=0mm, bottomtitle=1mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, colback=white, rightrule=.15mm, arc=.35mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, left=2mm, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, breakable, coltitle=black, bottomtitle=1mm, toptitle=1mm, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 2x2 Matrices}, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white]
 
 For any 2x2 matrix \(A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}\),
 the characteristic equation is always:
@@ -3010,7 +3019,7 @@ determinant and plug them into the quadratic formula.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, colback=white, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, opacitybacktitle=0.6, breakable, bottomrule=.15mm, colframe=quarto-callout-note-color-frame, arc=.35mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 3x3 Matrices}, opacityback=0, titlerule=0mm, bottomtitle=1mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, colback=white, rightrule=.15mm, arc=.35mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, left=2mm, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, breakable, coltitle=black, bottomtitle=1mm, toptitle=1mm, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 3x3 Matrices}, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white]
 
 A similar, though more complex, shortcut exists for 3x3 matrices. The
 characteristic equation is:
