@@ -1,0 +1,249 @@
+---
+title: "Mathematics in Robotics: Linear Algebra & Calculus in Action"
+subtitle: "From Theory to Robot Arms"
+author: "Siju Swamy"
+institute: "Department of Mathematics"
+date: today
+
+format: 
+  revealjs:
+    theme: [simple, default]       # clean professional theme
+    transition: fade               # smooth transition
+    background-transition: fade
+    slide-number: true             # small slide number at bottom
+    logo: logo.png                 # optional logo in corner
+    footer: "Robotics & Computational Mathematics | 2025"
+    highlight-style: github        # code highlighting
+    code-line-numbers: true        # professional style for code
+    toc: false                     # no cluttered TOC
+    incremental: false             # bullet points appear step by step
+    preview-links: auto
+    css: slides.css                # custom css for colors
+jupyter: python3
+code-fold: true
+---
+
+## Robotics- the technology for live agents
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fn3KWM1kuAw?si=dgFy3hM86mhYGXuF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+## Why Linear Algebra & Calculus in Robotics?
+
+::: incremental
+- **Linear Algebra** → robot arm kinematics, transformations
+- **Calculus** → motion, velocity, optimization
+- **Differential Equations** → dynamics & control
+- **Optimization** → trajectory planning
+:::
+## Introduction
+
+- This session connects **Linear Algebra** with **Robotics**
+- Focus: Using matrices for **2D robot arm kinematics**
+- Students will see:
+  - Forward kinematics with homogeneous transformations  
+  - How **rank & system of equations** arise in robotics  
+  - Visualization of robot arms in **3D with Python**
+
+## Kinematics in Robotics  
+
+- **Kinematics**: The study of motion without considering forces or torques.  
+- Focuses on **position, velocity, and acceleration** of robot links and joints.  
+
+
+## Forward vs Inverse Kinematics
+
+## Kinematics in Robotics
+
+::: {.smaller}
+| Aspect        | Forward Kinematics | Inverse Kinematics |
+|---------------|-------------------|---------------------|
+| **Input**     | Joint angles       | Desired pose        |
+| **Output**    | End-effector pose  | Joint angles        |
+| **Method**    | Matrix multiplications | Nonlinear equations |
+| **Difficulty**| Easy, direct       | Hard, multiple/no solutions |
+:::
+
+
+
+## Why Important?  
+
+- Robot arm motion planning  
+- Industrial manipulators control  
+- Autonomous systems (drones, humanoids)  
+- Foundation for dynamics, control, and AI-based robotics  
+
+
+## Forward Kinematics — 2D Robot (Geometry)
+
+::: {.center}
+![](2D-FK.png){width=90%}
+:::
+
+
+## Homogeneous transforms (2D)
+
+For a rotation by $\theta$ and translation along x by $a$:
+
+$$
+R(\theta) =
+\begin{bmatrix}
+\cos\theta & -\sin\theta & 0\\[4pt]
+\sin\theta & \cos\theta  & 0\\[4pt]
+0 & 0 & 1
+\end{bmatrix}
+\qquad
+T_x(a) =
+\begin{bmatrix}
+1 & 0 & a\\[4pt]
+0 & 1 & 0\\[4pt]
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+Link transform (rotate then translate along local x): $T_i = R(\theta_i)\,T_x(L_i)$
+
+## Matrix representation of Forward Kinematics
+
+$$
+T=\begin{bmatrix}
+\cos\theta_1 & -\sin\theta_1 & L_1\cos\theta_1 \\
+\sin\theta_1 & \cos\theta_1 & L_1\sin\theta_1 \\
+0 & 0 & 1
+\end{bmatrix}\cdot \begin{bmatrix}
+\cos\theta_2 & -\sin\theta_2 & L_2\cos\theta_2 \\
+\sin\theta_2 & \cos\theta_2 & L_2\sin\theta_2 \\
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+$$
+T =
+\begin{bmatrix}
+\cos(\theta_1+\theta_2) & -\sin(\theta_1+\theta_2) &  L_1\cos\theta_1 + L_2\cos(\theta_1+\theta_2) \\
+\sin(\theta_1+\theta_2) & \cos(\theta_1+\theta_2) &  L_1\sin\theta_1 + L_2\sin(\theta_1+\theta_2) \\
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+
+## Python implementation of a 2D Robot arm
+
+```{python}
+#| code-fold: true
+#| echo: true
+# Forward Kinematics for a 2-link planar robot arm
+import numpy as np
+import matplotlib.pyplot as plt
+
+def fk(theta1, theta2, L1=1.0, L2=1.0):
+    x1, y1 = L1*np.cos(theta1), L1*np.sin(theta1)
+    x2, y2 = x1 + L2*np.cos(theta1+theta2), y1 + L2*np.sin(theta1+theta2)
+    return (0,0), (x1,y1), (x2,y2)
+
+p0, p1, p2 = fk(np.pi/4, np.pi/6)
+
+fig = plt.figure(figsize=(5,5))
+ax = fig.add_subplot(111)
+ax.plot([p0[0], p1[0], p2[0]], [p0[1], p1[1], p2[1]], '-o', linewidth=3)
+ax.set_xlim(-2,2)
+ax.set_ylim(-2,2)
+ax.set_aspect('equal')
+ax.set_title("2-Link Planar Robot Arm")
+plt.show()
+```
+
+## Role of Rank in Robotics
+
+:::{.smaller}
+| Concept             | Robotics Meaning                                   | Effect of Rank Deficiency            |
+|---------------------|----------------------------------------------------|--------------------------------------|
+| **Jacobian Matrix** | Relates joint velocities → end-effector velocities | Lose control in some directions       |
+| **DOF** | Independent motions of robot joints           | Reduced mobility                      |
+| **Singularity**     | Robot in stretched/folded pose                     | Infinite joint velocities, instability |
+:::
+
+
+## Rank and Singularity in Robotics
+
+At certain configurations, the Jacobian matrix loses rank →  robot loses degrees of freedom.
+
+```{python}
+#| code-fold: true
+#| echo: true
+import numpy as np
+
+def jacobian(theta1, theta2, l1=1.0, l2=1.0):
+    # Forward kinematics: end-effector (x,y)
+    x = l1*np.cos(theta1) + l2*np.cos(theta1+theta2)
+    y = l1*np.sin(theta1) + l2*np.sin(theta1+theta2)
+    
+    # Jacobian matrix
+    J = np.array([
+        [-l1*np.sin(theta1) - l2*np.sin(theta1+theta2), -l2*np.sin(theta1+theta2)],
+        [ l1*np.cos(theta1) + l2*np.cos(theta1+theta2),  l2*np.cos(theta1+theta2)]
+    ])
+    
+    return (x, y), J
+
+# Example 1: Normal configuration
+(x1, y1), J1 = jacobian(np.pi/4, np.pi/4)
+print("Configuration 1 (Normal):")
+print("Jacobian:\n", J1)
+print("Rank:", np.linalg.matrix_rank(J1))
+
+# Example 2: Singularity (arm fully stretched)
+(x2, y2), J2 = jacobian(0, 0)
+print("\nConfiguration 2 (Singularity):")
+print("Jacobian:\n", J2)
+print("Rank:", np.linalg.matrix_rank(J2))
+```
+
+## Solving System of Equations
+
+In robotics, joint positions and constraints often lead to a **system of linear equations**:  
+
+- Suppose the arm must satisfy **linear constraints**:
+$x + y = d, \quad 2x - y = c$
+
+- Matrix form:
+$$
+\underbrace{\begin{bmatrix}
+1 & 1 \\
+2 & -1
+\end{bmatrix}}_{A}
+\begin{bmatrix} x \\ y \end{bmatrix}
+=
+\underbrace{\begin{bmatrix} d \\ c \end{bmatrix}}_{b}
+$$
+
+## Python code for solution
+
+```{python}
+#| code-fold: true
+#| echo: true
+import numpy as np
+
+# Coefficient matrix A
+A = np.array([[1, 1],
+              [2, -1]])
+
+# Constants (d=5, c=1)
+b = np.array([5, 1])
+
+# Solve Ax = b
+solution = np.linalg.solve(A, b)
+
+x, y = solution
+print(f"Solution: x = {x:.2f}, y = {y:.2f}")
+```
+
+## Looking Ahead
+
+🚀 Future sessions will bring:  
+
+- Hands-on **computational experiments**  
+- Step-by-step application of **Linear Algebra** in real robotic systems  
+- A clear path from **mathematical concepts → practical robotics solutions**  
+
+**"The computations aspect will make the mathematics come alive."**

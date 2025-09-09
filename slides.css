@@ -1,0 +1,39 @@
+/* Windows Blue background */
+.reveal {
+  background-color: #0078D7 !important;  /* Windows blue */
+  color: white !important;
+}
+
+/* Headings */
+.reveal h1, 
+.reveal h2, 
+.reveal h3, 
+.reveal h4, 
+.reveal h5, 
+.reveal h6 {
+  color: white !important;
+}
+
+/* Regular text, lists, tables */
+.reveal p, 
+.reveal li, 
+.reveal table {
+  color: white !important;
+}
+
+/* Code blocks */
+.reveal pre code {
+  background-color: #f1eded !important; /* dark gray/black background */
+  color: #0f0000 !important;            /* light gray text */
+  border-radius: 8px;
+  padding: 10px;
+  display: block;
+}
+
+/* Inline code */
+.reveal code {
+  background-color: #1e1e1e !important;
+  color: #dcdcdc !important;
+  padding: 2px 4px;
+  border-radius: 4px;
+}

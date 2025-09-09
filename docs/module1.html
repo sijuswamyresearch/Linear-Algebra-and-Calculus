@@ -275,7 +275,13 @@ window.Quarto = {
   <li><a href="#homogeneous-system-ax-0" id="toc-homogeneous-system-ax-0" class="nav-link" data-scroll-target="#homogeneous-system-ax-0"><span class="header-section-number">3.10.1</span> Homogeneous System: <span class="math inline">\(Ax = 0\)</span></a></li>
   <li><a href="#non-homogeneous-system-ax-b" id="toc-non-homogeneous-system-ax-b" class="nav-link" data-scroll-target="#non-homogeneous-system-ax-b"><span class="header-section-number">3.10.2</span> Non-Homogeneous System: <span class="math inline">\(Ax = b\)</span></a></li>
   </ul></li>
-  <li><a href="#module-i-summary" id="toc-module-i-summary" class="nav-link" data-scroll-target="#module-i-summary"><span class="header-section-number">3.11</span> Module I Summary</a></li>
+  <li><a href="#tutorial-questions-applications-of-fundamental-theorem-in-linear-algebra" id="toc-tutorial-questions-applications-of-fundamental-theorem-in-linear-algebra" class="nav-link" data-scroll-target="#tutorial-questions-applications-of-fundamental-theorem-in-linear-algebra"><span class="header-section-number">3.11</span> Tutorial questions: Applications of Fundamental Theorem in Linear Algebra</a>
+  <ul class="collapse">
+  <li><a href="#signal-processing-solvability-of-filter-design-equations" id="toc-signal-processing-solvability-of-filter-design-equations" class="nav-link" data-scroll-target="#signal-processing-solvability-of-filter-design-equations"><span class="header-section-number">3.11.1</span> Signal Processing – Solvability of Filter Design Equations</a></li>
+  <li><a href="#circuit-analysis-nodal-equations" id="toc-circuit-analysis-nodal-equations" class="nav-link" data-scroll-target="#circuit-analysis-nodal-equations"><span class="header-section-number">3.11.2</span> Circuit Analysis – Nodal Equations</a></li>
+  <li><a href="#computer-graphics-transformation-equations" id="toc-computer-graphics-transformation-equations" class="nav-link" data-scroll-target="#computer-graphics-transformation-equations"><span class="header-section-number">3.11.3</span> Computer Graphics – Transformation Equations</a></li>
+  </ul></li>
+  <li><a href="#module-i-summary" id="toc-module-i-summary" class="nav-link" data-scroll-target="#module-i-summary"><span class="header-section-number">3.12</span> Module I Summary</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1520,7 +1526,7 @@ y \approx X \beta
 <blockquote class="blockquote">
 <p><strong>Step 2:</strong> Load the dataset and prepare <span class="math inline">\(X\)</span> and <span class="math inline">\(y\)</span></p>
 </blockquote>
-<div id="7a1c08ea" class="cell" data-execution_count="8">
+<div id="9cd7fb68" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1556,7 +1562,7 @@ Vector b (X^T y):
 <blockquote class="blockquote">
 <p><strong>Step 3:</strong> Solve using Gauss elimination</p>
 </blockquote>
-<div id="b9fb1f0b" class="cell" data-execution_count="9">
+<div id="9653fdbe" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gauss_elimination(A, b):</span>
@@ -1595,7 +1601,7 @@ Vector b (X^T y):
 <blockquote class="blockquote">
 <p><strong>Step 4:</strong> Compare with <code>sklearn</code> LinearRegression</p>
 </blockquote>
-<div id="5a8e34c8" class="cell" data-execution_count="10">
+<div id="22d7f623" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
@@ -1916,8 +1922,221 @@ The nullspace is spanned by:
 <p>This is an amazing and deep result! It says that the set of all solutions to <span class="math inline">\(Ax = b\)</span> is just a shifted version of the nullspace. The nullspace goes through the origin, and we just shift the whole thing by one particular solution vector.</p>
 </section>
 </section>
-<section id="module-i-summary" class="level2" data-number="3.11">
-<h2 data-number="3.11" class="anchored" data-anchor-id="module-i-summary"><span class="header-section-number">3.11</span> Module I Summary</h2>
+<section id="tutorial-questions-applications-of-fundamental-theorem-in-linear-algebra" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="tutorial-questions-applications-of-fundamental-theorem-in-linear-algebra"><span class="header-section-number">3.11</span> Tutorial questions: Applications of Fundamental Theorem in Linear Algebra</h2>
+<blockquote class="blockquote">
+<p><strong>Objectives and expected outcomes:</strong></p>
+</blockquote>
+<ul>
+<li><p>This tutorial focuses on <strong>application-level problems</strong> based on the Fundamental Theorem of Linear Algebra (FTLA).</p>
+<ul>
+<li><p>Students are expected to <strong>formulate, solve, and interpret</strong> systems of linear equations in applied contexts.</p></li>
+<li><p>Apply <strong>rank and FTLA</strong> to determine solvability and uniqueness of engineering systems.<br>
+</p></li>
+<li><p>Connect mathematical theory with <strong>applications in signal processing, circuit analysis, and graphics</strong>.<br>
+</p></li>
+<li><p>Justify consistency, uniqueness, or multiplicity of solutions through stepwise reasoning.</p></li>
+</ul></li>
+</ul>
+<hr>
+<section id="signal-processing-solvability-of-filter-design-equations" class="level3" data-number="3.11.1">
+<h3 data-number="3.11.1" class="anchored" data-anchor-id="signal-processing-solvability-of-filter-design-equations"><span class="header-section-number">3.11.1</span> Signal Processing – Solvability of Filter Design Equations</h3>
+<p>A digital filter is to be designed such that its output satisfies the linear system</p>
+<p><span class="math display">\[
+Ax = b, \quad
+A = \begin{bmatrix}
+1 &amp; 0 &amp; -1 \\
+0 &amp; 1 &amp; -1 \\
+1 &amp; 1 &amp; -2
+\end{bmatrix}, \quad
+b = \begin{bmatrix} 2 \\ 1 \\ 3 \end{bmatrix}.
+\]</span></p>
+<p><strong>Solution:</strong></p>
+<ol type="1">
+<li><p><strong>Check rank of <span class="math inline">\(A\)</span>:</strong> <span class="math display">\[
+A \sim
+\begin{bmatrix}
+1 &amp; 0 &amp; -1 \\
+0 &amp; 1 &amp; -1 \\
+0 &amp; 0 &amp; 0
+\end{bmatrix}
+\quad \Rightarrow \quad \text{rank}(A)=2.
+\]</span></p></li>
+<li><p><strong>Augmented matrix rank:</strong> <span class="math display">\[
+K \sim
+\begin{bmatrix}
+1 &amp; 0 &amp; -1 &amp; | &amp; 2 \\
+0 &amp; 1 &amp; -1 &amp; | &amp; 1 \\
+0 &amp; 0 &amp; 0 &amp; | &amp; 0
+\end{bmatrix}.
+\]</span> Rank <span class="math inline">\((A)=\)</span>Rank <span class="math inline">\(K=2\)</span>.<br>
+⇒ <strong>System is consistent.</strong></p></li>
+<li><p><strong>Number of solutions:</strong><br>
+Since <span class="math inline">\(\text{rank}(A)=2 &lt; n=3\)</span>, the system has <strong>infinitely many solutions</strong>.</p></li>
+<li><p><strong>Solve reduced system:</strong><br>
+<span class="math display">\[
+x_1 - x_3 = 2, \quad x_2 - x_3 = 1.
+\]</span> General solution: <span class="math display">\[
+x = \begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix} + x_3 \begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix},
+\quad x_3 \in \mathbb{R}.
+\]</span></p></li>
+</ol>
+<p>✅ <strong>Apply-level justification:</strong> Students apply rank conditions to check consistency, then compute and interpret the infinite solution set as filter design flexibility.</p>
+<hr>
+</section>
+<section id="circuit-analysis-nodal-equations" class="level3" data-number="3.11.2">
+<h3 data-number="3.11.2" class="anchored" data-anchor-id="circuit-analysis-nodal-equations"><span class="header-section-number">3.11.2</span> Circuit Analysis – Nodal Equations</h3>
+<p>A circuit yields the nodal equations:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+2 &amp; -1 &amp; -1 \\
+-1 &amp; 2 &amp; -1 \\
+-1 &amp; -1 &amp; 2
+\end{bmatrix}
+\begin{bmatrix} V_1 \\ V_2 \\ V_3 \end{bmatrix}
+=
+\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}.
+\]</span></p>
+<p><strong>Solution</strong></p>
+<ol type="1">
+<li><strong>Form augmented matrix:</strong> The augmented matrix, <span class="math inline">\(K\)</span> is given by:</li>
+</ol>
+<p><span class="math display">\[
+K=\left[\begin{array}{ccc|c}
+2 &amp; -1 &amp; -1 &amp; 0\\
+-1 &amp; 2 &amp; -1 &amp; 0\\
+-1 &amp; -1 &amp; 2 &amp; 0
+\end{array}\right].
+\]</span></p>
+<ol start="2" type="1">
+<li><strong>Eliminate first column entries below the pivot (2 in row 1):</strong><br>
+</li>
+</ol>
+<ul>
+<li><span class="math inline">\(R_2 \to 2R_2 + R_1\)</span><br>
+</li>
+<li><span class="math inline">\(R_3 \to 2R_3 + R_1\)</span></li>
+</ul>
+<p>This gives: <span class="math display">\[
+K\sim \left[\begin{array}{ccc|c}
+2 &amp; -1 &amp; -1 &amp; 0\\
+0 &amp; 3 &amp; -3 &amp; 0\\
+0 &amp; -3 &amp; 3 &amp; 0
+\end{array}\right].
+\]</span></p>
+<ol start="3" type="1">
+<li><strong>Eliminate second column entry below pivot (3 in row 2):</strong><br>
+</li>
+</ol>
+<ul>
+<li><span class="math inline">\(R_3 \to R_3 + R_2\)</span>.</li>
+</ul>
+<p>This gives: <span class="math display">\[
+K\sim \left[\begin{array}{ccc|c}
+2 &amp; -1 &amp; -1 &amp; 0\\
+0 &amp; 3 &amp; -3 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0
+\end{array}\right].
+\]</span></p>
+<ol start="4" type="1">
+<li><strong>Interpret the reduced system:</strong> <span class="math display">\[
+\begin{cases}
+2V_1 - V_2 - V_3 = 0 \\
+3V_2 - 3V_3 = 0
+\end{cases}
+\]</span></li>
+</ol>
+<p>Simplify the equations: <span class="math display">\[
+\begin{cases}
+2V_1 = V_2 + V_3 \\
+V_2 = V_3
+\end{cases}
+\]</span></p>
+<ol start="5" type="1">
+<li><strong>Parametric solution:</strong><br>
+Let <span class="math inline">\(V_3 = t\)</span>. Then <span class="math inline">\(V_2 = t\)</span>, and <span class="math inline">\(2V_1 = 2t \Rightarrow V_1 = t\)</span>.</li>
+</ol>
+<p>So, <span class="math display">\[
+\begin{bmatrix}V_1\\V_2\\V_3\end{bmatrix}
+= t \begin{bmatrix}1\\1\\1\end{bmatrix}, \quad t \in \mathbb{R}.
+\]</span></p>
+<p>✅ <strong>Apply-level justification:</strong> Students apply elimination (without normalizing pivots) to show that the solution space is one-dimensional, matching the physics of nodal equations.</p>
+<hr>
+</section>
+<section id="computer-graphics-transformation-equations" class="level3" data-number="3.11.3">
+<h3 data-number="3.11.3" class="anchored" data-anchor-id="computer-graphics-transformation-equations"><span class="header-section-number">3.11.3</span> Computer Graphics – Transformation Equations</h3>
+<p>In a 2D graphics engine, the system for affine transformation parameters is:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 \\
+1 &amp; 1 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 1
+\end{bmatrix}
+\begin{bmatrix} a \\ b \\ c \\ d \end{bmatrix}
+=
+\begin{bmatrix} 2 \\ 3 \\ 7 \\ 5 \end{bmatrix}.
+\]</span></p>
+<p><strong>Solution:</strong></p>
+<p><strong>1. Form the augmented matrix <span class="math inline">\([A\mid b]\)</span>:</strong> <span class="math display">\[
+\left[\begin{array}{cccc|c}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 2\\[4pt]
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 3\\[4pt]
+1 &amp; 1 &amp; 1 &amp; 0 &amp; 7\\[4pt]
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 5
+\end{array}\right].
+\]</span></p>
+<p><strong>2. Use the obvious pivots in rows 1 and 2 to eliminate corresponding entries below/above (they already isolate <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>):</strong><br>
+- Row 1 already gives <span class="math inline">\(a = 2\)</span>.<br>
+- Row 2 already gives <span class="math inline">\(b = 3\)</span>.</p>
+<p>We can still perform systematic elimination to show consistency:</p>
+<p><strong>3. Eliminate <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> from row 3 using rows 1 and 2:</strong> - Replace <span class="math inline">\(R_3 \to R_3 - R_1 - R_2\)</span>: <span class="math display">\[
+R_3 = [1,1,1,0\,|\,7] - [1,0,0,0\,|\,2] - [0,1,0,0\,|\,3] = [0,0,1,0\,|\,2].
+\]</span></p>
+<p>After this operation the augmented matrix becomes: <span class="math display">\[
+\left[\begin{array}{cccc|c}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 2\\[4pt]
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 3\\[4pt]
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 2\\[4pt]
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 5
+\end{array}\right].
+\]</span></p>
+<p><strong>4. Use the pivot in row 3 (now isolates <span class="math inline">\(c\)</span>) to eliminate <span class="math inline">\(c\)</span> from row 4:</strong><br>
+- Replace <span class="math inline">\(R_4 \to R_4 - R_3\)</span>: <span class="math display">\[
+R_4 = [0,0,1,1\,|\,5] - [0,0,1,0\,|\,2] = [0,0,0,1\,|\,3].
+\]</span></p>
+<p>Now the matrix is: <span class="math display">\[
+\left[\begin{array}{cccc|c}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 2\\[4pt]
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 3\\[4pt]
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 2\\[4pt]
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 3
+\end{array}\right].
+\]</span></p>
+<p><strong>5. Read off the solution from the (upper-triangular/diagonalized) augmented matrix:</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+a &amp;= 2,\\
+b &amp;= 3,\\
+c &amp;= 2,\\
+d &amp;= 3.
+\end{aligned}
+\]</span></p>
+<p>So the unique solution is <span class="math display">\[
+(a,b,c,d) = (2,\,3,\,2,\,3).
+\]</span></p>
+<p><strong>6. Verify uniqueness and consistency:</strong></p>
+<ul>
+<li>The elimination produced a diagonal (full pivot in each column), showing ((A)=4) and hence a unique solution.<br>
+</li>
+<li>All rows were consistent (no contradictory zero = nonzero row), so the system is consistent.</li>
+</ul>
+<p>✅ <strong>Apply-level justification:</strong> Students carry out elimination steps to solve a real-engineering parameter identification problem, verifying full-rank condition and interpreting the unique parameter set for a stable affine transformation in graphics.</p>
+<hr>
+</section>
+</section>
+<section id="module-i-summary" class="level2" data-number="3.12">
+<h2 data-number="3.12" class="anchored" data-anchor-id="module-i-summary"><span class="header-section-number">3.12</span> Module I Summary</h2>
 <ul>
 <li>We can view a linear system in two ways: the <em>Row Picture</em> (intersecting hyperplanes) and the <em>Column Picture</em> (linear combination of vectors).</li>
 <li><em>Gauss Elimination</em> is the core algorithm for solving any system. It reduces the system to <em>Row Echelon Form</em>.</li>
