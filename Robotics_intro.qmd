@@ -1,5 +1,5 @@
 ---
-title: "Mathematics in Robotics: Linear Algebra & Calculus in Action"
+title: "Linear Algebra in Action"
 subtitle: "From Theory to Robot Arms"
 author: "Siju Swamy"
 institute: "Department of Mathematics"

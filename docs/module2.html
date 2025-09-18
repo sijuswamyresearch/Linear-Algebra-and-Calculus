@@ -237,13 +237,18 @@ window.Quarto = {
   <li><a href="#example-finding-eigenvectors-by-hand" id="toc-example-finding-eigenvectors-by-hand" class="nav-link" data-scroll-target="#example-finding-eigenvectors-by-hand"><span class="header-section-number">3.2.3</span> Example: Finding Eigenvectors by Hand</a></li>
   </ul></li>
   <li><a href="#the-geometry-of-eigenvectors" id="toc-the-geometry-of-eigenvectors" class="nav-link" data-scroll-target="#the-geometry-of-eigenvectors"><span class="header-section-number">3.3</span> The Geometry of Eigenvectors</a></li>
-  <li><a href="#diagonalization-of-a-matrix" id="toc-diagonalization-of-a-matrix" class="nav-link" data-scroll-target="#diagonalization-of-a-matrix"><span class="header-section-number">3.4</span> Diagonalization of a Matrix</a>
+  <li><a href="#tutorial-3--eigen-values-and-eigen-vectors-in-engineering-applications" id="toc-tutorial-3--eigen-values-and-eigen-vectors-in-engineering-applications" class="nav-link" data-scroll-target="#tutorial-3--eigen-values-and-eigen-vectors-in-engineering-applications"><span class="header-section-number">3.4</span> Tutorial 3- Eigen values and Eigen vectors in Engineering Applications</a>
   <ul class="collapse">
-  <li><a href="#example-verifying-diagonalization" id="toc-example-verifying-diagonalization" class="nav-link" data-scroll-target="#example-verifying-diagonalization"><span class="header-section-number">3.4.1</span> Example: Verifying Diagonalization</a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="header-section-number">3.4.1</span> Questions</a></li>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions"><span class="header-section-number">3.4.2</span> Solutions</a></li>
   </ul></li>
-  <li><a href="#symmetric-and-orthogonal-matrices" id="toc-symmetric-and-orthogonal-matrices" class="nav-link" data-scroll-target="#symmetric-and-orthogonal-matrices"><span class="header-section-number">3.5</span> Symmetric and Orthogonal Matrices</a></li>
-  <li><a href="#application-quadratic-forms" id="toc-application-quadratic-forms" class="nav-link" data-scroll-target="#application-quadratic-forms"><span class="header-section-number">3.6</span> Application: Quadratic Forms</a></li>
-  <li><a href="#module-ii-summary" id="toc-module-ii-summary" class="nav-link" data-scroll-target="#module-ii-summary"><span class="header-section-number">3.7</span> Module II Summary</a></li>
+  <li><a href="#diagonalization-of-a-matrix" id="toc-diagonalization-of-a-matrix" class="nav-link" data-scroll-target="#diagonalization-of-a-matrix"><span class="header-section-number">3.5</span> Diagonalization of a Matrix</a>
+  <ul class="collapse">
+  <li><a href="#example-verifying-diagonalization" id="toc-example-verifying-diagonalization" class="nav-link" data-scroll-target="#example-verifying-diagonalization"><span class="header-section-number">3.5.1</span> Example: Verifying Diagonalization</a></li>
+  </ul></li>
+  <li><a href="#symmetric-and-orthogonal-matrices" id="toc-symmetric-and-orthogonal-matrices" class="nav-link" data-scroll-target="#symmetric-and-orthogonal-matrices"><span class="header-section-number">3.6</span> Symmetric and Orthogonal Matrices</a></li>
+  <li><a href="#application-quadratic-forms" id="toc-application-quadratic-forms" class="nav-link" data-scroll-target="#application-quadratic-forms"><span class="header-section-number">3.7</span> Application: Quadratic Forms</a></li>
+  <li><a href="#module-ii-summary" id="toc-module-ii-summary" class="nav-link" data-scroll-target="#module-ii-summary"><span class="header-section-number">3.8</span> Module II Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -527,16 +532,184 @@ Figure&nbsp;3.1: The unit circle (blue) is transformed into an ellipse (green). 
 </div>
 </div>
 </section>
-<section id="diagonalization-of-a-matrix" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="diagonalization-of-a-matrix"><span class="header-section-number">3.4</span> Diagonalization of a Matrix</h2>
+<section id="tutorial-3--eigen-values-and-eigen-vectors-in-engineering-applications" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="tutorial-3--eigen-values-and-eigen-vectors-in-engineering-applications"><span class="header-section-number">3.4</span> Tutorial 3- Eigen values and Eigen vectors in Engineering Applications</h2>
+<p><em>Solve each question using algebraic techniques:</em> form the characteristic polynomial, compute eigenvalues, find eigenvectors (mode shapes/principal directions/steady-state vectors), and verify algebraic and geometric multiplicities.</p>
+<hr>
+<section id="questions" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="questions"><span class="header-section-number">3.4.1</span> Questions</h3>
+<ol type="1">
+<li><strong>MEMS Resonator — Vibration Analysis</strong></li>
+</ol>
+<p>A MEMS resonator used in an oscillator circuit has stiffness matrix</p>
+<p><span class="math display">\[K = \begin{bmatrix}6 &amp; -2 &amp; 0 \\ -2 &amp; 4 &amp; -2 \\ 0 &amp; -2 &amp; 6\end{bmatrix}.\]</span></p>
+<ol type="a">
+<li><p>Find the natural frequencies of vibration (eigenvalues of <span class="math inline">\(K\)</span>).</p></li>
+<li><p>Determine the mode shapes of vibration (eigenvectors of <span class="math inline">\(K\)</span>).</p></li>
+<li><p>Verify algebraic and geometric multiplicities of each eigenfrequency.</p></li>
+<li><p>Explain the engineering meaning of each eigenvalue as a measure (e.g., squared natural frequency) and comment on stability.</p></li>
+</ol>
+<hr>
+<ol start="2" type="1">
+<li><strong>Wireless Channel Reliability</strong></li>
+</ol>
+<p>A discrete-time Markov model for a wireless channel has transition matrix</p>
+<p><span class="math display">\[P = \begin{bmatrix}0.8 &amp; 0.2 \\ 0.3 &amp; 0.7\end{bmatrix}.\]</span></p>
+<ol type="a">
+<li><p>Compute the eigenvalues of <span class="math inline">\(P\)</span>.</p></li>
+<li><p>Find the steady-state reliability vector (the eigenvector corresponding to <span class="math inline">\(\lambda=1\)</span>) and normalize it to a probability vector.</p></li>
+<li><p>Verify algebraic and geometric multiplicities.</p></li>
+<li><p>Interpret the dominant and subdominant eigenvalues with respect to long-term reliability and convergence speed.</p></li>
+</ol>
+<hr>
+<ol start="3" type="1">
+<li><strong>Image Compression via PCA</strong></li>
+</ol>
+<p>Covariance matrix of a 2-D feature (pixel intensities) is</p>
+<p><span class="math display">\[C = \begin{bmatrix}5 &amp; 2 \\ 2 &amp; 2\end{bmatrix}.\]</span></p>
+<ol type="a">
+<li><p>Find the principal directions (eigenvectors) of <span class="math inline">\(C\)</span>.</p></li>
+<li><p>Compute the variance explained by each direction (eigenvalues).</p></li>
+<li><p>Verify algebraic and geometric multiplicities.</p></li>
+<li><p>Compute the percentage of total variance captured by the largest eigenvalue (compression efficiency).</p></li>
+</ol>
+<hr>
+<ol start="4" type="1">
+<li><strong>Quantum 2-Level System (Hamiltonian)</strong></li>
+</ol>
+<p>The Hamiltonian of a two-level quantum system is</p>
+<p><span class="math display">\[H = \begin{bmatrix}4 &amp; 1 \\ 1 &amp; 4\end{bmatrix}.\]</span></p>
+<ol type="a">
+<li><p>Find the energy levels (eigenvalues) of <span class="math inline">\(H\)</span>.</p></li>
+<li><p>Determine the stationary states (normalized eigenvectors).</p></li>
+<li><p>Verify algebraic and geometric multiplicities.</p></li>
+<li><p>Express <span class="math inline">\(H\)</span> using spectral decomposition and state how eigenvalues control state evolution phases.</p></li>
+</ol>
+<hr>
+<ol start="5" type="1">
+<li><strong>Control System — State Matrix Modes</strong></li>
+</ol>
+<p>A linear time-invariant system has state matrix</p>
+<p><span class="math display">\[A = \begin{bmatrix}0 &amp; 1 \\ -5 &amp; -4\end{bmatrix}.\]</span></p>
+<ol type="a">
+<li><p>Find the modes of system response (eigenvalues of <span class="math inline">\(A\)</span>).</p></li>
+<li><p>Determine the response directions (eigenvectors) and indicate whether they are real or complex.</p></li>
+<li><p>Verify algebraic and geometric multiplicities.</p></li>
+<li><p>Interpret the real parts of eigenvalues as stability margins and the imaginary parts as oscillation frequency.</p></li>
+</ol>
+<hr>
+</section>
+<section id="solutions" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="solutions"><span class="header-section-number">3.4.2</span> Solutions</h3>
+<blockquote class="blockquote">
+<p><strong>1. MEMS Resonator — Vibration Modes and Stability</strong></p>
+</blockquote>
+<p><strong>(a) Characteristic polynomial and eigenvalues.</strong></p>
+<p>Compute <span class="math inline">\(\det(K-\lambda I)=0\)</span>. The characteristic polynomial simplifies to</p>
+<p><span class="math display">\[-\lambda^3 +16\lambda^2 -76\lambda +96 = 0,\]</span></p>
+<p>whose real positive roots are</p>
+<p><span class="math display">\[\lambda_1 = 2,\quad \lambda_2 = 6,\quad \lambda_3 = 8.\]</span></p>
+<p><strong>(b) Mode shapes (eigenvectors).</strong></p>
+<p>Solve <span class="math inline">\((K-\lambda I)\mathbf v=0\)</span> for each root:</p>
+<ul>
+<li>For <span class="math inline">\(\lambda_1=2\)</span>: <span class="math inline">\(\mathbf v_1 = [1,\,2,\,1]^T\)</span>.</li>
+<li>For <span class="math inline">\(\lambda_2=6\)</span>: <span class="math inline">\(\mathbf v_2 = [-1,\,0,\,1]^T\)</span>.</li>
+<li>For <span class="math inline">\(\lambda_3=8\)</span>: <span class="math inline">\(\mathbf v_3 = [1,\,-1,\,1]^T\)</span>.</li>
+</ul>
+<p>(Students may present normalized forms.)</p>
+<p><strong>(c) Multiplicities.</strong></p>
+<p>Each eigenvalue appears once in the characteristic polynomial (algebraic multiplicity = 1) and has one independent eigenvector (geometric multiplicity = 1).</p>
+<p><strong>(d) Engineering interpretation.</strong></p>
+<p>Assuming mass normalization, eigenvalues correspond to squared natural angular frequencies <span class="math inline">\(\omega^2\)</span>. Therefore</p>
+<p><span class="math display">\[\omega_1=\sqrt{2},\;\omega_2=\sqrt{6},\;\omega_3=\sqrt{8}.\]</span></p>
+<p>All eigenvalues positive and simple imply distinct, stable oscillatory modes; no zero/negative eigenvalues appear, so no rigid-body mode or instability is present.</p>
+<hr>
+<blockquote class="blockquote">
+<p><strong>2. Wireless Channel Reliability — Long-term Measure &amp; Convergence</strong></p>
+</blockquote>
+<p><strong>(a) Eigenvalues.</strong></p>
+<p>Solve <span class="math inline">\(\det(P-\lambda I)=0\)</span> to get</p>
+<p><span class="math display">\[\lambda_1 = 1,\qquad \lambda_2 = \tfrac{1}{2}.\]</span></p>
+<p><strong>(b) Steady-state vector.</strong></p>
+<p>Solve <span class="math inline">\((P-I)\mathbf v=0\)</span>. One eigenvector is <span class="math inline">\([1,1]^T\)</span>, normalized to</p>
+<p><span class="math display">\[\pi = \begin{bmatrix}1/2\\\\[4pt]1/2\end{bmatrix}.\]</span></p>
+<p><strong>(c) Multiplicities.</strong></p>
+<p>Both eigenvalues are simple: algebraic multiplicity = 1 and geometric multiplicity = 1.</p>
+<p><strong>(d) Engineering meaning.</strong></p>
+<p><span class="math inline">\(\lambda_1=1\)</span> yields the steady-state distribution (long-term reliability). The subdominant eigenvalue <span class="math inline">\(\lambda_2=0.5\)</span> determines exponential convergence speed: transients decay as <span class="math inline">\((0.5)^t\)</span>.</p>
+<hr>
+<blockquote class="blockquote">
+<p><strong>3. PCA — Principal Directions and Variance Explained</strong></p>
+</blockquote>
+<p><strong>(a) Eigenvalues.</strong></p>
+<p>Solve <span class="math inline">\(\det(C-\lambda I)=0\)</span> to obtain</p>
+<p><span class="math display">\[\lambda_1 = 6,\qquad \lambda_2 = 1.\]</span></p>
+<p><strong>(b) Eigenvectors (principal directions).</strong></p>
+<ul>
+<li>For <span class="math inline">\(\lambda_1=6\)</span>: <span class="math inline">\(\mathbf u_1=[2,\,1]^T\)</span> (principal direction).</li>
+<li>For <span class="math inline">\(\lambda_2=1\)</span>: <span class="math inline">\(\mathbf u_2=[-1,\,2]^T\)</span>.</li>
+</ul>
+<p><strong>(c) Multiplicities.</strong></p>
+<p>Distinct eigenvalues ⇒ algebraic multiplicities = geometric multiplicities = 1.</p>
+<p><strong>(d) Compression efficiency.</strong></p>
+<p>Total variance <span class="math inline">\(=6+1=7\)</span>. Fraction captured by first PC:</p>
+<p><span class="math display">\[\frac{6}{7}\approx 85.71\%.\]</span></p>
+<p>Projecting onto the first principal direction retains ~85.7% of variance.</p>
+<hr>
+<blockquote class="blockquote">
+<p><strong>4. Quantum 2-Level System — Energy Levels &amp; Stationary States</strong></p>
+</blockquote>
+<p><strong>(a) Eigenvalues (energy levels).</strong></p>
+<p>Solve <span class="math inline">\(\det(H-\lambda I)=0\)</span>; roots are</p>
+<p><span class="math display">\[\lambda_1 = 3,\quad \lambda_2 = 5.\]</span></p>
+<p><strong>(b) Normalized stationary states.</strong></p>
+<ul>
+<li>For <span class="math inline">\(\lambda_1=3\)</span>: <span class="math inline">\(\mathbf p_1 = \tfrac{1}{\sqrt{2}}[-1,\,1]^T\)</span>.</li>
+<li>For <span class="math inline">\(\lambda_2=5\)</span>: <span class="math inline">\(\mathbf p_2 = \tfrac{1}{\sqrt{2}}[1,\,1]^T\)</span>.</li>
+</ul>
+<p><strong>(c) Multiplicities.</strong></p>
+<p>Both simple (algebraic = geometric = 1).</p>
+<p><strong>(d) Spectral decomposition.</strong></p>
+<p><span class="math display">\[H = 3\,\mathbf p_1\mathbf p_1^T + 5\,\mathbf p_2\mathbf p_2^T.\]</span></p>
+<p>Time evolution <span class="math inline">\(e^{-iHt}\)</span> applies phases <span class="math inline">\(e^{-i\lambda t}\)</span> to each stationary state.</p>
+<hr>
+<blockquote class="blockquote">
+<ol start="5" type="1">
+<li><strong>Control System — Modes &amp; Stability Margin</strong></li>
+</ol>
+</blockquote>
+<p><strong>(a) Eigenvalues (modes).</strong></p>
+<p>Characteristic equation <span class="math inline">\(\lambda^2 + 4\lambda + 5 = 0\)</span> gives</p>
+<p><span class="math display">\[\lambda_{1,2} = -2 \pm i.\]</span></p>
+<p><strong>(b) Eigenvectors.</strong></p>
+<p>Corresponding complex eigenvectors can be computed; one representative for <span class="math inline">\(\lambda=-2+i\)</span> is</p>
+<p><span class="math display">\[\mathbf v = \begin{bmatrix}-\tfrac{2}{5}+\tfrac{i}{5}\\\\[4pt] 1 \end{bmatrix}.\]</span></p>
+<p>Real sinusoidal modes can be constructed from the complex eigenpairs.</p>
+<p><strong>(c) Multiplicities.</strong></p>
+<p>Distinct complex conjugate eigenvalues → algebraic multiplicity = geometric multiplicity = 1 for each.</p>
+<p><strong>(d) Interpretation.</strong></p>
+<p>Real part <span class="math inline">\(-2\)</span> indicates exponential decay (stable). Imaginary part <span class="math inline">\(\pm1\)</span> indicates oscillation frequency 1 rad/s. Decay envelope ~ <span class="math inline">\(e^{-2t}\)</span>.</p>
+<hr>
+<blockquote class="blockquote">
+<p><strong>Notes for instructors</strong></p>
+</blockquote>
+<ul>
+<li>The answers above use convenient integer eigenvectors; students should be awarded full credit for any nonzero scalar multiple or normalized versions.</li>
+<li>Encourage explicit algebraic steps: expansion of determinants, solving the linear systems for eigenvectors, and normalization when required.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="diagonalization-of-a-matrix" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="diagonalization-of-a-matrix"><span class="header-section-number">3.5</span> Diagonalization of a Matrix</h2>
 <p>This brings us to one of the most powerful ideas in linear algebra: <strong>diagonalization</strong>. The goal is to write a matrix <span class="math inline">\(A\)</span> as a product of three simpler matrices.</p>
 <blockquote class="blockquote">
 <p><strong>The Diagonalization Formula</strong> <span class="math display">\[ A = S \Lambda S^{-1} \]</span> Where: * <span class="math inline">\(S\)</span> is the matrix whose columns are the eigenvectors of <span class="math inline">\(A\)</span>. * <span class="math inline">\(\Lambda\)</span> (Lambda) is the diagonal matrix with the eigenvalues on its diagonal.</p>
 </blockquote>
 <p>A matrix can be diagonalized if and only if it has a full set of linearly independent eigenvectors.</p>
 <p>Why is this so useful? Consider computing <span class="math inline">\(A^{100}\)</span>. This would be a nightmare. But if <span class="math inline">\(A\)</span> is diagonalized: <span class="math display">\[ A^2 = (S \Lambda S^{-1})(S \Lambda S^{-1}) = S \Lambda (S^{-1}S) \Lambda S^{-1} = S \Lambda^2 S^{-1} \]</span> In general: <span class="math display">\[ A^k = S \Lambda^k S^{-1} \]</span> Computing <span class="math inline">\(\Lambda^k\)</span> is trivial: you just raise the diagonal entries to the <span class="math inline">\(k\)</span>-th power!</p>
-<section id="example-verifying-diagonalization" class="level3" data-number="3.4.1">
-<h3 data-number="3.4.1" class="anchored" data-anchor-id="example-verifying-diagonalization"><span class="header-section-number">3.4.1</span> Example: Verifying Diagonalization</h3>
+<section id="example-verifying-diagonalization" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="example-verifying-diagonalization"><span class="header-section-number">3.5.1</span> Example: Verifying Diagonalization</h3>
 <p>Let’s verify <span class="math inline">\(A = S \Lambda S^{-1}\)</span> and compute <span class="math inline">\(A^3\)</span> for our matrix.</p>
 <div id="verify-diagonalization" class="cell" data-execution_count="4">
 <details class="code-fold">
@@ -614,16 +787,16 @@ Are the results close? True</code></pre>
 </div>
 </section>
 </section>
-<section id="symmetric-and-orthogonal-matrices" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="symmetric-and-orthogonal-matrices"><span class="header-section-number">3.5</span> Symmetric and Orthogonal Matrices</h2>
+<section id="symmetric-and-orthogonal-matrices" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="symmetric-and-orthogonal-matrices"><span class="header-section-number">3.6</span> Symmetric and Orthogonal Matrices</h2>
 <p>Things get even nicer for a very special class of matrices: <strong>symmetric matrices</strong>, where <span class="math inline">\(A = A^T\)</span>.</p>
 <p>Symmetric matrices have two incredible properties: 1. All their eigenvalues are real numbers. 2. Their eigenvectors can be chosen to be <strong>orthogonal</strong> (perpendicular to each other).</p>
 <p>If we normalize the eigenvectors (make them unit length), they form an <strong>orthonormal set</strong>. The matrix <span class="math inline">\(Q\)</span> whose columns are these orthonormal eigenvectors is an <strong>orthogonal matrix</strong>.</p>
 <p>Orthogonal matrices are wonderful because their inverse is simply their transpose: <span class="math inline">\(Q^{-1} = Q^T\)</span>.</p>
 <p>This leads to the <strong>Spectral Theorem</strong>, which says that any symmetric matrix can be diagonalized as: <span class="math display">\[ A = Q \Lambda Q^T \]</span></p>
 </section>
-<section id="application-quadratic-forms" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="application-quadratic-forms"><span class="header-section-number">3.6</span> Application: Quadratic Forms</h2>
+<section id="application-quadratic-forms" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="application-quadratic-forms"><span class="header-section-number">3.7</span> Application: Quadratic Forms</h2>
 <p>What are these ideas good for? One classic application is understanding the geometry of <strong>quadratic forms</strong>. A quadratic form is a polynomial where every term has degree two. For example: <span class="math display">\[ f(x, y) = 2x^2 + 6xy + 2y^2 \]</span> This equation describes a shape on the plane. But what shape? The <span class="math inline">\(6xy\)</span> “cross-product” term makes it hard to see because it corresponds to a rotated shape. Our goal is to eliminate this term.</p>
 <p>We can write any quadratic form using a symmetric matrix: <span class="math display">\[ f(x, y) = \begin{bmatrix} x &amp; y \end{bmatrix} \begin{bmatrix} 2 &amp; 3 \\ 3 &amp; 2 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = x^T A x \]</span></p>
 <p>The eigenvectors of <span class="math inline">\(A\)</span> point along the principal axes of the shape, and the eigenvalues tell us the scaling in those directions. By changing to a coordinate system aligned with the eigenvectors, we can describe the shape without a cross-term.</p>
@@ -695,8 +868,8 @@ Figure&nbsp;3.2: The ellipse defined by the quadratic form. The eigenvectors (re
 </div>
 <p>The plot shows it perfectly. The quadratic form describes a rotated ellipse, and the eigenvectors of the associated symmetric matrix point exactly along its major and minor axes. The signs of the eigenvalues (<span class="math inline">\(\lambda_1=5, \lambda_2=-1\)</span>) tell us it’s a hyperbola (one positive, one negative), not an ellipse. My description was slightly off, but the math and the plot reveal the truth! This is why we do the computation.</p>
 </section>
-<section id="module-ii-summary" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="module-ii-summary"><span class="header-section-number">3.7</span> Module II Summary</h2>
+<section id="module-ii-summary" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="module-ii-summary"><span class="header-section-number">3.8</span> Module II Summary</h2>
 <ul>
 <li>The core idea of this module is the equation <span class="math inline">\(Ax = \lambda x\)</span>.</li>
 <li><strong>Eigenvectors</strong> (<span class="math inline">\(x\)</span>) are the special directions for a matrix that are only scaled, not rotated. <strong>Eigenvalues</strong> (<span class="math inline">\(\lambda\)</span>) are the scaling factors.</li>

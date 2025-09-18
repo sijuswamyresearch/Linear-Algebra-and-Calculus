@@ -2999,7 +2999,7 @@ Solving this equation for \(\lambda\) gives us the eigenvalues. Then,
 for each eigenvalue, we plug it back into \((A - \lambda I)x = 0\) to
 find the corresponding eigenvector(s).
 
-\begin{tcolorbox}[enhanced jigsaw, colback=white, rightrule=.15mm, arc=.35mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, left=2mm, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, breakable, coltitle=black, bottomtitle=1mm, toptitle=1mm, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 2x2 Matrices}, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, rightrule=.15mm, breakable, arc=.35mm, colframe=quarto-callout-note-color-frame, opacitybacktitle=0.6, coltitle=black, toprule=.15mm, colback=white, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 2x2 Matrices}, left=2mm, leftrule=.75mm]
 
 For any 2x2 matrix \(A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}\),
 the characteristic equation is always:
@@ -3019,7 +3019,7 @@ determinant and plug them into the quadratic formula.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, colback=white, rightrule=.15mm, arc=.35mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, left=2mm, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, breakable, coltitle=black, bottomtitle=1mm, toptitle=1mm, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 3x3 Matrices}, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, rightrule=.15mm, breakable, arc=.35mm, colframe=quarto-callout-note-color-frame, opacitybacktitle=0.6, coltitle=black, toprule=.15mm, colback=white, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 3x3 Matrices}, left=2mm, leftrule=.75mm]
 
 A similar, though more complex, shortcut exists for 3x3 matrices. The
 characteristic equation is:
@@ -3285,6 +3285,364 @@ transformed into an ellipse (green). The eigenvectors (red) only
 stretch, keeping their direction.}
 
 \end{figure}%
+
+\section{Tutorial 3- Eigen values and Eigen vectors in Engineering
+Applications}\label{tutorial-3--eigen-values-and-eigen-vectors-in-engineering-applications}
+
+\emph{Solve each question using algebraic techniques:} form the
+characteristic polynomial, compute eigenvalues, find eigenvectors (mode
+shapes/principal directions/steady-state vectors), and verify algebraic
+and geometric multiplicities.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Questions}\label{questions}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{MEMS Resonator --- Vibration Analysis}
+\end{enumerate}
+
+A MEMS resonator used in an oscillator circuit has stiffness matrix
+
+\[K = \begin{bmatrix}6 & -2 & 0 \\ -2 & 4 & -2 \\ 0 & -2 & 6\end{bmatrix}.\]
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\item
+  Find the natural frequencies of vibration (eigenvalues of \(K\)).
+\item
+  Determine the mode shapes of vibration (eigenvectors of \(K\)).
+\item
+  Verify algebraic and geometric multiplicities of each eigenfrequency.
+\item
+  Explain the engineering meaning of each eigenvalue as a measure (e.g.,
+  squared natural frequency) and comment on stability.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  \textbf{Wireless Channel Reliability}
+\end{enumerate}
+
+A discrete-time Markov model for a wireless channel has transition
+matrix
+
+\[P = \begin{bmatrix}0.8 & 0.2 \\ 0.3 & 0.7\end{bmatrix}.\]
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\item
+  Compute the eigenvalues of \(P\).
+\item
+  Find the steady-state reliability vector (the eigenvector
+  corresponding to \(\lambda=1\)) and normalize it to a probability
+  vector.
+\item
+  Verify algebraic and geometric multiplicities.
+\item
+  Interpret the dominant and subdominant eigenvalues with respect to
+  long-term reliability and convergence speed.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  \textbf{Image Compression via PCA}
+\end{enumerate}
+
+Covariance matrix of a 2-D feature (pixel intensities) is
+
+\[C = \begin{bmatrix}5 & 2 \\ 2 & 2\end{bmatrix}.\]
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\item
+  Find the principal directions (eigenvectors) of \(C\).
+\item
+  Compute the variance explained by each direction (eigenvalues).
+\item
+  Verify algebraic and geometric multiplicities.
+\item
+  Compute the percentage of total variance captured by the largest
+  eigenvalue (compression efficiency).
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  \textbf{Quantum 2-Level System (Hamiltonian)}
+\end{enumerate}
+
+The Hamiltonian of a two-level quantum system is
+
+\[H = \begin{bmatrix}4 & 1 \\ 1 & 4\end{bmatrix}.\]
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\item
+  Find the energy levels (eigenvalues) of \(H\).
+\item
+  Determine the stationary states (normalized eigenvectors).
+\item
+  Verify algebraic and geometric multiplicities.
+\item
+  Express \(H\) using spectral decomposition and state how eigenvalues
+  control state evolution phases.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  \textbf{Control System --- State Matrix Modes}
+\end{enumerate}
+
+A linear time-invariant system has state matrix
+
+\[A = \begin{bmatrix}0 & 1 \\ -5 & -4\end{bmatrix}.\]
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\item
+  Find the modes of system response (eigenvalues of \(A\)).
+\item
+  Determine the response directions (eigenvectors) and indicate whether
+  they are real or complex.
+\item
+  Verify algebraic and geometric multiplicities.
+\item
+  Interpret the real parts of eigenvalues as stability margins and the
+  imaginary parts as oscillation frequency.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Solutions}\label{solutions}
+
+\begin{quote}
+\textbf{1. MEMS Resonator --- Vibration Modes and Stability}
+\end{quote}
+
+\textbf{(a) Characteristic polynomial and eigenvalues.}
+
+Compute \(\det(K-\lambda I)=0\). The characteristic polynomial
+simplifies to
+
+\[-\lambda^3 +16\lambda^2 -76\lambda +96 = 0,\]
+
+whose real positive roots are
+
+\[\lambda_1 = 2,\quad \lambda_2 = 6,\quad \lambda_3 = 8.\]
+
+\textbf{(b) Mode shapes (eigenvectors).}
+
+Solve \((K-\lambda I)\mathbf v=0\) for each root:
+
+\begin{itemize}
+\tightlist
+\item
+  For \(\lambda_1=2\): \(\mathbf v_1 = [1,\,2,\,1]^T\).
+\item
+  For \(\lambda_2=6\): \(\mathbf v_2 = [-1,\,0,\,1]^T\).
+\item
+  For \(\lambda_3=8\): \(\mathbf v_3 = [1,\,-1,\,1]^T\).
+\end{itemize}
+
+(Students may present normalized forms.)
+
+\textbf{(c) Multiplicities.}
+
+Each eigenvalue appears once in the characteristic polynomial (algebraic
+multiplicity = 1) and has one independent eigenvector (geometric
+multiplicity = 1).
+
+\textbf{(d) Engineering interpretation.}
+
+Assuming mass normalization, eigenvalues correspond to squared natural
+angular frequencies \(\omega^2\). Therefore
+
+\[\omega_1=\sqrt{2},\;\omega_2=\sqrt{6},\;\omega_3=\sqrt{8}.\]
+
+All eigenvalues positive and simple imply distinct, stable oscillatory
+modes; no zero/negative eigenvalues appear, so no rigid-body mode or
+instability is present.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\textbf{2. Wireless Channel Reliability --- Long-term Measure \&
+Convergence}
+\end{quote}
+
+\textbf{(a) Eigenvalues.}
+
+Solve \(\det(P-\lambda I)=0\) to get
+
+\[\lambda_1 = 1,\qquad \lambda_2 = \tfrac{1}{2}.\]
+
+\textbf{(b) Steady-state vector.}
+
+Solve \((P-I)\mathbf v=0\). One eigenvector is \([1,1]^T\), normalized
+to
+
+\[\pi = \begin{bmatrix}1/2\\\\[4pt]1/2\end{bmatrix}.\]
+
+\textbf{(c) Multiplicities.}
+
+Both eigenvalues are simple: algebraic multiplicity = 1 and geometric
+multiplicity = 1.
+
+\textbf{(d) Engineering meaning.}
+
+\(\lambda_1=1\) yields the steady-state distribution (long-term
+reliability). The subdominant eigenvalue \(\lambda_2=0.5\) determines
+exponential convergence speed: transients decay as \((0.5)^t\).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\textbf{3. PCA --- Principal Directions and Variance Explained}
+\end{quote}
+
+\textbf{(a) Eigenvalues.}
+
+Solve \(\det(C-\lambda I)=0\) to obtain
+
+\[\lambda_1 = 6,\qquad \lambda_2 = 1.\]
+
+\textbf{(b) Eigenvectors (principal directions).}
+
+\begin{itemize}
+\tightlist
+\item
+  For \(\lambda_1=6\): \(\mathbf u_1=[2,\,1]^T\) (principal direction).
+\item
+  For \(\lambda_2=1\): \(\mathbf u_2=[-1,\,2]^T\).
+\end{itemize}
+
+\textbf{(c) Multiplicities.}
+
+Distinct eigenvalues ⇒ algebraic multiplicities = geometric
+multiplicities = 1.
+
+\textbf{(d) Compression efficiency.}
+
+Total variance \(=6+1=7\). Fraction captured by first PC:
+
+\[\frac{6}{7}\approx 85.71\%.\]
+
+Projecting onto the first principal direction retains
+\textasciitilde85.7\% of variance.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\textbf{4. Quantum 2-Level System --- Energy Levels \& Stationary
+States}
+\end{quote}
+
+\textbf{(a) Eigenvalues (energy levels).}
+
+Solve \(\det(H-\lambda I)=0\); roots are
+
+\[\lambda_1 = 3,\quad \lambda_2 = 5.\]
+
+\textbf{(b) Normalized stationary states.}
+
+\begin{itemize}
+\tightlist
+\item
+  For \(\lambda_1=3\): \(\mathbf p_1 = \tfrac{1}{\sqrt{2}}[-1,\,1]^T\).
+\item
+  For \(\lambda_2=5\): \(\mathbf p_2 = \tfrac{1}{\sqrt{2}}[1,\,1]^T\).
+\end{itemize}
+
+\textbf{(c) Multiplicities.}
+
+Both simple (algebraic = geometric = 1).
+
+\textbf{(d) Spectral decomposition.}
+
+\[H = 3\,\mathbf p_1\mathbf p_1^T + 5\,\mathbf p_2\mathbf p_2^T.\]
+
+Time evolution \(e^{-iHt}\) applies phases \(e^{-i\lambda t}\) to each
+stationary state.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  \textbf{Control System --- Modes \& Stability Margin}
+\end{enumerate}
+\end{quote}
+
+\textbf{(a) Eigenvalues (modes).}
+
+Characteristic equation \(\lambda^2 + 4\lambda + 5 = 0\) gives
+
+\[\lambda_{1,2} = -2 \pm i.\]
+
+\textbf{(b) Eigenvectors.}
+
+Corresponding complex eigenvectors can be computed; one representative
+for \(\lambda=-2+i\) is
+
+\[\mathbf v = \begin{bmatrix}-\tfrac{2}{5}+\tfrac{i}{5}\\\\[4pt] 1 \end{bmatrix}.\]
+
+Real sinusoidal modes can be constructed from the complex eigenpairs.
+
+\textbf{(c) Multiplicities.}
+
+Distinct complex conjugate eigenvalues → algebraic multiplicity =
+geometric multiplicity = 1 for each.
+
+\textbf{(d) Interpretation.}
+
+Real part \(-2\) indicates exponential decay (stable). Imaginary part
+\(\pm1\) indicates oscillation frequency 1 rad/s. Decay envelope
+\textasciitilde{} \(e^{-2t}\).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\textbf{Notes for instructors}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  The answers above use convenient integer eigenvectors; students should
+  be awarded full credit for any nonzero scalar multiple or normalized
+  versions.
+\item
+  Encourage explicit algebraic steps: expansion of determinants, solving
+  the linear systems for eigenvectors, and normalization when required.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \section{Diagonalization of a Matrix}\label{diagonalization-of-a-matrix}
 
