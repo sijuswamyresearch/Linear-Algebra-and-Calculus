@@ -2999,7 +2999,7 @@ Solving this equation for \(\lambda\) gives us the eigenvalues. Then,
 for each eigenvalue, we plug it back into \((A - \lambda I)x = 0\) to
 find the corresponding eigenvector(s).
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, rightrule=.15mm, breakable, arc=.35mm, colframe=quarto-callout-note-color-frame, opacitybacktitle=0.6, coltitle=black, toprule=.15mm, colback=white, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 2x2 Matrices}, left=2mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, titlerule=0mm, opacityback=0, colback=white, toprule=.15mm, colbacktitle=quarto-callout-note-color!10!white, toptitle=1mm, opacitybacktitle=0.6, bottomtitle=1mm, breakable, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 2x2 Matrices}, arc=.35mm, rightrule=.15mm, bottomrule=.15mm, colframe=quarto-callout-note-color-frame, left=2mm, leftrule=.75mm]
 
 For any 2x2 matrix \(A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}\),
 the characteristic equation is always:
@@ -3019,7 +3019,7 @@ determinant and plug them into the quadratic formula.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, rightrule=.15mm, breakable, arc=.35mm, colframe=quarto-callout-note-color-frame, opacitybacktitle=0.6, coltitle=black, toprule=.15mm, colback=white, opacityback=0, bottomrule=.15mm, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 3x3 Matrices}, left=2mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, titlerule=0mm, opacityback=0, colback=white, toprule=.15mm, colbacktitle=quarto-callout-note-color!10!white, toptitle=1mm, opacitybacktitle=0.6, bottomtitle=1mm, breakable, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Shortcut for finding eigen values of 3x3 Matrices}, arc=.35mm, rightrule=.15mm, bottomrule=.15mm, colframe=quarto-callout-note-color-frame, left=2mm, leftrule=.75mm]
 
 A similar, though more complex, shortcut exists for 3x3 matrices. The
 characteristic equation is:
@@ -3469,6 +3469,36 @@ Solve \((K-\lambda I)\mathbf v=0\) for each root:
 
 (Students may present normalized forms.)
 
+\begin{quote}
+\emph{Python code}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Stiffness matrix}
+\NormalTok{K }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{6}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{, }\DecValTok{0}\NormalTok{],}
+\NormalTok{              [}\OperatorTok{{-}}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{],}
+\NormalTok{              [}\DecValTok{0}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{, }\DecValTok{6}\NormalTok{]])}
+
+\CommentTok{\# Eigenvalues and eigenvectors}
+\NormalTok{eigvals, eigvecs }\OperatorTok{=}\NormalTok{ np.linalg.eig(K)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Eigenvalues:"}\NormalTok{, eigvals)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Mode Shapes (eigenvectors):"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(eigvecs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Eigenvalues: [2. 6. 8.]
+Mode Shapes (eigenvectors):
+[[ 4.08248290e-01 -7.07106781e-01  5.77350269e-01]
+ [ 8.16496581e-01  4.02240178e-16 -5.77350269e-01]
+ [ 4.08248290e-01  7.07106781e-01  5.77350269e-01]]
+\end{verbatim}
+
 \textbf{(c) Multiplicities.}
 
 Each eigenvalue appears once in the characteristic polynomial (algebraic
@@ -3517,6 +3547,37 @@ multiplicity = 1.
 reliability). The subdominant eigenvalue \(\lambda_2=0.5\) determines
 exponential convergence speed: transients decay as \((0.5)^t\).
 
+\begin{quote}
+\emph{Python code}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{A }\OperatorTok{=}\NormalTok{ np.array([[}\FloatTok{0.8}\NormalTok{, }\FloatTok{0.3}\NormalTok{],}
+\NormalTok{              [}\FloatTok{0.2}\NormalTok{, }\FloatTok{0.7}\NormalTok{]])}
+
+\NormalTok{eigvals, eigvecs }\OperatorTok{=}\NormalTok{ np.linalg.eig(A)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Eigenvalues:"}\NormalTok{, eigvals)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Eigenvectors:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(eigvecs)}
+
+\CommentTok{\# Check stability}
+\NormalTok{stable }\OperatorTok{=} \BuiltInTok{all}\NormalTok{(}\BuiltInTok{abs}\NormalTok{(eigvals) }\OperatorTok{\textless{}} \DecValTok{1}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"System stable?"}\NormalTok{, stable)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Eigenvalues: [1.  0.5]
+Eigenvectors:
+[[ 0.83205029 -0.70710678]
+ [ 0.5547002   0.70710678]]
+System stable? False
+\end{verbatim}
+
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
@@ -3553,6 +3614,112 @@ Total variance \(=6+1=7\). Fraction captured by first PC:
 Projecting onto the first principal direction retains
 \textasciitilde85.7\% of variance.
 
+\begin{quote}
+\emph{Python code}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Covariance matrix from Question 3}
+\NormalTok{C }\OperatorTok{=}\NormalTok{ np.array([[}\FloatTok{5.}\NormalTok{, }\FloatTok{2.}\NormalTok{],}
+\NormalTok{              [}\FloatTok{2.}\NormalTok{, }\FloatTok{2.}\NormalTok{]])}
+
+\CommentTok{\# eigendecomposition}
+\NormalTok{eigvals, eigvecs }\OperatorTok{=}\NormalTok{ np.linalg.eig(C)}
+
+\CommentTok{\# sort in descending order of eigenvalue}
+\NormalTok{idx }\OperatorTok{=}\NormalTok{ np.argsort(eigvals)[::}\OperatorTok{{-}}\DecValTok{1}\NormalTok{]}
+\NormalTok{eigvals }\OperatorTok{=}\NormalTok{ eigvals[idx]}
+\NormalTok{eigvecs }\OperatorTok{=}\NormalTok{ eigvecs[:, idx]}
+
+\CommentTok{\# normalize eigenvectors (columns) to unit length}
+\NormalTok{eigvecs\_norm }\OperatorTok{=}\NormalTok{ eigvecs }\OperatorTok{/}\NormalTok{ np.linalg.norm(eigvecs, axis}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Covariance matrix C:}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, C)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Eigenvalues (sorted):"}\NormalTok{, eigvals)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Normalized eigenvectors (columns correspond to eigenvalues):}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, eigvecs\_norm)}
+
+\CommentTok{\# Variance explained}
+\NormalTok{total\_var }\OperatorTok{=}\NormalTok{ eigvals.}\BuiltInTok{sum}\NormalTok{()}
+\NormalTok{fractions }\OperatorTok{=}\NormalTok{ eigvals }\OperatorTok{/}\NormalTok{ total\_var}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Total variance: }\SpecialCharTok{\{:.6f\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(total\_var))}
+\ControlFlowTok{for}\NormalTok{ i,(lam, frac) }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(}\BuiltInTok{zip}\NormalTok{(eigvals, fractions), start}\OperatorTok{=}\DecValTok{1}\NormalTok{):}
+    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"PC}\SpecialCharTok{\{}\NormalTok{i}\SpecialCharTok{\}}\SpecialStringTok{: eigenvalue = }\SpecialCharTok{\{}\NormalTok{lam}\SpecialCharTok{:.6f\}}\SpecialStringTok{  {-}\textgreater{} variance = }\SpecialCharTok{\{}\NormalTok{frac}\OperatorTok{*}\DecValTok{100}\SpecialCharTok{:.4f\}}\SpecialStringTok{\%"}\NormalTok{)}
+
+\CommentTok{\# Algebraic multiplicity (cluster equal eigenvalues within tol)}
+\KeywordTok{def}\NormalTok{ algebraic\_multiplicities(vals, tol}\OperatorTok{=}\FloatTok{1e{-}8}\NormalTok{):}
+\NormalTok{    vals }\OperatorTok{=} \BuiltInTok{list}\NormalTok{(vals)}
+\NormalTok{    used }\OperatorTok{=}\NormalTok{ [}\VariableTok{False}\NormalTok{]}\OperatorTok{*}\BuiltInTok{len}\NormalTok{(vals)}
+\NormalTok{    clusters }\OperatorTok{=}\NormalTok{ []}
+    \ControlFlowTok{for}\NormalTok{ i,v }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(vals):}
+        \ControlFlowTok{if}\NormalTok{ used[i]:}
+            \ControlFlowTok{continue}
+\NormalTok{        cnt }\OperatorTok{=} \DecValTok{1}
+\NormalTok{        used[i] }\OperatorTok{=} \VariableTok{True}
+        \ControlFlowTok{for}\NormalTok{ j }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(i}\OperatorTok{+}\DecValTok{1}\NormalTok{, }\BuiltInTok{len}\NormalTok{(vals)):}
+            \ControlFlowTok{if}\NormalTok{ (}\KeywordTok{not}\NormalTok{ used[j]) }\KeywordTok{and}\NormalTok{ (}\BuiltInTok{abs}\NormalTok{(vals[j] }\OperatorTok{{-}}\NormalTok{ v) }\OperatorTok{\textless{}}\NormalTok{ tol):}
+\NormalTok{                cnt }\OperatorTok{+=} \DecValTok{1}
+\NormalTok{                used[j] }\OperatorTok{=} \VariableTok{True}
+\NormalTok{        clusters.append((v, cnt))}
+    \ControlFlowTok{return}\NormalTok{ clusters}
+
+\CommentTok{\# Geometric multiplicity = dimension of nullspace of (C {-} lambda I) = n {-} rank(C {-} lambda I)}
+\KeywordTok{def}\NormalTok{ geometric\_multiplicity(A, lam, tol}\OperatorTok{=}\FloatTok{1e{-}10}\NormalTok{):}
+\NormalTok{    M }\OperatorTok{=}\NormalTok{ A }\OperatorTok{{-}}\NormalTok{ lam }\OperatorTok{*}\NormalTok{ np.eye(A.shape[}\DecValTok{0}\NormalTok{])}
+\NormalTok{    rank }\OperatorTok{=}\NormalTok{ np.linalg.matrix\_rank(M, tol}\OperatorTok{=}\NormalTok{tol)}
+    \ControlFlowTok{return}\NormalTok{ A.shape[}\DecValTok{0}\NormalTok{] }\OperatorTok{{-}}\NormalTok{ rank}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Algebraic multiplicities (value, count):"}\NormalTok{, algebraic\_multiplicities(eigvals))}
+\ControlFlowTok{for}\NormalTok{ lam }\KeywordTok{in}\NormalTok{ np.unique(np.}\BuiltInTok{round}\NormalTok{(eigvals, }\DecValTok{12}\NormalTok{)):}
+    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Geometric multiplicity of λ=}\SpecialCharTok{\{}\NormalTok{lam}\SpecialCharTok{\}}\SpecialStringTok{: }\SpecialCharTok{\{}\NormalTok{geometric\_multiplicity(C, lam)}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+
+\CommentTok{\# Helper: integer{-}proportional presentation of eigenvectors (useful for handouts)}
+\KeywordTok{def}\NormalTok{ integer\_representation(v, tol}\OperatorTok{=}\FloatTok{1e{-}8}\NormalTok{):}
+    \CommentTok{\# scale vector so the smallest non{-}zero absolute entry becomes 1 (or {-}1), then round}
+\NormalTok{    nonzero }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{abs}\NormalTok{(v) }\OperatorTok{\textgreater{}}\NormalTok{ tol}
+    \ControlFlowTok{if} \KeywordTok{not}\NormalTok{ nonzero.}\BuiltInTok{any}\NormalTok{():}
+        \ControlFlowTok{return}\NormalTok{ np.zeros\_like(v, dtype}\OperatorTok{=}\BuiltInTok{int}\NormalTok{)}
+\NormalTok{    scale }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{min}\NormalTok{(np.}\BuiltInTok{abs}\NormalTok{(v[nonzero]))}
+\NormalTok{    v\_scaled }\OperatorTok{=}\NormalTok{ v }\OperatorTok{/}\NormalTok{ scale}
+\NormalTok{    v\_int }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{round}\NormalTok{(v\_scaled).astype(}\BuiltInTok{int}\NormalTok{)}
+    \ControlFlowTok{return}\NormalTok{ v\_int}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Integer{-}proportional eigenvectors (for presentation):"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(eigvecs\_norm.shape[}\DecValTok{1}\NormalTok{]):}
+\NormalTok{    v }\OperatorTok{=}\NormalTok{ eigvecs\_norm[:, i]}
+    \CommentTok{\# fix sign convention for presentation: make first nonzero entry positive}
+\NormalTok{    first\_nonzero }\OperatorTok{=}\NormalTok{ np.where(np.}\BuiltInTok{abs}\NormalTok{(v) }\OperatorTok{\textgreater{}} \FloatTok{1e{-}8}\NormalTok{)[}\DecValTok{0}\NormalTok{][}\DecValTok{0}\NormalTok{]}
+    \ControlFlowTok{if}\NormalTok{ v[first\_nonzero] }\OperatorTok{\textless{}} \DecValTok{0}\NormalTok{:}
+\NormalTok{        v }\OperatorTok{=} \OperatorTok{{-}}\NormalTok{v}
+    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"λ = }\SpecialCharTok{\{}\NormalTok{eigvals[i]}\SpecialCharTok{:.6f\}}\SpecialStringTok{ : approx vector {-}\textgreater{}"}\NormalTok{, integer\_representation(v))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Covariance matrix C:
+ [[5. 2.]
+ [2. 2.]]
+
+Eigenvalues (sorted): [6. 1.]
+Normalized eigenvectors (columns correspond to eigenvalues):
+ [[ 0.89442719 -0.4472136 ]
+ [ 0.4472136   0.89442719]]
+
+Total variance: 7.000000
+PC1: eigenvalue = 6.000000  -> variance = 85.7143%
+PC2: eigenvalue = 1.000000  -> variance = 14.2857%
+
+Algebraic multiplicities (value, count): [(6.0, 1), (1.0, 1)]
+Geometric multiplicity of λ=1.0: 1
+Geometric multiplicity of λ=6.0: 1
+
+Integer-proportional eigenvectors (for presentation):
+λ = 6.000000 : approx vector -> [2 1]
+λ = 1.000000 : approx vector -> [ 1 -2]
+\end{verbatim}
+
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
@@ -3586,6 +3753,46 @@ Both simple (algebraic = geometric = 1).
 
 Time evolution \(e^{-iHt}\) applies phases \(e^{-i\lambda t}\) to each
 stationary state.
+
+\begin{quote}
+\emph{Python code}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ scipy.linalg }\ImportTok{import}\NormalTok{ expm}
+
+\NormalTok{H }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{],}
+\NormalTok{              [}\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{]])}
+
+\NormalTok{eigvals, eigvecs }\OperatorTok{=}\NormalTok{ np.linalg.eig(H)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Eigenvalues (energy levels):"}\NormalTok{, eigvals)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Eigenvectors (stationary states):}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, eigvecs)}
+
+\CommentTok{\# Verify spectral decomposition}
+\NormalTok{H\_recon }\OperatorTok{=}\NormalTok{ eigvecs }\OperatorTok{@}\NormalTok{ np.diag(eigvals) }\OperatorTok{@}\NormalTok{ np.linalg.inv(eigvecs)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Reconstructed H:}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, np.}\BuiltInTok{round}\NormalTok{(H\_recon, }\DecValTok{5}\NormalTok{))}
+
+\CommentTok{\# Time evolution operator at t=1, ħ=1}
+\NormalTok{t }\OperatorTok{=} \FloatTok{1.0}
+\NormalTok{U }\OperatorTok{=}\NormalTok{ expm(}\OperatorTok{{-}}\OtherTok{1j} \OperatorTok{*}\NormalTok{ H }\OperatorTok{*}\NormalTok{ t)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Time evolution operator U(t=1):}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, np.}\BuiltInTok{round}\NormalTok{(U, }\DecValTok{4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Eigenvalues (energy levels): [5. 3.]
+Eigenvectors (stationary states):
+ [[ 0.70710678 -0.70710678]
+ [ 0.70710678  0.70710678]]
+Reconstructed H:
+ [[4. 1.]
+ [1. 4.]]
+Time evolution operator U(t=1):
+ [[-0.3532+0.4089j  0.6368+0.55j  ]
+ [ 0.6368+0.55j   -0.3532+0.4089j]]
+\end{verbatim}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -3624,6 +3831,117 @@ geometric multiplicity = 1 for each.
 Real part \(-2\) indicates exponential decay (stable). Imaginary part
 \(\pm1\) indicates oscillation frequency 1 rad/s. Decay envelope
 \textasciitilde{} \(e^{-2t}\).
+
+\begin{quote}
+\emph{Python code}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Control system (2x2) analysis: A = [[0,1],[{-}5,{-}4]]}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{from}\NormalTok{ scipy.linalg }\ImportTok{import}\NormalTok{ expm}
+
+\NormalTok{A }\OperatorTok{=}\NormalTok{ np.array([[}\FloatTok{0.}\NormalTok{, }\FloatTok{1.}\NormalTok{],}
+\NormalTok{              [}\OperatorTok{{-}}\FloatTok{5.}\NormalTok{, }\OperatorTok{{-}}\FloatTok{4.}\NormalTok{]])}
+
+\CommentTok{\# Eigen{-}decomposition}
+\NormalTok{eigvals, eigvecs }\OperatorTok{=}\NormalTok{ np.linalg.eig(A)   }\CommentTok{\# eigvecs columns correspond to eigvals}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"A =}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, A)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Eigenvalues:"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ i, lam }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(eigvals, start}\OperatorTok{=}\DecValTok{1}\NormalTok{):}
+    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"  λ}\SpecialCharTok{\{}\NormalTok{i}\SpecialCharTok{\}}\SpecialStringTok{ = }\SpecialCharTok{\{}\NormalTok{lam}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Eigenvectors (columns):}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, eigvecs)}
+
+\CommentTok{\# Real and imaginary parts}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Real parts of eigenvalues:"}\NormalTok{, np.real(eigvals))}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Imag parts of eigenvalues:"}\NormalTok{, np.imag(eigvals))}
+
+\CommentTok{\# Stability check: asymptotically stable if all real parts \textless{} 0}
+\NormalTok{is\_stable }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{all}\NormalTok{(np.real(eigvals) }\OperatorTok{\textless{}} \DecValTok{0}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Asymptotically stable?"}\NormalTok{, is\_stable)}
+
+\CommentTok{\# Algebraic multiplicities (count equal eigenvalues within tolerance)}
+\KeywordTok{def}\NormalTok{ algebraic\_multiplicities(vals, tol}\OperatorTok{=}\FloatTok{1e{-}8}\NormalTok{):}
+\NormalTok{    vals\_r }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{round}\NormalTok{(vals.real, }\DecValTok{8}\NormalTok{) }\OperatorTok{+} \OtherTok{1j}\OperatorTok{*}\NormalTok{np.}\BuiltInTok{round}\NormalTok{(vals.imag, }\DecValTok{8}\NormalTok{)}
+\NormalTok{    unique, counts }\OperatorTok{=}\NormalTok{ np.unique(vals\_r, return\_counts}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+    \ControlFlowTok{return} \BuiltInTok{list}\NormalTok{(}\BuiltInTok{zip}\NormalTok{(unique, counts))}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Algebraic multiplicities:"}\NormalTok{, algebraic\_multiplicities(eigvals))}
+
+\CommentTok{\# Geometric multiplicity: n {-} rank(A {-} λI)}
+\KeywordTok{def}\NormalTok{ geometric\_multiplicity(A, lam, tol}\OperatorTok{=}\FloatTok{1e{-}10}\NormalTok{):}
+\NormalTok{    M }\OperatorTok{=}\NormalTok{ A }\OperatorTok{{-}}\NormalTok{ lam }\OperatorTok{*}\NormalTok{ np.eye(A.shape[}\DecValTok{0}\NormalTok{])}
+\NormalTok{    rank }\OperatorTok{=}\NormalTok{ np.linalg.matrix\_rank(M, tol}\OperatorTok{=}\NormalTok{tol)}
+    \ControlFlowTok{return}\NormalTok{ A.shape[}\DecValTok{0}\NormalTok{] }\OperatorTok{{-}}\NormalTok{ rank}
+
+\ControlFlowTok{for}\NormalTok{ lam }\KeywordTok{in}\NormalTok{ eigvals:}
+\NormalTok{    gm }\OperatorTok{=}\NormalTok{ geometric\_multiplicity(A, lam)}
+    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Geometric multiplicity of λ=}\SpecialCharTok{\{}\NormalTok{lam}\SpecialCharTok{\}}\SpecialStringTok{: }\SpecialCharTok{\{}\NormalTok{gm}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+
+\CommentTok{\# Check diagonalizability (geometric multiplicities == algebraic)}
+\CommentTok{\# For small matrices we can check if eigvecs are linearly independent:}
+\NormalTok{rank\_eigvecs }\OperatorTok{=}\NormalTok{ np.linalg.matrix\_rank(eigvecs)}
+\NormalTok{diag\_ok }\OperatorTok{=}\NormalTok{ (rank\_eigvecs }\OperatorTok{==}\NormalTok{ A.shape[}\DecValTok{0}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Eigenvector matrix rank:"}\NormalTok{, rank\_eigvecs)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Matrix diagonalizable over C?"}\NormalTok{, diag\_ok)}
+
+\CommentTok{\# Spectral reconstruction: A\_recon = V * diag(lambda) * V\^{}\{{-}1\}}
+\NormalTok{A\_recon }\OperatorTok{=}\NormalTok{ eigvecs }\OperatorTok{@}\NormalTok{ np.diag(eigvals) }\OperatorTok{@}\NormalTok{ np.linalg.inv(eigvecs)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Spectral reconstruction (A\_recon):}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, np.}\BuiltInTok{round}\NormalTok{(A\_recon, }\DecValTok{10}\NormalTok{))}
+
+\CommentTok{\# If eigenvalues are complex conjugates, form real modal (real{-}valued 2x2 block) representation}
+\CommentTok{\# and compute the real state transition e\^{}\{At\} via expm}
+\NormalTok{t }\OperatorTok{=} \FloatTok{0.5}  \CommentTok{\# example time}
+\NormalTok{Phi }\OperatorTok{=}\NormalTok{ expm(A }\OperatorTok{*}\NormalTok{ t)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"}\CharTok{\textbackslash{}n}\SpecialStringTok{State{-}transition matrix e\^{}}\CharTok{\{\{}\SpecialStringTok{A t}\CharTok{\}\}}\SpecialStringTok{ for t=}\SpecialCharTok{\{}\NormalTok{t}\SpecialCharTok{\}}\SpecialStringTok{:}\CharTok{\textbackslash{}n}\SpecialStringTok{"}\NormalTok{, np.}\BuiltInTok{round}\NormalTok{(Phi, }\DecValTok{6}\NormalTok{))}
+
+\CommentTok{\# Provide a short interpretation printout}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Interpretation:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{" {-} Eigenvalues provide modes: real part =\textgreater{} decay rate, imag part =\textgreater{} oscillation frequency."}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{" {-} Here, eigenvalues = {-}2 ± 1j  =\textgreater{} decaying oscillation with decay rate 2 and angular freq 1."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+A =
+ [[ 0.  1.]
+ [-5. -4.]]
+
+Eigenvalues:
+  λ1 = (-2.0000000000000004+1.0000000000000004j)
+  λ2 = (-2.0000000000000004-1.0000000000000004j)
+
+Eigenvectors (columns):
+ [[-0.36514837-0.18257419j -0.36514837+0.18257419j]
+ [ 0.91287093+0.j          0.91287093-0.j        ]]
+
+Real parts of eigenvalues: [-2. -2.]
+Imag parts of eigenvalues: [ 1. -1.]
+
+Asymptotically stable? True
+
+Algebraic multiplicities: [((-2-1j), 1), ((-2+1j), 1)]
+Geometric multiplicity of λ=(-2.0000000000000004+1.0000000000000004j): 1
+Geometric multiplicity of λ=(-2.0000000000000004-1.0000000000000004j): 1
+
+Eigenvector matrix rank: 2
+Matrix diagonalizable over C? True
+
+Spectral reconstruction (A_recon):
+ [[-0.+0.j  1.-0.j]
+ [-5.-0.j -4.-0.j]]
+
+State-transition matrix e^{A t} for t=0.5:
+ [[ 0.675586  0.176371]
+ [-0.881854 -0.029897]]
+
+Interpretation:
+ - Eigenvalues provide modes: real part => decay rate, imag part => oscillation frequency.
+ - Here, eigenvalues = -2 ± 1j  => decaying oscillation with decay rate 2 and angular freq 1.
+\end{verbatim}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 

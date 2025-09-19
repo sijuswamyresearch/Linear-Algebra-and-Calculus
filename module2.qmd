@@ -683,7 +683,7 @@ print(" - Here, eigenvalues = -2 ± 1j  => decaying oscillation with decay rate 
 ```
 
 ---
-::
+
 >**Notes for instructors**
 
 - The answers above use convenient integer eigenvectors; students should be awarded full credit for any nonzero scalar multiple or normalized versions.
