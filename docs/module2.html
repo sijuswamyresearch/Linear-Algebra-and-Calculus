@@ -617,6 +617,34 @@ Figure&nbsp;3.1: The unit circle (blue) is transformed into an ellipse (green). 
 <li>For <span class="math inline">\(\lambda_3=8\)</span>: <span class="math inline">\(\mathbf v_3 = [1,\,-1,\,1]^T\)</span>.</li>
 </ul>
 <p>(Students may present normalized forms.)</p>
+<blockquote class="blockquote">
+<p><em>Python code</em></p>
+</blockquote>
+<div id="d9edd002" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Stiffness matrix</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> np.array([[<span class="dv">6</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">0</span>],</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>              [<span class="op">-</span><span class="dv">2</span>, <span class="dv">4</span>, <span class="op">-</span><span class="dv">2</span>],</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">0</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">6</span>]])</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Eigenvalues and eigenvectors</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>eigvals, eigvecs <span class="op">=</span> np.linalg.eig(K)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Eigenvalues:"</span>, eigvals)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Mode Shapes (eigenvectors):"</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(eigvecs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Eigenvalues: [2. 6. 8.]
+Mode Shapes (eigenvectors):
+[[ 4.08248290e-01 -7.07106781e-01  5.77350269e-01]
+ [ 8.16496581e-01  4.02240178e-16 -5.77350269e-01]
+ [ 4.08248290e-01  7.07106781e-01  5.77350269e-01]]</code></pre>
+</div>
+</div>
 <p><strong>(c) Multiplicities.</strong></p>
 <p>Each eigenvalue appears once in the characteristic polynomial (algebraic multiplicity = 1) and has one independent eigenvector (geometric multiplicity = 1).</p>
 <p><strong>(d) Engineering interpretation.</strong></p>
@@ -637,6 +665,35 @@ Figure&nbsp;3.1: The unit circle (blue) is transformed into an ellipse (green). 
 <p>Both eigenvalues are simple: algebraic multiplicity = 1 and geometric multiplicity = 1.</p>
 <p><strong>(d) Engineering meaning.</strong></p>
 <p><span class="math inline">\(\lambda_1=1\)</span> yields the steady-state distribution (long-term reliability). The subdominant eigenvalue <span class="math inline">\(\lambda_2=0.5\)</span> determines exponential convergence speed: transients decay as <span class="math inline">\((0.5)^t\)</span>.</p>
+<blockquote class="blockquote">
+<p><em>Python code</em></p>
+</blockquote>
+<div id="c36e8c53" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="fl">0.8</span>, <span class="fl">0.3</span>],</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>              [<span class="fl">0.2</span>, <span class="fl">0.7</span>]])</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>eigvals, eigvecs <span class="op">=</span> np.linalg.eig(A)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Eigenvalues:"</span>, eigvals)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Eigenvectors:"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(eigvecs)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Check stability</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>stable <span class="op">=</span> <span class="bu">all</span>(<span class="bu">abs</span>(eigvals) <span class="op">&lt;</span> <span class="dv">1</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"System stable?"</span>, stable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Eigenvalues: [1.  0.5]
+Eigenvectors:
+[[ 0.83205029 -0.70710678]
+ [ 0.5547002   0.70710678]]
+System stable? False</code></pre>
+</div>
+</div>
 <hr>
 <blockquote class="blockquote">
 <p><strong>3. PCA — Principal Directions and Variance Explained</strong></p>
@@ -655,6 +712,110 @@ Figure&nbsp;3.1: The unit circle (blue) is transformed into an ellipse (green). 
 <p>Total variance <span class="math inline">\(=6+1=7\)</span>. Fraction captured by first PC:</p>
 <p><span class="math display">\[\frac{6}{7}\approx 85.71\%.\]</span></p>
 <p>Projecting onto the first principal direction retains ~85.7% of variance.</p>
+<blockquote class="blockquote">
+<p><em>Python code</em></p>
+</blockquote>
+<div id="42387d10" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Covariance matrix from Question 3</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> np.array([[<span class="fl">5.</span>, <span class="fl">2.</span>],</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>              [<span class="fl">2.</span>, <span class="fl">2.</span>]])</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># eigendecomposition</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>eigvals, eigvecs <span class="op">=</span> np.linalg.eig(C)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># sort in descending order of eigenvalue</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>idx <span class="op">=</span> np.argsort(eigvals)[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>eigvals <span class="op">=</span> eigvals[idx]</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>eigvecs <span class="op">=</span> eigvecs[:, idx]</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># normalize eigenvectors (columns) to unit length</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>eigvecs_norm <span class="op">=</span> eigvecs <span class="op">/</span> np.linalg.norm(eigvecs, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Covariance matrix C:</span><span class="ch">\n</span><span class="st">"</span>, C)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Eigenvalues (sorted):"</span>, eigvals)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Normalized eigenvectors (columns correspond to eigenvalues):</span><span class="ch">\n</span><span class="st">"</span>, eigvecs_norm)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Variance explained</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>total_var <span class="op">=</span> eigvals.<span class="bu">sum</span>()</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>fractions <span class="op">=</span> eigvals <span class="op">/</span> total_var</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Total variance: </span><span class="sc">{:.6f}</span><span class="st">"</span>.<span class="bu">format</span>(total_var))</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i,(lam, frac) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(eigvals, fractions), start<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"PC</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: eigenvalue = </span><span class="sc">{</span>lam<span class="sc">:.6f}</span><span class="ss">  -&gt; variance = </span><span class="sc">{</span>frac<span class="op">*</span><span class="dv">100</span><span class="sc">:.4f}</span><span class="ss">%"</span>)</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Algebraic multiplicity (cluster equal eigenvalues within tol)</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> algebraic_multiplicities(vals, tol<span class="op">=</span><span class="fl">1e-8</span>):</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    vals <span class="op">=</span> <span class="bu">list</span>(vals)</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    used <span class="op">=</span> [<span class="va">False</span>]<span class="op">*</span><span class="bu">len</span>(vals)</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    clusters <span class="op">=</span> []</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i,v <span class="kw">in</span> <span class="bu">enumerate</span>(vals):</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> used[i]:</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>        cnt <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>        used[i] <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>, <span class="bu">len</span>(vals)):</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> (<span class="kw">not</span> used[j]) <span class="kw">and</span> (<span class="bu">abs</span>(vals[j] <span class="op">-</span> v) <span class="op">&lt;</span> tol):</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>                cnt <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>                used[j] <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>        clusters.append((v, cnt))</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> clusters</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Geometric multiplicity = dimension of nullspace of (C - lambda I) = n - rank(C - lambda I)</span></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> geometric_multiplicity(A, lam, tol<span class="op">=</span><span class="fl">1e-10</span>):</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>    M <span class="op">=</span> A <span class="op">-</span> lam <span class="op">*</span> np.eye(A.shape[<span class="dv">0</span>])</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>    rank <span class="op">=</span> np.linalg.matrix_rank(M, tol<span class="op">=</span>tol)</span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> A.shape[<span class="dv">0</span>] <span class="op">-</span> rank</span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Algebraic multiplicities (value, count):"</span>, algebraic_multiplicities(eigvals))</span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lam <span class="kw">in</span> np.unique(np.<span class="bu">round</span>(eigvals, <span class="dv">12</span>)):</span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Geometric multiplicity of λ=</span><span class="sc">{</span>lam<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>geometric_multiplicity(C, lam)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Helper: integer-proportional presentation of eigenvectors (useful for handouts)</span></span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> integer_representation(v, tol<span class="op">=</span><span class="fl">1e-8</span>):</span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>    <span class="co"># scale vector so the smallest non-zero absolute entry becomes 1 (or -1), then round</span></span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>    nonzero <span class="op">=</span> np.<span class="bu">abs</span>(v) <span class="op">&gt;</span> tol</span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> nonzero.<span class="bu">any</span>():</span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.zeros_like(v, dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>    scale <span class="op">=</span> np.<span class="bu">min</span>(np.<span class="bu">abs</span>(v[nonzero]))</span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a>    v_scaled <span class="op">=</span> v <span class="op">/</span> scale</span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>    v_int <span class="op">=</span> np.<span class="bu">round</span>(v_scaled).astype(<span class="bu">int</span>)</span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> v_int</span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Integer-proportional eigenvectors (for presentation):"</span>)</span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(eigvecs_norm.shape[<span class="dv">1</span>]):</span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> eigvecs_norm[:, i]</span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a>    <span class="co"># fix sign convention for presentation: make first nonzero entry positive</span></span>
+<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a>    first_nonzero <span class="op">=</span> np.where(np.<span class="bu">abs</span>(v) <span class="op">&gt;</span> <span class="fl">1e-8</span>)[<span class="dv">0</span>][<span class="dv">0</span>]</span>
+<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> v[first_nonzero] <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> <span class="op">-</span>v</span>
+<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"λ = </span><span class="sc">{</span>eigvals[i]<span class="sc">:.6f}</span><span class="ss"> : approx vector -&gt;"</span>, integer_representation(v))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Covariance matrix C:
+ [[5. 2.]
+ [2. 2.]]
+
+Eigenvalues (sorted): [6. 1.]
+Normalized eigenvectors (columns correspond to eigenvalues):
+ [[ 0.89442719 -0.4472136 ]
+ [ 0.4472136   0.89442719]]
+
+Total variance: 7.000000
+PC1: eigenvalue = 6.000000  -&gt; variance = 85.7143%
+PC2: eigenvalue = 1.000000  -&gt; variance = 14.2857%
+
+Algebraic multiplicities (value, count): [(6.0, 1), (1.0, 1)]
+Geometric multiplicity of λ=1.0: 1
+Geometric multiplicity of λ=6.0: 1
+
+Integer-proportional eigenvectors (for presentation):
+λ = 6.000000 : approx vector -&gt; [2 1]
+λ = 1.000000 : approx vector -&gt; [ 1 -2]</code></pre>
+</div>
+</div>
 <hr>
 <blockquote class="blockquote">
 <p><strong>4. Quantum 2-Level System — Energy Levels &amp; Stationary States</strong></p>
@@ -672,6 +833,44 @@ Figure&nbsp;3.1: The unit circle (blue) is transformed into an ellipse (green). 
 <p><strong>(d) Spectral decomposition.</strong></p>
 <p><span class="math display">\[H = 3\,\mathbf p_1\mathbf p_1^T + 5\,\mathbf p_2\mathbf p_2^T.\]</span></p>
 <p>Time evolution <span class="math inline">\(e^{-iHt}\)</span> applies phases <span class="math inline">\(e^{-i\lambda t}\)</span> to each stationary state.</p>
+<blockquote class="blockquote">
+<p><em>Python code</em></p>
+</blockquote>
+<div id="ed7918ab" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.linalg <span class="im">import</span> expm</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>H <span class="op">=</span> np.array([[<span class="dv">4</span>, <span class="dv">1</span>],</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">1</span>, <span class="dv">4</span>]])</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>eigvals, eigvecs <span class="op">=</span> np.linalg.eig(H)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Eigenvalues (energy levels):"</span>, eigvals)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Eigenvectors (stationary states):</span><span class="ch">\n</span><span class="st">"</span>, eigvecs)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify spectral decomposition</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>H_recon <span class="op">=</span> eigvecs <span class="op">@</span> np.diag(eigvals) <span class="op">@</span> np.linalg.inv(eigvecs)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Reconstructed H:</span><span class="ch">\n</span><span class="st">"</span>, np.<span class="bu">round</span>(H_recon, <span class="dv">5</span>))</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Time evolution operator at t=1, ħ=1</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>U <span class="op">=</span> expm(<span class="op">-</span><span class="ot">1j</span> <span class="op">*</span> H <span class="op">*</span> t)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time evolution operator U(t=1):</span><span class="ch">\n</span><span class="st">"</span>, np.<span class="bu">round</span>(U, <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Eigenvalues (energy levels): [5. 3.]
+Eigenvectors (stationary states):
+ [[ 0.70710678 -0.70710678]
+ [ 0.70710678  0.70710678]]
+Reconstructed H:
+ [[4. 1.]
+ [1. 4.]]
+Time evolution operator U(t=1):
+ [[-0.3532+0.4089j  0.6368+0.55j  ]
+ [ 0.6368+0.55j   -0.3532+0.4089j]]</code></pre>
+</div>
+</div>
 <hr>
 <blockquote class="blockquote">
 <ol start="5" type="1">
@@ -689,6 +888,115 @@ Figure&nbsp;3.1: The unit circle (blue) is transformed into an ellipse (green). 
 <p>Distinct complex conjugate eigenvalues → algebraic multiplicity = geometric multiplicity = 1 for each.</p>
 <p><strong>(d) Interpretation.</strong></p>
 <p>Real part <span class="math inline">\(-2\)</span> indicates exponential decay (stable). Imaginary part <span class="math inline">\(\pm1\)</span> indicates oscillation frequency 1 rad/s. Decay envelope ~ <span class="math inline">\(e^{-2t}\)</span>.</p>
+<blockquote class="blockquote">
+<p><em>Python code</em></p>
+</blockquote>
+<div id="a2acc9cd" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Control system (2x2) analysis: A = [[0,1],[-5,-4]]</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.linalg <span class="im">import</span> expm</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="fl">0.</span>, <span class="fl">1.</span>],</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>              [<span class="op">-</span><span class="fl">5.</span>, <span class="op">-</span><span class="fl">4.</span>]])</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Eigen-decomposition</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>eigvals, eigvecs <span class="op">=</span> np.linalg.eig(A)   <span class="co"># eigvecs columns correspond to eigvals</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"A =</span><span class="ch">\n</span><span class="st">"</span>, A)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Eigenvalues:"</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, lam <span class="kw">in</span> <span class="bu">enumerate</span>(eigvals, start<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  λ</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>lam<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Eigenvectors (columns):</span><span class="ch">\n</span><span class="st">"</span>, eigvecs)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Real and imaginary parts</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Real parts of eigenvalues:"</span>, np.real(eigvals))</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Imag parts of eigenvalues:"</span>, np.imag(eigvals))</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Stability check: asymptotically stable if all real parts &lt; 0</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>is_stable <span class="op">=</span> np.<span class="bu">all</span>(np.real(eigvals) <span class="op">&lt;</span> <span class="dv">0</span>)</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Asymptotically stable?"</span>, is_stable)</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Algebraic multiplicities (count equal eigenvalues within tolerance)</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> algebraic_multiplicities(vals, tol<span class="op">=</span><span class="fl">1e-8</span>):</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>    vals_r <span class="op">=</span> np.<span class="bu">round</span>(vals.real, <span class="dv">8</span>) <span class="op">+</span> <span class="ot">1j</span><span class="op">*</span>np.<span class="bu">round</span>(vals.imag, <span class="dv">8</span>)</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    unique, counts <span class="op">=</span> np.unique(vals_r, return_counts<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">list</span>(<span class="bu">zip</span>(unique, counts))</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Algebraic multiplicities:"</span>, algebraic_multiplicities(eigvals))</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Geometric multiplicity: n - rank(A - λI)</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> geometric_multiplicity(A, lam, tol<span class="op">=</span><span class="fl">1e-10</span>):</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    M <span class="op">=</span> A <span class="op">-</span> lam <span class="op">*</span> np.eye(A.shape[<span class="dv">0</span>])</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>    rank <span class="op">=</span> np.linalg.matrix_rank(M, tol<span class="op">=</span>tol)</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> A.shape[<span class="dv">0</span>] <span class="op">-</span> rank</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lam <span class="kw">in</span> eigvals:</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>    gm <span class="op">=</span> geometric_multiplicity(A, lam)</span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Geometric multiplicity of λ=</span><span class="sc">{</span>lam<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>gm<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Check diagonalizability (geometric multiplicities == algebraic)</span></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a><span class="co"># For small matrices we can check if eigvecs are linearly independent:</span></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>rank_eigvecs <span class="op">=</span> np.linalg.matrix_rank(eigvecs)</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>diag_ok <span class="op">=</span> (rank_eigvecs <span class="op">==</span> A.shape[<span class="dv">0</span>])</span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Eigenvector matrix rank:"</span>, rank_eigvecs)</span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Matrix diagonalizable over C?"</span>, diag_ok)</span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Spectral reconstruction: A_recon = V * diag(lambda) * V^{-1}</span></span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>A_recon <span class="op">=</span> eigvecs <span class="op">@</span> np.diag(eigvals) <span class="op">@</span> np.linalg.inv(eigvecs)</span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Spectral reconstruction (A_recon):</span><span class="ch">\n</span><span class="st">"</span>, np.<span class="bu">round</span>(A_recon, <span class="dv">10</span>))</span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a><span class="co"># If eigenvalues are complex conjugates, form real modal (real-valued 2x2 block) representation</span></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a><span class="co"># and compute the real state transition e^{At} via expm</span></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="fl">0.5</span>  <span class="co"># example time</span></span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> expm(A <span class="op">*</span> t)</span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">State-transition matrix e^</span><span class="ch">{{</span><span class="ss">A t</span><span class="ch">}}</span><span class="ss"> for t=</span><span class="sc">{</span>t<span class="sc">}</span><span class="ss">:</span><span class="ch">\n</span><span class="ss">"</span>, np.<span class="bu">round</span>(Phi, <span class="dv">6</span>))</span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Provide a short interpretation printout</span></span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Interpretation:"</span>)</span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">" - Eigenvalues provide modes: real part =&gt; decay rate, imag part =&gt; oscillation frequency."</span>)</span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">" - Here, eigenvalues = -2 ± 1j  =&gt; decaying oscillation with decay rate 2 and angular freq 1."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>A =
+ [[ 0.  1.]
+ [-5. -4.]]
+
+Eigenvalues:
+  λ1 = (-2.0000000000000004+1.0000000000000004j)
+  λ2 = (-2.0000000000000004-1.0000000000000004j)
+
+Eigenvectors (columns):
+ [[-0.36514837-0.18257419j -0.36514837+0.18257419j]
+ [ 0.91287093+0.j          0.91287093-0.j        ]]
+
+Real parts of eigenvalues: [-2. -2.]
+Imag parts of eigenvalues: [ 1. -1.]
+
+Asymptotically stable? True
+
+Algebraic multiplicities: [((-2-1j), 1), ((-2+1j), 1)]
+Geometric multiplicity of λ=(-2.0000000000000004+1.0000000000000004j): 1
+Geometric multiplicity of λ=(-2.0000000000000004-1.0000000000000004j): 1
+
+Eigenvector matrix rank: 2
+Matrix diagonalizable over C? True
+
+Spectral reconstruction (A_recon):
+ [[-0.+0.j  1.-0.j]
+ [-5.-0.j -4.-0.j]]
+
+State-transition matrix e^{A t} for t=0.5:
+ [[ 0.675586  0.176371]
+ [-0.881854 -0.029897]]
+
+Interpretation:
+ - Eigenvalues provide modes: real part =&gt; decay rate, imag part =&gt; oscillation frequency.
+ - Here, eigenvalues = -2 ± 1j  =&gt; decaying oscillation with decay rate 2 and angular freq 1.</code></pre>
+</div>
+</div>
 <hr>
 <blockquote class="blockquote">
 <p><strong>Notes for instructors</strong></p>
@@ -711,52 +1019,52 @@ Figure&nbsp;3.1: The unit circle (blue) is transformed into an ellipse (green). 
 <section id="example-verifying-diagonalization" class="level3" data-number="3.5.1">
 <h3 data-number="3.5.1" class="anchored" data-anchor-id="example-verifying-diagonalization"><span class="header-section-number">3.5.1</span> Example: Verifying Diagonalization</h3>
 <p>Let’s verify <span class="math inline">\(A = S \Lambda S^{-1}\)</span> and compute <span class="math inline">\(A^3\)</span> for our matrix.</p>
-<div id="verify-diagonalization" class="cell" data-execution_count="4">
+<div id="verify-diagonalization" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Our matrix A</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">4</span>, <span class="op">-</span><span class="dv">2</span>],</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>,  <span class="dv">1</span>]</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>], dtype<span class="op">=</span><span class="bu">float</span>)  <span class="co"># ensure float for safety in inverse</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># NumPy's eig function gives both eigenvalues and eigenvectors</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>eigenvalues, eigenvectors <span class="op">=</span> np.linalg.eig(A)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># S is the matrix of eigenvectors</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> eigenvectors</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Λ is the diagonal matrix of eigenvalues</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>Lambda <span class="op">=</span> np.diag(eigenvalues)</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Matrix S (Eigenvectors):"</span>)</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(S)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Matrix Λ (Eigenvalues):"</span>)</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Lambda)</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate S-inverse</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>S_inv <span class="op">=</span> np.linalg.inv(S)</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify A = SΛS⁻¹</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>A_reconstructed <span class="op">=</span> S <span class="op">@</span> Lambda <span class="op">@</span> S_inv</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Reconstructed A = SΛS⁻¹:"</span>)</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A_reconstructed)</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Is it close to the original A?"</span>, np.allclose(A, A_reconstructed))</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute A³ directly</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>A_cubed_direct <span class="op">=</span> np.linalg.matrix_power(A, <span class="dv">3</span>)</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute A³ using diagonalization</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>Lambda_cubed <span class="op">=</span> np.diag(eigenvalues<span class="op">**</span><span class="dv">3</span>)</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>A_cubed_diagonal <span class="op">=</span> S <span class="op">@</span> Lambda_cubed <span class="op">@</span> S_inv</span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">--- Computing A³ ---"</span>)</span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Direct computation (A³):"</span>)</span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A_cubed_direct)</span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Using diagonalization (SΛ³S⁻¹):"</span>)</span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A_cubed_diagonal)</span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Are the results close?"</span>, np.allclose(A_cubed_direct, A_cubed_diagonal))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Our matrix A</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">4</span>, <span class="op">-</span><span class="dv">2</span>],</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>,  <span class="dv">1</span>]</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>], dtype<span class="op">=</span><span class="bu">float</span>)  <span class="co"># ensure float for safety in inverse</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># NumPy's eig function gives both eigenvalues and eigenvectors</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>eigenvalues, eigenvectors <span class="op">=</span> np.linalg.eig(A)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># S is the matrix of eigenvectors</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> eigenvectors</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Λ is the diagonal matrix of eigenvalues</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>Lambda <span class="op">=</span> np.diag(eigenvalues)</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Matrix S (Eigenvectors):"</span>)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(S)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Matrix Λ (Eigenvalues):"</span>)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Lambda)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate S-inverse</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>S_inv <span class="op">=</span> np.linalg.inv(S)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify A = SΛS⁻¹</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>A_reconstructed <span class="op">=</span> S <span class="op">@</span> Lambda <span class="op">@</span> S_inv</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Reconstructed A = SΛS⁻¹:"</span>)</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A_reconstructed)</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Is it close to the original A?"</span>, np.allclose(A, A_reconstructed))</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute A³ directly</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>A_cubed_direct <span class="op">=</span> np.linalg.matrix_power(A, <span class="dv">3</span>)</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute A³ using diagonalization</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>Lambda_cubed <span class="op">=</span> np.diag(eigenvalues<span class="op">**</span><span class="dv">3</span>)</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>A_cubed_diagonal <span class="op">=</span> S <span class="op">@</span> Lambda_cubed <span class="op">@</span> S_inv</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">--- Computing A³ ---"</span>)</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Direct computation (A³):"</span>)</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A_cubed_direct)</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Using diagonalization (SΛ³S⁻¹):"</span>)</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A_cubed_diagonal)</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Are the results close?"</span>, np.allclose(A_cubed_direct, A_cubed_diagonal))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Matrix S (Eigenvectors):
@@ -801,57 +1109,57 @@ Are the results close? True</code></pre>
 <p>We can write any quadratic form using a symmetric matrix: <span class="math display">\[ f(x, y) = \begin{bmatrix} x &amp; y \end{bmatrix} \begin{bmatrix} 2 &amp; 3 \\ 3 &amp; 2 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = x^T A x \]</span></p>
 <p>The eigenvectors of <span class="math inline">\(A\)</span> point along the principal axes of the shape, and the eigenvalues tell us the scaling in those directions. By changing to a coordinate system aligned with the eigenvectors, we can describe the shape without a cross-term.</p>
 <p>Let’s find the axes of the ellipse given by <span class="math inline">\(2x^2 + 6xy + 2y^2 = 1\)</span>.</p>
-<div id="cell-fig-quadratic-form" class="cell" data-execution_count="5">
+<div id="cell-fig-quadratic-form" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Symmetric matrix for the quadratic form</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">3</span>, <span class="dv">1</span>],</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">2</span>]</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>])</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Eigen-decomposition gives the axes and scaling</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>eigvals, eigvecs <span class="op">=</span> np.linalg.eig(A)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>v1 <span class="op">=</span> eigvecs[:, <span class="dv">0</span>]</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>v2 <span class="op">=</span> eigvecs[:, <span class="dv">1</span>]</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate grid data</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="dv">400</span>)</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="dv">400</span>)</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Quadratic form value: F(x, y) = [x y] A [x; y]</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> A[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">*</span> X<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> A[<span class="dv">0</span>, <span class="dv">1</span>] <span class="op">*</span> X <span class="op">*</span> Y <span class="op">+</span> A[<span class="dv">1</span>, <span class="dv">1</span>] <span class="op">*</span> Y<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">7</span>))</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw the level set F = 1 (ellipse)</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>plt.contour(X, Y, F, levels<span class="op">=</span>[<span class="dv">1</span>], colors<span class="op">=</span><span class="st">'blue'</span>)</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw eigenvectors scaled by semi-axis lengths</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>axis1 <span class="op">=</span> v1 <span class="op">/</span> np.sqrt(eigvals[<span class="dv">0</span>])</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>axis2 <span class="op">=</span> v2 <span class="op">/</span> np.sqrt(eigvals[<span class="dv">1</span>])</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>plt.quiver(<span class="dv">0</span>, <span class="dv">0</span>, axis1[<span class="dv">0</span>], axis1[<span class="dv">1</span>], angles<span class="op">=</span><span class="st">'xy'</span>, scale_units<span class="op">=</span><span class="st">'xy'</span>, scale<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="ss">f'Axis 1 (λ=</span><span class="sc">{</span>eigvals[<span class="dv">0</span>]<span class="sc">:.2f}</span><span class="ss">)'</span>)</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>plt.quiver(<span class="dv">0</span>, <span class="dv">0</span>, <span class="op">-</span>axis1[<span class="dv">0</span>], <span class="op">-</span>axis1[<span class="dv">1</span>], angles<span class="op">=</span><span class="st">'xy'</span>, scale_units<span class="op">=</span><span class="st">'xy'</span>, scale<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>plt.quiver(<span class="dv">0</span>, <span class="dv">0</span>, axis2[<span class="dv">0</span>], axis2[<span class="dv">1</span>], angles<span class="op">=</span><span class="st">'xy'</span>, scale_units<span class="op">=</span><span class="st">'xy'</span>, scale<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="ss">f'Axis 2 (λ=</span><span class="sc">{</span>eigvals[<span class="dv">1</span>]<span class="sc">:.2f}</span><span class="ss">)'</span>)</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>plt.quiver(<span class="dv">0</span>, <span class="dv">0</span>, <span class="op">-</span>axis2[<span class="dv">0</span>], <span class="op">-</span>axis2[<span class="dv">1</span>], angles<span class="op">=</span><span class="st">'xy'</span>, scale_units<span class="op">=</span><span class="st">'xy'</span>, scale<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Formatting</span></span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Principal Axes of a Quadratic Form'</span>)</span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)</span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'y'</span>)</span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>plt.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'equal'</span>)</span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Symmetric matrix for the quadratic form</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">3</span>, <span class="dv">1</span>],</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Eigen-decomposition gives the axes and scaling</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>eigvals, eigvecs <span class="op">=</span> np.linalg.eig(A)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>v1 <span class="op">=</span> eigvecs[:, <span class="dv">0</span>]</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>v2 <span class="op">=</span> eigvecs[:, <span class="dv">1</span>]</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate grid data</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="dv">400</span>)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="dv">400</span>)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Quadratic form value: F(x, y) = [x y] A [x; y]</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> A[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">*</span> X<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> A[<span class="dv">0</span>, <span class="dv">1</span>] <span class="op">*</span> X <span class="op">*</span> Y <span class="op">+</span> A[<span class="dv">1</span>, <span class="dv">1</span>] <span class="op">*</span> Y<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">7</span>))</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw the level set F = 1 (ellipse)</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>plt.contour(X, Y, F, levels<span class="op">=</span>[<span class="dv">1</span>], colors<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw eigenvectors scaled by semi-axis lengths</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>axis1 <span class="op">=</span> v1 <span class="op">/</span> np.sqrt(eigvals[<span class="dv">0</span>])</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>axis2 <span class="op">=</span> v2 <span class="op">/</span> np.sqrt(eigvals[<span class="dv">1</span>])</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>plt.quiver(<span class="dv">0</span>, <span class="dv">0</span>, axis1[<span class="dv">0</span>], axis1[<span class="dv">1</span>], angles<span class="op">=</span><span class="st">'xy'</span>, scale_units<span class="op">=</span><span class="st">'xy'</span>, scale<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="ss">f'Axis 1 (λ=</span><span class="sc">{</span>eigvals[<span class="dv">0</span>]<span class="sc">:.2f}</span><span class="ss">)'</span>)</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>plt.quiver(<span class="dv">0</span>, <span class="dv">0</span>, <span class="op">-</span>axis1[<span class="dv">0</span>], <span class="op">-</span>axis1[<span class="dv">1</span>], angles<span class="op">=</span><span class="st">'xy'</span>, scale_units<span class="op">=</span><span class="st">'xy'</span>, scale<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>plt.quiver(<span class="dv">0</span>, <span class="dv">0</span>, axis2[<span class="dv">0</span>], axis2[<span class="dv">1</span>], angles<span class="op">=</span><span class="st">'xy'</span>, scale_units<span class="op">=</span><span class="st">'xy'</span>, scale<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="ss">f'Axis 2 (λ=</span><span class="sc">{</span>eigvals[<span class="dv">1</span>]<span class="sc">:.2f}</span><span class="ss">)'</span>)</span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>plt.quiver(<span class="dv">0</span>, <span class="dv">0</span>, <span class="op">-</span>axis2[<span class="dv">0</span>], <span class="op">-</span>axis2[<span class="dv">1</span>], angles<span class="op">=</span><span class="st">'xy'</span>, scale_units<span class="op">=</span><span class="st">'xy'</span>, scale<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Formatting</span></span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Principal Axes of a Quadratic Form'</span>)</span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)</span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'y'</span>)</span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>plt.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'equal'</span>)</span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-quadratic-form" class="quarto-float quarto-figure quarto-figure-center anchored">

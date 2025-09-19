@@ -358,6 +358,25 @@ Solve $(K-\lambda I)\mathbf v=0$ for each root:
 
 (Students may present normalized forms.)
 
+>*Python code*
+
+```{python}
+import numpy as np
+
+# Stiffness matrix
+K = np.array([[6, -2, 0],
+              [-2, 4, -2],
+              [0, -2, 6]])
+
+# Eigenvalues and eigenvectors
+eigvals, eigvecs = np.linalg.eig(K)
+
+print("Eigenvalues:", eigvals)
+print("Mode Shapes (eigenvectors):")
+print(eigvecs)
+```
+
+
 **(c) Multiplicities.**
 
 Each eigenvalue appears once in the characteristic polynomial (algebraic multiplicity = 1) and has one independent eigenvector (geometric multiplicity = 1).
@@ -394,6 +413,24 @@ Both eigenvalues are simple: algebraic multiplicity = 1 and geometric multiplici
 
 $\lambda_1=1$ yields the steady-state distribution (long-term reliability). The subdominant eigenvalue $\lambda_2=0.5$ determines exponential convergence speed: transients decay as $(0.5)^t$.
 
+>*Python code*
+
+```{python}
+import numpy as np
+
+A = np.array([[0.8, 0.3],
+              [0.2, 0.7]])
+
+eigvals, eigvecs = np.linalg.eig(A)
+
+print("Eigenvalues:", eigvals)
+print("Eigenvectors:")
+print(eigvecs)
+
+# Check stability
+stable = all(abs(eigvals) < 1)
+print("System stable?", stable)
+```
 ---
 
 >**3. PCA — Principal Directions and Variance Explained**
@@ -421,6 +458,86 @@ $$\frac{6}{7}\approx 85.71\%.$$
 
 Projecting onto the first principal direction retains ~85.7% of variance.
 
+>*Python code*
+
+```{python}
+import numpy as np
+
+# Covariance matrix from Question 3
+C = np.array([[5., 2.],
+              [2., 2.]])
+
+# eigendecomposition
+eigvals, eigvecs = np.linalg.eig(C)
+
+# sort in descending order of eigenvalue
+idx = np.argsort(eigvals)[::-1]
+eigvals = eigvals[idx]
+eigvecs = eigvecs[:, idx]
+
+# normalize eigenvectors (columns) to unit length
+eigvecs_norm = eigvecs / np.linalg.norm(eigvecs, axis=0)
+
+print("Covariance matrix C:\n", C)
+print("\nEigenvalues (sorted):", eigvals)
+print("Normalized eigenvectors (columns correspond to eigenvalues):\n", eigvecs_norm)
+
+# Variance explained
+total_var = eigvals.sum()
+fractions = eigvals / total_var
+print("\nTotal variance: {:.6f}".format(total_var))
+for i,(lam, frac) in enumerate(zip(eigvals, fractions), start=1):
+    print(f"PC{i}: eigenvalue = {lam:.6f}  -> variance = {frac*100:.4f}%")
+
+# Algebraic multiplicity (cluster equal eigenvalues within tol)
+def algebraic_multiplicities(vals, tol=1e-8):
+    vals = list(vals)
+    used = [False]*len(vals)
+    clusters = []
+    for i,v in enumerate(vals):
+        if used[i]:
+            continue
+        cnt = 1
+        used[i] = True
+        for j in range(i+1, len(vals)):
+            if (not used[j]) and (abs(vals[j] - v) < tol):
+                cnt += 1
+                used[j] = True
+        clusters.append((v, cnt))
+    return clusters
+
+# Geometric multiplicity = dimension of nullspace of (C - lambda I) = n - rank(C - lambda I)
+def geometric_multiplicity(A, lam, tol=1e-10):
+    M = A - lam * np.eye(A.shape[0])
+    rank = np.linalg.matrix_rank(M, tol=tol)
+    return A.shape[0] - rank
+
+print("\nAlgebraic multiplicities (value, count):", algebraic_multiplicities(eigvals))
+for lam in np.unique(np.round(eigvals, 12)):
+    print(f"Geometric multiplicity of λ={lam}: {geometric_multiplicity(C, lam)}")
+
+# Helper: integer-proportional presentation of eigenvectors (useful for handouts)
+def integer_representation(v, tol=1e-8):
+    # scale vector so the smallest non-zero absolute entry becomes 1 (or -1), then round
+    nonzero = np.abs(v) > tol
+    if not nonzero.any():
+        return np.zeros_like(v, dtype=int)
+    scale = np.min(np.abs(v[nonzero]))
+    v_scaled = v / scale
+    v_int = np.round(v_scaled).astype(int)
+    return v_int
+
+print("\nInteger-proportional eigenvectors (for presentation):")
+for i in range(eigvecs_norm.shape[1]):
+    v = eigvecs_norm[:, i]
+    # fix sign convention for presentation: make first nonzero entry positive
+    first_nonzero = np.where(np.abs(v) > 1e-8)[0][0]
+    if v[first_nonzero] < 0:
+        v = -v
+    print(f"λ = {eigvals[i]:.6f} : approx vector ->", integer_representation(v))
+
+```
+
 ---
 
 >**4. Quantum 2-Level System — Energy Levels & Stationary States**
@@ -445,6 +562,30 @@ Both simple (algebraic = geometric = 1).
 $$H = 3\,\mathbf p_1\mathbf p_1^T + 5\,\mathbf p_2\mathbf p_2^T.$$ 
 
 Time evolution $e^{-iHt}$ applies phases $e^{-i\lambda t}$ to each stationary state.
+
+>*Python code*
+
+```{python}
+from scipy.linalg import expm
+
+H = np.array([[4, 1],
+              [1, 4]])
+
+eigvals, eigvecs = np.linalg.eig(H)
+
+print("Eigenvalues (energy levels):", eigvals)
+print("Eigenvectors (stationary states):\n", eigvecs)
+
+# Verify spectral decomposition
+H_recon = eigvecs @ np.diag(eigvals) @ np.linalg.inv(eigvecs)
+print("Reconstructed H:\n", np.round(H_recon, 5))
+
+# Time evolution operator at t=1, ħ=1
+t = 1.0
+U = expm(-1j * H * t)
+print("Time evolution operator U(t=1):\n", np.round(U, 4))
+
+```
 
 ---
 
@@ -472,8 +613,77 @@ Distinct complex conjugate eigenvalues → algebraic multiplicity = geometric mu
 
 Real part $-2$ indicates exponential decay (stable). Imaginary part $\pm1$ indicates oscillation frequency 1 rad/s. Decay envelope ~ $e^{-2t}$.
 
----
+>*Python code*
 
+```{python}
+# Control system (2x2) analysis: A = [[0,1],[-5,-4]]
+import numpy as np
+from scipy.linalg import expm
+
+A = np.array([[0., 1.],
+              [-5., -4.]])
+
+# Eigen-decomposition
+eigvals, eigvecs = np.linalg.eig(A)   # eigvecs columns correspond to eigvals
+
+print("A =\n", A)
+print("\nEigenvalues:")
+for i, lam in enumerate(eigvals, start=1):
+    print(f"  λ{i} = {lam}")
+
+print("\nEigenvectors (columns):\n", eigvecs)
+
+# Real and imaginary parts
+print("\nReal parts of eigenvalues:", np.real(eigvals))
+print("Imag parts of eigenvalues:", np.imag(eigvals))
+
+# Stability check: asymptotically stable if all real parts < 0
+is_stable = np.all(np.real(eigvals) < 0)
+print("\nAsymptotically stable?", is_stable)
+
+# Algebraic multiplicities (count equal eigenvalues within tolerance)
+def algebraic_multiplicities(vals, tol=1e-8):
+    vals_r = np.round(vals.real, 8) + 1j*np.round(vals.imag, 8)
+    unique, counts = np.unique(vals_r, return_counts=True)
+    return list(zip(unique, counts))
+
+print("\nAlgebraic multiplicities:", algebraic_multiplicities(eigvals))
+
+# Geometric multiplicity: n - rank(A - λI)
+def geometric_multiplicity(A, lam, tol=1e-10):
+    M = A - lam * np.eye(A.shape[0])
+    rank = np.linalg.matrix_rank(M, tol=tol)
+    return A.shape[0] - rank
+
+for lam in eigvals:
+    gm = geometric_multiplicity(A, lam)
+    print(f"Geometric multiplicity of λ={lam}: {gm}")
+
+# Check diagonalizability (geometric multiplicities == algebraic)
+# For small matrices we can check if eigvecs are linearly independent:
+rank_eigvecs = np.linalg.matrix_rank(eigvecs)
+diag_ok = (rank_eigvecs == A.shape[0])
+print("\nEigenvector matrix rank:", rank_eigvecs)
+print("Matrix diagonalizable over C?", diag_ok)
+
+# Spectral reconstruction: A_recon = V * diag(lambda) * V^{-1}
+A_recon = eigvecs @ np.diag(eigvals) @ np.linalg.inv(eigvecs)
+print("\nSpectral reconstruction (A_recon):\n", np.round(A_recon, 10))
+
+# If eigenvalues are complex conjugates, form real modal (real-valued 2x2 block) representation
+# and compute the real state transition e^{At} via expm
+t = 0.5  # example time
+Phi = expm(A * t)
+print(f"\nState-transition matrix e^{{A t}} for t={t}:\n", np.round(Phi, 6))
+
+# Provide a short interpretation printout
+print("\nInterpretation:")
+print(" - Eigenvalues provide modes: real part => decay rate, imag part => oscillation frequency.")
+print(" - Here, eigenvalues = -2 ± 1j  => decaying oscillation with decay rate 2 and angular freq 1.")
+```
+
+---
+::
 >**Notes for instructors**
 
 - The answers above use convenient integer eigenvectors; students should be awarded full credit for any nonzero scalar multiple or normalized versions.
