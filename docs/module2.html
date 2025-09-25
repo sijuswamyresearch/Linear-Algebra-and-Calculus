@@ -248,7 +248,8 @@ window.Quarto = {
   </ul></li>
   <li><a href="#symmetric-and-orthogonal-matrices" id="toc-symmetric-and-orthogonal-matrices" class="nav-link" data-scroll-target="#symmetric-and-orthogonal-matrices"><span class="header-section-number">3.6</span> Symmetric and Orthogonal Matrices</a></li>
   <li><a href="#application-quadratic-forms" id="toc-application-quadratic-forms" class="nav-link" data-scroll-target="#application-quadratic-forms"><span class="header-section-number">3.7</span> Application: Quadratic Forms</a></li>
-  <li><a href="#module-ii-summary" id="toc-module-ii-summary" class="nav-link" data-scroll-target="#module-ii-summary"><span class="header-section-number">3.8</span> Module II Summary</a></li>
+  <li><a href="#tutorial-4-principal-axis-transformation-of-quadratic-forms" id="toc-tutorial-4-principal-axis-transformation-of-quadratic-forms" class="nav-link" data-scroll-target="#tutorial-4-principal-axis-transformation-of-quadratic-forms"><span class="header-section-number">3.8</span> Tutorial 4: Principal Axis Transformation of Quadratic Forms</a></li>
+  <li><a href="#module-ii-summary" id="toc-module-ii-summary" class="nav-link" data-scroll-target="#module-ii-summary"><span class="header-section-number">3.9</span> Module II Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -620,7 +621,7 @@ Figure&nbsp;3.1: The unit circle (blue) is transformed into an ellipse (green). 
 <blockquote class="blockquote">
 <p><em>Python code</em></p>
 </blockquote>
-<div id="b3042602" class="cell" data-execution_count="4">
+<div id="232ce99b" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -668,7 +669,7 @@ Mode Shapes (eigenvectors):
 <blockquote class="blockquote">
 <p><em>Python code</em></p>
 </blockquote>
-<div id="5fb85cc3" class="cell" data-execution_count="5">
+<div id="80879570" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -715,7 +716,7 @@ System stable? False</code></pre>
 <blockquote class="blockquote">
 <p><em>Python code</em></p>
 </blockquote>
-<div id="ee57df50" class="cell" data-execution_count="6">
+<div id="9805dbf2" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -836,7 +837,7 @@ Integer-proportional eigenvectors (for presentation):
 <blockquote class="blockquote">
 <p><em>Python code</em></p>
 </blockquote>
-<div id="28f39be9" class="cell" data-execution_count="7">
+<div id="4e1055f7" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.linalg <span class="im">import</span> expm</span>
@@ -891,7 +892,7 @@ Time evolution operator U(t=1):
 <blockquote class="blockquote">
 <p><em>Python code</em></p>
 </blockquote>
-<div id="fc912af6" class="cell" data-execution_count="8">
+<div id="854a9ae0" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Control system (2x2) analysis: A = [[0,1],[-5,-4]]</span></span>
@@ -1176,8 +1177,186 @@ Figure&nbsp;3.2: The ellipse defined by the quadratic form. The eigenvectors (re
 </div>
 <p>The plot shows it perfectly. The quadratic form describes a rotated ellipse, and the eigenvectors of the associated symmetric matrix point exactly along its major and minor axes. The signs of the eigenvalues (<span class="math inline">\(\lambda_1=5, \lambda_2=-1\)</span>) tell us it’s a hyperbola (one positive, one negative), not an ellipse. My description was slightly off, but the math and the plot reveal the truth! This is why we do the computation.</p>
 </section>
-<section id="module-ii-summary" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="module-ii-summary"><span class="header-section-number">3.8</span> Module II Summary</h2>
+<section id="tutorial-4-principal-axis-transformation-of-quadratic-forms" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="tutorial-4-principal-axis-transformation-of-quadratic-forms"><span class="header-section-number">3.8</span> Tutorial 4: Principal Axis Transformation of Quadratic Forms</h2>
+<ol type="1">
+<li>Step 1: Write the quadratic form in <span class="math inline">\(X^TAX = c\)</span> form and compute eigenvalues/eigenvectors of <span class="math inline">\(A\)</span>.<br>
+</li>
+<li>Step 2: Construct the modal matrix <span class="math inline">\(B\)</span>, compute <span class="math inline">\(B^{-1}\)</span>, and form normalized modal matrix <span class="math inline">\(\hat{B}\)</span>.<br>
+</li>
+<li>Step 3: Write orthogonal transformation <span class="math inline">\(X = \hat{B}Y\)</span>.<br>
+</li>
+<li>Step 4: Express the quadratic form in principal axis form with numeric eigenvalues.<br>
+</li>
+<li>Step 5: Express <span class="math inline">\(Y = B^{-1}X\)</span> with numeric coefficients.</li>
+</ol>
+<hr>
+<p><strong>Problem 1:</strong> The energy stored in a coupled capacitor system is given by: <span class="math display">\[
+5x_1^{2}+4x_1x_2+3x_2^{2}=10
+\]</span> Transform to principal-axis form, find the orthogonal transformation <span class="math inline">\(X=\hat{B}Y\)</span>, classify the conic, and give <span class="math inline">\(Y=B^{-1}X\)</span>.</p>
+<p><strong>Solution:</strong></p>
+<p><strong>Step 1:</strong> <span class="math inline">\(A = \begin{bmatrix}5 &amp; 2\\2 &amp; 3\end{bmatrix}\)</span></p>
+<p>Eigenvalues: <span class="math inline">\(\lambda_1 = 6.236\)</span>, <span class="math inline">\(\lambda_2 = 1.764\)</span></p>
+<p>Eigenvectors:<br>
+<span class="math inline">\(v_1 = \begin{pmatrix}3.236\\2\end{pmatrix}\)</span>, <span class="math inline">\(v_2 = \begin{pmatrix}-1.236\\2\end{pmatrix}\)</span></p>
+<p><strong>Step 2:</strong> Modal matrix <span class="math inline">\(B = \begin{bmatrix}3.236 &amp; -1.236\\2 &amp; 2\end{bmatrix}\)</span><br>
+Normalized modal matrix:</p>
+<p><span class="math display">\[
+\hat{B} = \begin{bmatrix}0.853 &amp; -0.525\\0.527 &amp; 0.850\end{bmatrix}
+\]</span></p>
+<p><strong>Step 3:</strong> Orthogonal transformation: <span class="math inline">\(X = \hat{B}Y\)</span></p>
+<p><strong>Step 4:</strong> Principal axis form:</p>
+<p><span class="math display">\[
+6.236 y_1^2 + 1.764 y_2^2 = 10
+\]</span></p>
+<p><strong>Step 5:</strong> Inverse transformation:</p>
+<p><span class="math display">\[
+Y = B^{-1}X =
+\begin{bmatrix}
+0.359 x_1 + 0.222 x_2\\
+-0.251 x_1 + 0.591 x_2
+\end{bmatrix}
+\]</span></p>
+<p>Classification: <strong>ellipse</strong></p>
+<hr>
+<p><strong>Problem 2:</strong> The spread of pixel intensity in an image block is modeled by:</p>
+<p><span class="math display">\[
+4x_1^{2}-6x_1x_2+9x_2^{2}=36
+\]</span></p>
+<p>Transform to principal axis form, find the orthogonal transformation, classify the conic, and write <span class="math inline">\(Y=B^{-1}X\)</span>.</p>
+<p><strong>Solution:</strong></p>
+<p><strong>Step 1:</strong> <span class="math inline">\(A = \begin{bmatrix}4 &amp; -3\\-3 &amp; 9\end{bmatrix}\)</span></p>
+<p>Eigenvalues: <span class="math inline">\(\lambda_1 = 10.405\)</span>, <span class="math inline">\(\lambda_2 = 2.595\)</span></p>
+<p>Eigenvectors: <span class="math inline">\(v_1 = \begin{pmatrix}1.405\\-3\end{pmatrix}\)</span>, <span class="math inline">\(v_2 = \begin{pmatrix}-6.405\\-3\end{pmatrix}\)</span></p>
+<p><strong>Step 2:</strong> Modal matrix <span class="math inline">\(B = [v_1\ v_2]\)</span><br>
+Normalized modal matrix:</p>
+<p><span class="math display">\[
+\hat{B} = \begin{bmatrix}0.421 &amp; -0.894\\ -0.907 &amp; -0.447\end{bmatrix}
+\]</span></p>
+<p><strong>Step 3:</strong> <span class="math inline">\(X = \hat{B}Y\)</span></p>
+<p><strong>Step 4:</strong> Principal axis form:</p>
+<p><span class="math display">\[
+10.405 y_1^2 + 2.595 y_2^2 = 36
+\]</span></p>
+<p><strong>Step 5:</strong> Inverse transformation:</p>
+<p><span class="math display">\[
+Y = B^{-1}X =
+\begin{bmatrix}
+0.404 x_1 - 0.172 x_2\\
+0.865 x_1 + 0.177 x_2
+\end{bmatrix}
+\]</span></p>
+<p>Classification: <strong>ellipse</strong></p>
+<hr>
+<p><strong>Problem 3:</strong> The potential energy of a 3-mass vibrating system is given by:<br>
+<span class="math display">\[
+6x_1^{2}+4x_1x_2+3x_2^{2}+2x_2x_3+2x_3^{2}=20
+\]</span></p>
+<p>Transform to principal axis form, find the orthogonal transformation, classify the quadric surface, and write <span class="math inline">\(Y=B^{-1}X\)</span>.</p>
+<p><strong>Solution:</strong></p>
+<p><strong>Step 1:</strong> <span class="math inline">\(A = \begin{bmatrix}6 &amp; 2 &amp; 0\\2 &amp; 3 &amp; 1\\0 &amp; 1 &amp; 2\end{bmatrix}\)</span></p>
+<p>Eigenvalues: <span class="math inline">\(\lambda_1 = 7.541\)</span>, <span class="math inline">\(\lambda_2 = 2.459\)</span>, <span class="math inline">\(\lambda_3 = 1.0\)</span></p>
+<p>Eigenvectors (normalized):<br>
+<span class="math inline">\(v_1 = \begin{pmatrix}0.814\\0.556\\0.166\end{pmatrix}\)</span>,<br>
+<span class="math inline">\(v_2 = \begin{pmatrix}-0.576\\0.817\\-0.056\end{pmatrix}\)</span>,<br>
+<span class="math inline">\(v_3 = \begin{pmatrix}-0.062\\-0.156\\0.986\end{pmatrix}\)</span></p>
+<p><strong>Step 2:</strong> Modal matrix <span class="math inline">\(B = [v_1\ v_2\ v_3]\)</span></p>
+<p><span class="math display">\[
+B =
+\begin{bmatrix}
+0.814 &amp; -0.576 &amp; -0.062\\
+0.556 &amp; 0.817 &amp; -0.156\\
+0.166 &amp; -0.056 &amp; 0.986
+\end{bmatrix}, \quad B^{-1} \approx B^T
+\]</span></p>
+<p>Normalized modal matrix: <span class="math inline">\(\hat{B} = B\)</span></p>
+<p><strong>Step 3:</strong> <span class="math inline">\(X = \hat{B}Y\)</span></p>
+<p><strong>Step 4:</strong> Principal axis form:</p>
+<p><span class="math display">\[
+7.541 y_1^2 + 2.459 y_2^2 + 1.0 y_3^2 = 20
+\]</span></p>
+<p><strong>Step 5:</strong> Inverse transformation:</p>
+<p><span class="math display">\[
+\begin{bmatrix}y_1\\y_2\\y_3\end{bmatrix} =
+B^{-1} X \approx
+\begin{bmatrix}
+0.814 &amp; 0.556 &amp; 0.166\\
+-0.576 &amp; 0.817 &amp; -0.056\\
+-0.062 &amp; -0.156 &amp; 0.986
+\end{bmatrix}
+\begin{bmatrix}x_1\\x_2\\x_3\end{bmatrix}
+\]</span></p>
+<p>Classification: All positive eigenvalues <span class="math inline">\(\Rightarrow\)</span> <strong>ellipsoid</strong></p>
+<hr>
+<p><strong>Problem 4:</strong> A quadratic classifier is modeled by: <span class="math display">\[
+2x_1^{2}+2x_1x_2+2x_2^{2}=8
+\]</span></p>
+<p>Reduce to principal axis form, find the orthogonal transformation, classify the conic, and write <span class="math inline">\(Y=B^{-1}X\)</span>.</p>
+<p><strong>Solution:</strong></p>
+<p><strong>Step 1:</strong> <span class="math inline">\(A = \begin{bmatrix}2 &amp; 1\\1 &amp; 2\end{bmatrix}\)</span></p>
+<p>Eigenvalues: <span class="math inline">\(\lambda_1 = 3\)</span>, <span class="math inline">\(\lambda_2 = 1\)</span></p>
+<p>Eigenvectors using formula: <span class="math inline">\(v_1 = \begin{pmatrix}1\\1\end{pmatrix}\)</span>, <span class="math inline">\(v_2 = \begin{pmatrix}-1\\1\end{pmatrix}\)</span></p>
+<p><strong>Step 2:</strong> Modal matrix <span class="math inline">\(B = [v_1\ v_2]\)</span>, normalized:</p>
+<p><span class="math display">\[
+\hat{B} = \frac{1}{\sqrt{2}}\begin{bmatrix}1 &amp; -1\\1 &amp; 1\end{bmatrix}
+\]</span></p>
+<p><strong>Step 3:</strong> <span class="math inline">\(X = \hat{B}Y\)</span></p>
+<p><strong>Step 4:</strong> Principal axis form:</p>
+<p><span class="math display">\[
+3 y_1^2 + 1 y_2^2 = 8
+\]</span></p>
+<p><strong>Step 5:</strong> Inverse transformation:</p>
+<p><span class="math display">\[
+Y = B^{-1}X = \frac{1}{2}\begin{bmatrix}1 &amp; 1\\-1 &amp; 1\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix} =
+\begin{bmatrix}\frac{x_1 + x_2}{2}\\ \frac{-x_1 + x_2}{2}\end{bmatrix}
+\]</span></p>
+<p>Classification: <strong>ellipse</strong></p>
+<hr>
+<p><strong>Problem 5:</strong> A Lyapunov function candidate is: <span class="math display">\[
+7x_1^{2}-4x_1x_2+4x_2^{2}+2x_2x_3+3x_3^{2}=15
+\]</span></p>
+<p>Transform to principal axis form, find the orthogonal transformation, determine stability, and write <span class="math inline">\(Y=B^{-1}X\)</span>.</p>
+<p><strong>Solution:</strong></p>
+<p><strong>Step 1:</strong> <span class="math inline">\(A = \begin{bmatrix}7 &amp; -2 &amp; 0\\-2 &amp; 4 &amp; 1\\0 &amp; 1 &amp; 3\end{bmatrix}\)</span></p>
+<p>Eigenvalues: <span class="math inline">\(\lambda_1 = 8.061\)</span>, <span class="math inline">\(\lambda_2 = 3.0\)</span>, <span class="math inline">\(\lambda_3 = 2.939\)</span></p>
+<p>Eigenvectors (normalized):<br>
+<span class="math inline">\(v_1 = \begin{pmatrix}0.872\\-0.441\\0.207\end{pmatrix}\)</span>,<br>
+<span class="math inline">\(v_2 = \begin{pmatrix}-0.308\\0.886\\-0.345\end{pmatrix}\)</span>,<br>
+<span class="math inline">\(v_3 = \begin{pmatrix}0.379\\0.153\\0.912\end{pmatrix}\)</span></p>
+<p><strong>Step 2:</strong> Modal matrix <span class="math inline">\(B = [v_1\ v_2\ v_3]\)</span>, <span class="math inline">\(\hat{B} = B\)</span>, <span class="math inline">\(B^{-1} \approx B^T\)</span></p>
+<p><strong>Step 3:</strong> <span class="math inline">\(X = \hat{B}Y\)</span></p>
+<p><strong>Step 4:</strong> Principal axis form:</p>
+<p><span class="math display">\[
+8.061 y_1^2 + 3.0 y_2^2 + 2.939 y_3^2 = 15
+\]</span></p>
+<p><strong>Step 5:</strong> Inverse transformation:</p>
+<p><span class="math display">\[
+Y = B^{-1} X \approx
+\begin{bmatrix}
+0.872 &amp; -0.441 &amp; 0.207\\
+-0.308 &amp; 0.886 &amp; -0.345\\
+0.379 &amp; 0.153 &amp; 0.912
+\end{bmatrix}
+\begin{bmatrix}x_1\\x_2\\x_3\end{bmatrix}
+\]</span></p>
+<p>Classification: All eigenvalues positive <span class="math inline">\(\Rightarrow\)</span> <strong>stable system</strong></p>
+<hr>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Interpretation of the sign of eigenvalues and the nature of normalized modal matrix in terms of stability
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The orthogonal modal transformation <span class="math inline">\(X=\hat{B}Y\)</span> rotates (and possibly reflects) the coordinate axes to align with the eigen-directions of <span class="math inline">\(A\)</span>. This eliminates cross-terms (interaction terms) and diagonalizes the quadratic form. Because <span class="math inline">\(\hat{B}\)</span> is orthonormal, it preserves quadratic quantities such as energy and definiteness: eigenvalue signs therefore directly determine the type of conic/quadric and stability. The transformed coordinates <span class="math inline">\(y_i\)</span> are independent modal contributions scaled by the eigenvalues.</p>
+</div>
+</div>
+</section>
+<section id="module-ii-summary" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="module-ii-summary"><span class="header-section-number">3.9</span> Module II Summary</h2>
 <ul>
 <li>The core idea of this module is the equation <span class="math inline">\(Ax = \lambda x\)</span>.</li>
 <li><strong>Eigenvectors</strong> (<span class="math inline">\(x\)</span>) are the special directions for a matrix that are only scaled, not rotated. <strong>Eigenvalues</strong> (<span class="math inline">\(\lambda\)</span>) are the scaling factors.</li>
