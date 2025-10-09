@@ -95,6 +95,221 @@ print(f"\nThe second-order partial f_xx is: {fxx}")
 print(f"The mixed partial f_xy is: {fxy}")
 ```
 
+## Tutorial- Basic Applications of Partial Differentiation in Engineering
+
+### Problem 1: Voltage variation in a resistive circuit
+In a resistive heating circuit, the voltage developed across a resistor depends on both the current through it and its resistance, according to:
+
+$$
+V = I^2 R
+$$
+
+where $I$ is the current and $R$ is the resistance. The current in the circuit is $2~\mathrm{A}$ and the resistance is $5~\Omega$.  
+
+**Tasks:**
+
+1. Determine the sensitivity of voltage with respect to current and resistance by finding $\dfrac{\partial V}{\partial I}$ and $\dfrac{\partial V}{\partial R}$.
+2. Estimate the approximate change in voltage when the current increases by $0.1~\mathrm{A}$ and the resistance decreases by $0.2~\Omega$ due to heating.
+
+**Solution:**
+
+$$
+\frac{\partial V}{\partial I} = 2 I R, \quad \frac{\partial V}{\partial R} = I^2
+$$
+
+At $(I, R) = (2,5)$:
+
+$$
+\frac{\partial V}{\partial I} = 20, \quad \frac{\partial V}{\partial R} = 4
+$$
+
+Approximate change in voltage:
+
+$$
+\Delta V \approx 20(0.1) + 4(-0.2) = 1.2~\mathrm{V}
+$$
+
+**Interpretation:** A small current increase dominates, producing $\Delta V \approx 1.2~\mathrm{V}$ rise.
+
+### Problem 2: Temperature distribution on a microchip surface
+In an electronic processor, heat dissipation on the chip surface is modeled by
+
+$$
+T(x, y) = 200 e^{-0.01(x^2 + y^2)}
+$$
+
+where $T$ (in °C) denotes the temperature at coordinates $(x, y)$ measured in millimeters from the chip’s center.  
+
+**Tasks:**
+
+1. Find the rate of change of temperature at point $(4,3)$ along the $x$-direction.  
+2. Determine the maximum rate of increase of temperature and the direction in which it occurs.
+
+**Solution:**
+
+$$
+T_x = -4x\, e^{-0.01(x^2 + y^2)}, \quad T_y = -4y\, e^{-0.01(x^2 + y^2)}
+$$
+
+At $(4,3)$:
+
+$$
+T_x = -16 e^{-0.25}, \quad T_y = -12 e^{-0.25}
+$$
+
+The gradient:
+
+$$
+\nabla T = (-16 e^{-0.25}, -12 e^{-0.25})
+$$
+
+Magnitude of maximum rate of increase:
+
+$$
+\|\nabla T\| = 20 e^{-0.25}
+$$
+
+Direction toward maximum increase: $(-\frac{4}{5}, -\frac{3}{5})$ (toward the chip center).
+
+
+
+### Problem 3: Electrostatic potential and field intensity
+The electrostatic potential $V$ at a point $(x, y, z)$ near a charge $q$ is expressed as
+
+$$
+V(x, y, z) = \frac{kq}{\sqrt{x^2 + y^2 + z^2}}
+$$
+
+where $k$ is a constant of proportionality.  
+
+**Tasks:**
+
+1. Compute $\dfrac{\partial V}{\partial x}$, $\dfrac{\partial V}{\partial y}$, and $\dfrac{\partial V}{\partial z}$.
+2. Derive the expression for the electric field vector $\vec{E} = -\nabla V$ and discuss its physical direction.
+
+**Solution:**
+
+$$
+\frac{\partial V}{\partial x} = -\frac{kq\, x}{(x^2 + y^2 + z^2)^{3/2}}, \quad
+\frac{\partial V}{\partial y} = -\frac{kq\, y}{(x^2 + y^2 + z^2)^{3/2}}, \quad
+\frac{\partial V}{\partial z} = -\frac{kq\, z}{(x^2 + y^2 + z^2)^{3/2}}
+$$
+
+Electric field vector:
+
+$$
+\vec{E} = \frac{kq (x, y, z)}{(x^2 + y^2 + z^2)^{3/2}}
+$$
+
+Direction: radially outward for a positive charge.
+
+
+### Problem 4: Gradient descent in a learning model
+In a neural network, the cost function for a single data instance $(x_1, x_2, y)$ is defined by
+
+$$
+J(w_1, w_2) = (w_1 x_1 + w_2 x_2 - y)^2
+$$
+
+where $w_1$ and $w_2$ are the model parameters.  
+
+**Tasks:**
+
+1. Find $\dfrac{\partial J}{\partial w_1}$ and $\dfrac{\partial J}{\partial w_2}$.
+2. Explain the significance of these derivatives in adjusting the weights using gradient descent.
+
+**Solution:**
+
+$$
+\frac{\partial J}{\partial w_1} = 2 (w_1 x_1 + w_2 x_2 - y) x_1, \quad
+\frac{\partial J}{\partial w_2} = 2 (w_1 x_1 + w_2 x_2 - y) x_2
+$$
+
+The gradient $\nabla J$ guides weight updates via:
+
+$$
+w_i \leftarrow w_i - \eta \frac{\partial J}{\partial w_i}
+$$
+
+
+
+### Problem 6: CPU performance sensitivity analysis
+A simplified performance model for a CPU relates processing time $t$ (ms) to clock frequency $f$ (GHz) and memory load $m$ (GB) as
+
+$$
+t(f, m) = \frac{1000 m}{f - 0.1 m}
+$$
+
+**Tasks:**
+
+1. Find $\dfrac{\partial t}{\partial f}$ and $\dfrac{\partial t}{\partial m}$.
+2. Interpret these derivatives as sensitivity measures of CPU performance with respect to $f$ and $m$.
+
+**Solution:**
+
+$$
+\frac{\partial t}{\partial f} = -\frac{1000 m}{(f - 0.1 m)^2}, \quad
+\frac{\partial t}{\partial m} = \frac{1000 f}{(f - 0.1 m)^2}
+$$
+
+Increasing $f$ reduces processing time; increasing $m$ increases processing time. Sensitivities scale with $(f - 0.1 m)^{-2}$.
+
+
+### Problem 7
+If $f(x, y, z) = \ln(\tan x + \tan y + \tan z)$, show that
+
+$$
+\sin 2x\, f_x + \sin 2y\, f_y + \sin 2z\, f_z = 2
+$$
+
+**Solution:**
+
+$$
+f_x = \frac{\sec^2 x}{\tan x + \tan y + \tan z}, \quad \sin 2x\, f_x = \frac{2 \tan x}{\tan x + \tan y + \tan z}
+$$
+
+Similarly for $y, z$. Adding all terms:
+
+$$
+\sin 2x\, f_x + \sin 2y\, f_y + \sin 2z\, f_z = 2
+$$
+
+
+
+### Problem 8
+If $g(x, y, z) = \ln(\cot x + \cot y + \cot z)$, prove that
+
+$$
+\sin 2x\, g_x + \sin 2y\, g_y + \sin 2z\, g_z = -2
+$$
+
+**Solution:**
+
+$$
+g_x = \frac{-\csc^2 x}{\cot x + \cot y + \cot z}, \quad \sin 2x\, g_x = -\frac{2 \cot x}{\cot x + \cot y + \cot z}
+$$
+
+Summing over $x, y, z$ gives $-2$.
+
+
+
+### Problem 9
+If $h(x, y, z) = \ln(\tan x \tan y \tan z)$, show that
+
+$$
+\sin 2x\, h_x + \sin 2y\, h_y + \sin 2z\, h_z = 6
+$$
+
+**Solution:**
+
+$$
+h_x = \frac{\sec^2 x}{\tan x} = \frac{2}{\sin 2x} \Rightarrow \sin 2x\, h_x = 2
+$$
+
+Similarly for $y, z$, summing gives $6$.
+
+
+
 ## The Gradient and Linear Approximation
 
 The two partial derivatives tell us the slope in the cardinal directions. But what if we want to know the slope in *any* direction? We can package our partial derivatives into a single, powerful object: the **gradient vector**.
@@ -104,6 +319,7 @@ The two partial derivatives tell us the slope in the cardinal directions. But wh
 > $$ \nabla f = \begin{bmatrix} \frac{\partial f}{\partial x} \\ \frac{\partial f}{\partial y} \end{bmatrix} = f_x \mathbf{i} + f_y \mathbf{j} $$
 
 The gradient is not just a container. It has a beautiful geometric meaning:
+
 1.  **Direction:** The gradient vector $\nabla f$ at a point $(x_0, y_0)$ points in the direction of the **steepest ascent** on the surface. It's the "uphill" direction.
 2.  **Magnitude:** The magnitude of the gradient, $||\nabla f||$, is the slope in that steepest direction.
 
@@ -322,6 +538,7 @@ for p in critical_points:
     else:
         print("  Result: Test is inconclusive")
 ```
+
 The results match what we see in the 3D plot perfectly! The origin is a local minimum, the points on the y-axis are local maxima (the two highest peaks), and the points on the x-axis are saddle points.
 
 ## Module III Summary
@@ -332,4 +549,3 @@ The results match what we see in the 3D plot perfectly! The origin is a local mi
 *   To find potential maxima and minima (**critical points**), we find where the landscape is flat by solving $\nabla f = 0$.
 *   The **Second Derivative Test**, using the determinant of the Hessian matrix, allows us to classify these critical points as local maxima, local minima, or saddle points.
 *   This process of finding extrema is called **optimization**, and it is the absolute core of how modern AI models are trained.
-```
