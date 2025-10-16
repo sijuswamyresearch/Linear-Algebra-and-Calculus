@@ -449,6 +449,553 @@ This formula has a beautiful, compact form using the gradient and the velocity v
 $$ \frac{dz}{dt} = \nabla f \cdot r'(t) $$
 The rate of change of your altitude is the dot product of the "steepest uphill" vector and your direction of travel vector. This is a perfect example of how linear algebra and calculus work together.
 
+## Tutorial 6: Applications of Chain Rule
+
+### Problem 1: Voltage Variation in a Temperature-Dependent Circuit
+
+A resistive circuit has voltage $V = I \cdot R$, where current and resistance vary with temperature $T$:
+
+$$
+I(T) = 5\sqrt{T}, \quad R(T) = 2T + 3
+$$ 
+
+Using the chain rule, find $\dfrac{dV}{dT}$ and interpret how voltage changes as temperature increases. Verify by substitution.
+
+**Chain-rule solution:**
+
+1. Intermediate variable: $V(I(T),R(T))$  
+2. Partial derivatives:
+
+$$
+\frac{\partial V}{\partial I} = R, \quad \frac{\partial V}{\partial R} = I
+$$  
+
+3. Derivatives of intermediate variables:
+
+$$
+\frac{dI}{dT} = \frac{5}{2} T^{-1/2}, \quad \frac{dR}{dT} = 2
+$$  
+
+4. Apply chain rule:
+
+$$
+\frac{dV}{dT} = \frac{\partial V}{\partial I}\frac{dI}{dT} + \frac{\partial V}{\partial R}\frac{dR}{dT} = R \cdot \frac{5}{2}T^{-1/2} + I \cdot 2
+$$  
+
+5. Substitute $I(T)$ and $R(T)$:
+
+$$
+\frac{dV}{dT} = (2T+3) \cdot \frac{5}{2}T^{-1/2} + 5\sqrt{T} \cdot 2 = 15\sqrt{T} +\frac{15}{2\sqrt{T}}
+$$
+
+**Verification by substitution:**
+
+$$
+V(T) = 5\sqrt{T}(2T+3) \implies \frac{dV}{dT} = 15T^{1/2} + \frac{15}{2T^{1/2}}
+$$
+
+**Python `SymPy` code:**
+```{python}
+import sympy as sp
+
+T = sp.symbols('T', positive=True)
+I = 5*sp.sqrt(T)
+R = 2*T + 3
+V = I*R
+
+# Direct derivative w.r.t T
+dV_dT = sp.diff(V, T)
+dV_dT
+```
+
+>*Alternate method:*
+
+```{python}
+T = sp.symbols('T', positive=True)
+I, R = sp.symbols('I R', real=True)  # treat as independent
+V = I*R
+
+# Partial derivatives
+dV_dI = sp.diff(V, I)   # R
+dV_dR = sp.diff(V, R)   # I
+
+# Substitute expressions for I and R
+I_expr = 5*sp.sqrt(T)
+R_expr = 2*T + 3
+
+# Derivatives of I and R w.r.t T
+dI_dT = sp.diff(I_expr, T)
+dR_dT = sp.diff(R_expr, T)
+
+# Chain rule
+dV_dT = dV_dI.subs(I,I_expr).subs(R,R_expr)*dI_dT + dV_dR.subs(I,I_expr)*dR_dT
+sp.simplify(dV_dT)
+```
+
+### Problem 2: Power Output in a Time-Varying Transistor
+
+In a transistor circuit, the instantaneous power is given by $P = V^2 / R$, where $V$ is the voltage across the transistor and $R$ is the resistance of the load. Suppose the voltage varies with time due to a decaying input signal, and the resistance slowly changes due to heating effects:
+
+$$
+V(t) = 10 e^{-0.02 t} \text{ volts}, \quad R(t) = 4 + 0.1 t \ \Omega
+$$
+
+Compute the **rate of change of power** $\dfrac{dP}{dt}$ at any time $t$ using the **multivariable chain rule**, and verify the result by direct differentiation.
+
+
+**Solution (Chain-Rule Method):**
+
+1. Treat $P$ as a function of two variables: $P(V,R)$.
+
+$$
+P(V,R) = \frac{V^2}{R}
+$$
+
+2. Compute the **partial derivatives**:
+
+$$
+\frac{\partial P}{\partial V} = \frac{2V}{R}, \quad
+\frac{\partial P}{\partial R} = -\frac{V^2}{R^2}
+$$
+
+3. Compute **derivatives of intermediate variables** w.r.t. $t$:
+
+$$
+\frac{dV}{dt} = \frac{d}{dt}(10 e^{-0.02 t}) = -0.2 e^{-0.02 t}, \quad
+\frac{dR}{dt} = \frac{d}{dt}(4 + 0.1 t) = 0.1
+$$
+
+4. Apply the **multivariable chain rule**:
+
+$$
+\frac{dP}{dt} = \frac{\partial P}{\partial V} \frac{dV}{dt} + \frac{\partial P}{\partial R} \frac{dR}{dt}
+$$
+
+Substitute the values:
+
+$$
+\frac{dP}{dt} = \frac{2V}{R} \cdot (-0.2 e^{-0.02 t}) + \left(-\frac{V^2}{R^2}\right) \cdot 0.1
+$$
+
+5. Substitute $V(t)$ and $R(t)$:
+
+$$
+\frac{dP}{dt} = \frac{2 \cdot 10 e^{-0.02 t}}{4 + 0.1 t} \cdot (-0.2 e^{-0.02 t}) - \frac{(10 e^{-0.02 t})^2}{(4 + 0.1 t)^2} \cdot 0.1
+$$
+
+Simplify:
+
+$$
+\frac{dP}{dt} = - \frac{4 (e^{-0.04 t})}{4 + 0.1 t} - \frac{100 e^{-0.04 t}}{(4 + 0.1 t)^2}
+$$
+
+This is the **rate of change of power** at any time $t$.
+
+
+**Verification by direct differentiation:**
+
+Directly compute:
+
+$$
+P(t) = \frac{(10 e^{-0.02 t})^2}{4 + 0.1 t} = \frac{100 e^{-0.04 t}}{4 + 0.1 t}
+$$
+
+Differentiating w.r.t $t$ gives exactly the same expression:
+
+$$
+\frac{dP}{dt} = - \frac{4 e^{-0.04 t}}{4 + 0.1 t} - \frac{100 e^{-0.04 t}}{(4 + 0.1 t)^2}
+$$
+
+>**Python code:**
+
+```{python}
+import sympy as sp
+
+t = sp.symbols('t', real=True)
+# Define independent symbols for chain rule
+V_sym, R_sym = sp.symbols('V R', real=True)
+P = V_sym**2 / R_sym
+
+# Partial derivatives
+dP_dV = sp.diff(P, V_sym)   # 2*V/R
+dP_dR = sp.diff(P, R_sym)   # -V^2 / R^2
+
+# Expressions for V(t) and R(t)
+V_expr = 10*sp.exp(-0.02*t)
+R_expr = 4 + 0.1*t
+
+# Derivatives of intermediate variables
+dV_dt = sp.diff(V_expr, t)
+dR_dt = sp.diff(R_expr, t)
+
+# Chain rule
+dP_dt = dP_dV.subs({V_sym:V_expr, R_sym:R_expr})*dV_dt + dP_dR.subs({V_sym:V_expr, R_sym:R_expr})*dR_dt
+dP_dt_simplified = sp.simplify(dP_dt)
+dP_dt_simplified
+```
+### Problem 3:  Capacitance Sensitivity in a Temperature-Dependent Capacitor
+
+A parallel-plate capacitor has capacitance 
+
+$$
+C = \varepsilon \frac{A}{d},
+$$ 
+
+where $A$ is the plate area, $d$ is the separation, and $\varepsilon$ is the permittivity. The capacitor is subject to temperature variations that change the radius of the circular plates and the separation:
+
+$$
+A = \pi r^2, \quad r = 2 + 0.01 T, \quad d = 1 + 0.005 T
+$$
+
+Compute the *rate of change of capacitance* $\dfrac{dC}{dT}$ using the **multivariable chain rule** and verify by direct differentiation.
+
+
+**Solution (Chain-Rule Method):**
+
+1. Treat $C$ as a function of two variables: $C(A(T), d(T))$.
+
+$$
+C(A,d) = \frac{\varepsilon A}{d}
+$$
+
+2. Compute the **partial derivatives**:
+
+$$
+\frac{\partial C}{\partial A} = \frac{\varepsilon}{d}, \quad
+\frac{\partial C}{\partial d} = -\frac{\varepsilon A}{d^2}
+$$
+
+3. Compute **derivatives of intermediate variables** w.r.t $T$:
+
+$$
+\frac{dA}{dT} = \frac{d}{dT} (\pi r^2) = 2\pi r \frac{dr}{dT} = 2 \pi (2+0.01T)(0.01) = 0.02 \pi (2+0.01T)
+$$
+
+$$
+\frac{dd}{dT} = \frac{d}{dT}(1 + 0.005 T) = 0.005
+$$
+
+4. Apply the **multivariable chain rule**:
+
+$$
+\frac{dC}{dT} = \frac{\partial C}{\partial A} \frac{dA}{dT} + \frac{\partial C}{\partial d} \frac{dd}{dT}
+$$
+
+Substitute the partial derivatives:
+
+$$
+\frac{dC}{dT} = \frac{\varepsilon}{d} \cdot 0.02 \pi (2+0.01T) - \frac{\varepsilon A}{d^2} \cdot 0.005
+$$
+
+5. Substitute $A = \pi r^2 = \pi (2 + 0.01 T)^2$ and $d = 1 + 0.005 T$:
+
+$$
+\frac{dC}{dT} = \frac{\varepsilon \cdot 0.02 \pi (2+0.01T)}{1+0.005T} - \frac{\varepsilon \pi (2+0.01T)^2 \cdot 0.005}{(1+0.005T)^2}
+$$
+
+This gives the **rate of change of capacitance** at any temperature $T$.
+
+**Verification by direct differentiation:**
+
+Directly differentiate:
+
+$$
+C(T) = \frac{\varepsilon \pi (2+0.01 T)^2}{1 + 0.005 T}
+$$
+
+w.r.t $T$ to get exactly the same expression as above.
+
+**Python SymPy Code (Corrected Chain-Rule Implementation):**
+
+```{python}
+import sympy as sp
+
+T = sp.symbols('T', real=True)
+eps = sp.symbols('eps', real=True)
+
+# Define intermediate variables as symbols for chain rule
+A_sym, d_sym = sp.symbols('A d', real=True)
+C = eps * A_sym / d_sym
+
+# Partial derivatives
+dC_dA = sp.diff(C, A_sym)   # eps / d
+dC_dd = sp.diff(C, d_sym)   # -eps*A / d^2
+
+# Expressions for A(T) and d(T)
+r_expr = 2 + 0.01*T
+A_expr = sp.pi * r_expr**2
+d_expr = 1 + 0.005*T
+
+# Derivatives of intermediate variables
+dA_dT = sp.diff(A_expr, T)
+dd_dT = sp.diff(d_expr, T)
+
+# Chain rule
+dC_dT = dC_dA.subs({A_sym:A_expr, d_sym:d_expr})*dA_dT + dC_dd.subs({A_sym:A_expr, d_sym:d_expr})*dd_dT
+dC_dT_simplified = sp.simplify(dC_dT)
+dC_dT_simplified
+```
+
+### Problem 4: Neural Network Weight Sensitivity
+
+Consider a simple neuron in a feedforward neural network with two inputs $x_1$ and $x_2$, weights $w_1$ and $w_2$, and bias $b$. The output of the neuron is  
+
+$$
+z = \tanh(u), \quad u = w_1 x_1 + w_2 x_2 + b
+$$  
+
+Compute the *sensitivity of the output* with respect to the weights, i.e., $\frac{\partial z}{\partial w_1}$ and $\frac{\partial z}{\partial w_2}$, using the *multivariable chain rule*. Verify the results using Python's SymPy library.
+
+
+**Solution (Chain-Rule Method):**
+
+1. Treat $z$ as a function of $u$: $z = \tanh(u)$.  
+2. Compute the derivative of $z$ with respect to $u$:
+
+$$
+\frac{dz}{du} = 1 - \tanh^2(u)
+$$
+
+3. Compute the derivatives of $u$ with respect to the weights:
+
+$$
+\frac{\partial u}{\partial w_1} = x_1, \quad \frac{\partial u}{\partial w_2} = x_2
+$$
+
+4. Apply the **chain rule**:
+
+$$
+\frac{\partial z}{\partial w_1} = \frac{dz}{du} \cdot \frac{\partial u}{\partial w_1} = (1 - \tanh^2(u)) \cdot x_1
+$$
+
+$$
+\frac{\partial z}{\partial w_2} = \frac{dz}{du} \cdot \frac{\partial u}{\partial w_2} = (1 - \tanh^2(u)) \cdot x_2
+$$
+
+
+**Verification using Python SymPy:**
+
+```{python}
+import sympy as sp
+
+# Define symbols
+w1, w2, x1, x2, b = sp.symbols('w1 w2 x1 x2 b', real=True)
+
+# Define u and z
+u = w1*x1 + w2*x2 + b
+z = sp.tanh(u)
+
+# Compute derivatives using chain rule automatically
+dz_dw1 = sp.diff(z, w1)
+dz_dw2 = sp.diff(z, w2)
+
+# Simplify
+dz_dw1_simpl = sp.simplify(dz_dw1)
+dz_dw2_simpl = sp.simplify(dz_dw2)
+
+dz_dw1_simpl, dz_dw2_simpl
+```
+
+### Problem 5: Temperature in a Polar Sensor Grid
+ 
+A sensor grid measures temperature at points $(x, y)$, where the temperature depends on position as  
+
+$$
+T = x^2 + y^2
+$$  
+
+Suppose the sensors are arranged in a polar coordinate system:
+
+$$
+x = r \cos\theta, \quad y = r \sin\theta
+$$  
+
+Compute the *rate of change of temperature* with respect to the radial distance $r$ and the angular position $\theta$, i.e., $\frac{\partial T}{\partial r}$ and $\frac{\partial T}{\partial \theta}$, using the *multivariable chain rule*. Verify the results using Python `SymPy`.
+
+
+**Solution (Chain-Rule Method):**
+
+1. Treat $T$ as a function of $x$ and $y$:
+
+$$
+T(x,y) = x^2 + y^2
+$$
+
+Partial derivatives:
+
+$$
+\frac{\partial T}{\partial x} = 2x, \quad \frac{\partial T}{\partial y} = 2y
+$$
+
+2. Compute derivatives of $x$ and $y$ with respect to $r$ and $\theta$:
+
+$$
+\frac{\partial x}{\partial r} = \cos\theta, \quad \frac{\partial x}{\partial \theta} = -r \sin\theta
+$$
+
+$$
+\frac{\partial y}{\partial r} = \sin\theta, \quad \frac{\partial y}{\partial \theta} = r \cos\theta
+$$
+
+3. Apply the **multivariable chain rule**:
+
+$$
+\frac{\partial T}{\partial r} = \frac{\partial T}{\partial x} \frac{\partial x}{\partial r} + \frac{\partial T}{\partial y} \frac{\partial y}{\partial r} = 2x \cos\theta + 2y \sin\theta
+$$
+
+$$
+\frac{\partial T}{\partial \theta} = \frac{\partial T}{\partial x} \frac{\partial x}{\partial \theta} + \frac{\partial T}{\partial y} \frac{\partial y}{\partial \theta} = 2x(-r \sin\theta) + 2y(r \cos\theta) = 0
+$$
+
+4. Substitute $x = r \cos\theta$, $y = r \sin\theta$:
+
+$$
+\frac{\partial T}{\partial r} = 2r (\cos^2\theta + \sin^2\theta) = 2r
+$$
+
+$$
+\frac{\partial T}{\partial \theta} = 0
+$$
+
+
+**Verification using Python SymPy:**
+
+```{python}
+import sympy as sp
+
+# Define symbols
+r, theta = sp.symbols('r theta', real=True)
+
+# Define coordinate transformations
+x = r * sp.cos(theta)
+y = r * sp.sin(theta)
+
+# Temperature function
+T = x**2 + y**2
+
+# Partial derivatives w.r.t r and theta
+dT_dr = sp.diff(T, r)
+dT_dtheta = sp.diff(T, theta)
+
+dT_dr_simpl = sp.simplify(dT_dr)
+dT_dtheta_simpl = sp.simplify(dT_dtheta)
+
+dT_dr_simpl, dT_dtheta_simpl
+```
+
+### Problem 6: Dynamic System Response Over Time
+
+A dynamic system has an output that depends multiplicatively on two time-varying inputs. The instantaneous output is
+
+$$
+z = e^{\,x y},
+$$
+
+where the inputs themselves vary with time as
+
+$$
+x(t) = 2t^2,\qquad y(t) = 3t + 1.
+$$
+
+Use the *multivariable chain rule* to compute the total derivative $\dfrac{dz}{dt}$ (i.e. the rate of change of the output with respect to time). Then *verify* the result by substituting $x(t),y(t)$ into $z$ and differentiating directly. Evaluate the rate at $t=1$ and interpret the result.
+
+**Solution (Chain-Rule Method):**
+
+1. Identify intermediate variables: $z = f(x,y)$ with $f(x,y)=e^{xy}$, and $x=x(t),\ y=y(t)$.
+
+2. Compute the partial derivatives of $z$ w.r.t the intermediate variables:
+
+$$
+\frac{\partial z}{\partial x} = \frac{\partial}{\partial x} e^{xy} = y\,e^{xy}, \qquad
+\frac{\partial z}{\partial y} = \frac{\partial}{\partial y} e^{xy} = x\,e^{xy}.
+$$
+
+3. Compute time-derivatives of the intermediate variables:
+
+$$
+\frac{dx}{dt} = \frac{d}{dt}(2t^2) = 4t, \qquad
+\frac{dy}{dt} = \frac{d}{dt}(3t+1) = 3.
+$$
+
+4. Apply the multivariable chain rule (total derivative):
+
+$$
+\frac{dz}{dt} = \frac{\partial z}{\partial x}\frac{dx}{dt} + \frac{\partial z}{\partial y}\frac{dy}{dt}.
+$$
+
+Substitute the partials and time-derivatives:
+
+$$
+\frac{dz}{dt} = \bigl(y e^{xy}\bigr)(4t) + \bigl(x e^{xy}\bigr)(3)
+= e^{xy}\bigl(4t y + 3x\bigr).
+$$
+
+5. Evaluate at $t=1$. First compute $x(1)=2\cdot1^2 = 2$ and $y(1)=3\cdot1+1 = 4$. Thus
+
+$$
+\frac{dz}{dt}\Big|_{t=1} = e^{(2)(4)}\bigl(4\cdot1\cdot4 + 3\cdot2\bigr) = e^{8}(16 + 6) = 22 e^{8}.
+$$
+
+**Interpretation:** At $t=1$ the output is increasing very rapidly: the instantaneous rate is $22e^8$, reflecting strong sensitivity because $z$ is exponential in the product $xy$.
+
+**Verification by substitution (direct differentiation):**
+
+Substitute $x(t)$ and $y(t)$ into $z$:
+
+$$
+z(t) = e^{(2t^2)(3t+1)} = e^{6t^3 + 2t^2}.
+$$
+
+Differentiate directly:
+
+$$
+\frac{dz}{dt} = e^{6t^3 + 2t^2}\cdot(18t^2 + 4t).
+$$
+
+Check algebraically that
+
+$$
+18t^2 + 4t \equiv 4t(3t+1) + 3(2t^2) = 4t y + 3x,
+$$
+
+so the direct differentiation result matches the chain-rule result. Evaluating at $t=1$ gives $22e^8$ as before.
+
+**Python (SymPy) verification code:**
+
+```{python}
+import sympy as sp
+
+# symbol
+t = sp.symbols('t', real=True)
+
+# define x(t), y(t)
+x_expr = 2*t**2
+y_expr = 3*t + 1
+
+# Method A: explicit chain-rule via partials (use x,y as symbols then substitute)
+x_sym, y_sym = sp.symbols('x_sym y_sym')
+z_sym = sp.exp(x_sym*y_sym)
+
+# partials
+z_x = sp.diff(z_sym, x_sym)   # y * exp(xy)
+z_y = sp.diff(z_sym, y_sym)   # x * exp(xy)
+
+# substitute x(t), y(t) and multiply by dx/dt, dy/dt
+dzdt_chain = (z_x.subs({x_sym: x_expr, y_sym: y_expr}) * sp.diff(x_expr, t) +
+              z_y.subs({x_sym: x_expr, y_sym: y_expr}) * sp.diff(y_expr, t))
+dzdt_chain_simpl = sp.simplify(dzdt_chain)
+
+# evaluate at t=1
+dzdt_chain_at_1 = dzdt_chain_simpl.subs(t, 1)
+
+# Method B: substitute then differentiate
+z_sub = sp.exp(x_expr * y_expr)
+dzdt_sub = sp.diff(z_sub, t)
+dzdt_sub_simpl = sp.simplify(dzdt_sub)
+dzdt_sub_at_1 = dzdt_sub_simpl.subs(t, 1)
+
+dzdt_chain_simpl, dzdt_chain_at_1, dzdt_sub_simpl, dzdt_sub_at_1
+```
 ## The Main Event: Finding Maxima and Minima
 
 Now we can answer the big question: how do we find the peaks and valleys of our landscape?
