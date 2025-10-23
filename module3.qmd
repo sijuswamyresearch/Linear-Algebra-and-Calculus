@@ -1088,6 +1088,336 @@ for p in critical_points:
 
 The results match what we see in the 3D plot perfectly! The origin is a local minimum, the points on the y-axis are local maxima (the two highest peaks), and the points on the x-axis are saddle points.
 
+## Tutorial 7: Local Extrema and the Second Partial Derivative Test  
+
+### Problem 1- Power in a resistor (filter design)
+
+The instantaneous power dissipated across a resistor is modeled by
+$$
+P(V,R)=\frac{V^{2}}{R+10},
+$$
+where $V$ is the input voltage (volts) and $R$ is the resistance (ohms). Find all stationary points and classify them using the second partial derivative test. Give a physical interpretation.
+
+>**Solution:**
+
+**1. First partial derivatives**
+$$
+P_V=\frac{\partial P}{\partial V}=\frac{2V}{R+10},\qquad
+P_R=\frac{\partial P}{\partial R}=-\frac{V^{2}}{(R+10)^{2}}.
+$$
+
+Stationary points require $P_V=0$ and $P_R=0$ simultaneously.
+
+- From $P_V=0$ we get $V=0$.
+
+- Substitute $V=0$ into $P_R$: $P_R(0,R)=0$ (for all $R$).
+
+**Conclusion:** The set of stationary points is the entire line $V=0$ (all $R$).
+
+
+**Second partial derivatives**
+$$
+P_{VV}=\frac{2}{R+10},\qquad
+P_{RR}=\frac{2V^{2}}{(R+10)^{3}},\qquad
+P_{VR}=P_{RV}=-\frac{2V}{(R+10)^{2}}.
+$$
+
+Evaluate at any stationary point $(V=0,R)$:
+$$
+P_{VV}\big|_{V=0}=\frac{2}{R+10}>0,\quad
+P_{RR}\big|_{V=0}=0,\quad
+P_{VR}\big|_{V=0}=0.
+$$
+
+Hessian determinant (Discriminant):
+$$
+D = P_{VV}P_{RR}-P_{VR}^2 = \frac{2}{R+10}\cdot 0 - 0 = 0,
+$$
+so the second derivative test is **inconclusive** (because $D=0$).
+
+
+**Further reasoning / interpretation**
+
+Compute $P$ along $V=0$: $P(0,R)=0$. Since $P(V,R)\ge0$ for all $(V,R)$ (denominator is positive for physical $R$), $P=0$ is the **global minimum value**. The line $V=0$ is therefore a flat valley of minima: in the $V$-direction the function is convex ($P_{VV}>0$), while along $R$ it is flat at $V=0$.
+
+
+**SymPy verification**
+
+```{python}
+import sympy as sp
+V, R = sp.symbols('V R', real=True)
+P = V**2/(R+10)
+# first partials
+dPV = sp.diff(P, V)
+dPR = sp.diff(P, R)
+# stationary set
+crit = sp.solve([sp.Eq(dPV,0), sp.Eq(dPR,0)], [V,R], dict=True)  # will show V=0 with free R
+# second partials
+PVV = sp.diff(P, V, 2)
+PRR = sp.diff(P, R, 2)
+PVR = sp.diff(P, V, 1, R, 1)
+dPV, dPR, crit, PVV, PRR, PVR
+```
+
+### Problem 2 — Carrier mobility in a thin film
+
+*Carrier mobility in a semiconductor thin film is modeled as
+$$
+\mu(x,y)=5 - x^{2} - 2y^{2} + xy,
+$$
+where $x$ and $y$ are nondimensional process parameters (e.g., doping concentration factor and annealing index). Find the stationary points and classify them using the second partial derivative test. Discuss the engineering interpretation for the point with highest mobility.
+
+>**Solution**
+
+**First partial derivatives**
+
+Compute the partial derivatives:
+$$
+\mu_x = \frac{\partial \mu}{\partial x} = -2x + y, \qquad
+\mu_y = \frac{\partial \mu}{\partial y} = -4y + x.
+$$
+
+Set $\mu_x=0$ and $\mu_y=0$ to find stationary points:
+$$
+-2x + y = 0 \Rightarrow y = 2x, \\
+-4y + x = 0 \Rightarrow x = 4y.
+$$
+
+Substitute $y = 2x$ into $x = 4y$:
+
+$$
+x = 4(2x) = 8x \Rightarrow 7x=0 \Rightarrow x=0 \Rightarrow y = 0.
+$$
+
+**Stationary point:** $(x,y) = (0,0)$.
+
+**Second partial derivatives**
+
+Compute the second partial derivatives:
+$$
+\mu_{xx} = -2, \quad \mu_{yy} = -4, \quad \mu_{xy} = 1.
+$$
+
+Hessian determinant:
+$$
+D = \mu_{xx}\mu_{yy} - (\mu_{xy})^2 = (-2)(-4) - 1^2 = 8 - 1 = 7 > 0.
+$$
+
+Since $D>0$ and $\mu_{xx}=-2<0$, the stationary point $(0,0)$ is a **local maximum**.
+
+**Value at maximum:** $\mu(0,0) = 5$.
+
+
+**Interpretation**
+
+The model predicts that the **highest carrier mobility** occurs at the nominal process parameters $(x,y)=(0,0)$. Any deviation from these parameters reduces mobility.
+
+
+**SymPy verification**
+
+```{python}
+import sympy as sp
+
+# Define symbols
+x, y = sp.symbols('x y', real=True)
+
+# Define function
+mu = 5 - x**2 - 2*y**2 + x*y
+
+# Compute first partial derivatives
+dmu_dx = sp.diff(mu, x)
+dmu_dy = sp.diff(mu, y)
+
+# Solve for stationary points
+crit = sp.solve([sp.Eq(dmu_dx,0), sp.Eq(dmu_dy,0)], [x,y])
+
+# Compute Hessian
+H = sp.hessian(mu, (x,y))
+
+# Evaluate determinant at stationary point
+D = sp.det(H).subs({x:0, y:0})
+
+dmu_dx, dmu_dy, crit, H, D
+```
+
+### Problem 3 — Cooling fin efficiency
+
+The thermal efficiency of a cooling fin is modeled by
+$$
+\eta(x,y) = 80 - 4x^{2} - 2y^{2} + 3xy,
+$$
+where $x$ and $y$ are nondimensional geometric parameters (e.g., normalized fin spacing and thickness). Determine the stationary point that optimizes efficiency and classify it using the second partial derivative test. Interpret the result in terms of fin design.
+
+>**Solution**
+
+**First partial derivatives**
+
+Compute the first partial derivatives:
+$$
+\eta_x = \frac{\partial \eta}{\partial x} = -8x + 3y, \qquad
+\eta_y = \frac{\partial \eta}{\partial y} = -4y + 3x.
+$$
+
+Set $\eta_x=0$ and $\eta_y=0$ to find stationary points:
+
+$$
+-8x + 3y = 0 \Rightarrow y = \frac{8}{3}x, \\
+-4y + 3x = 0 \Rightarrow x = \frac{4}{3}y.
+$$
+
+Substitute $y=\frac{8}{3}x$ into $x = \frac{4}{3}y$:
+
+$$
+x = \frac{4}{3}\cdot \frac{8}{3}x = \frac{32}{9}x \Rightarrow \frac{32}{9}x - x = 0 \Rightarrow \frac{23}{9}x = 0 \Rightarrow x=0.
+$$
+
+Hence $y = \frac{8}{3}\cdot 0 = 0$.
+
+**Stationary point:** $(x,y) = (0,0)$.
+
+**Second partial derivatives**
+
+Compute second partial derivatives:
+$$
+\eta_{xx} = -8, \quad \eta_{yy} = -4, \quad \eta_{xy} = 3.
+$$
+
+Hessian determinant:
+$$
+D = \eta_{xx}\eta_{yy} - (\eta_{xy})^2 = (-8)(-4) - 3^2 = 32 - 9 = 23 > 0.
+$$
+
+Since $D>0$ and $\eta_{xx}=-8<0$, the stationary point $(0,0)$ is a **local maximum**.
+
+**Value at maximum:** $\eta(0,0) = 80$.
+
+
+**Interpretation**
+
+The model predicts that the **maximum thermal efficiency** occurs at the nominal fin geometry $(x,y)=(0,0)$. Deviations in spacing or thickness reduce efficiency. Engineers can use this information to guide optimal fin design.
+
+**SymPy verification**
+
+```{python}
+import sympy as sp
+
+# Define symbols
+x, y = sp.symbols('x y', real=True)
+
+# Define function
+eta = 80 - 4*x**2 - 2*y**2 + 3*x*y
+
+# First partial derivatives
+deta_dx = sp.diff(eta, x)
+deta_dy = sp.diff(eta, y)
+
+# Solve for stationary points
+crit = sp.solve([sp.Eq(deta_dx,0), sp.Eq(deta_dy,0)], [x,y])
+
+# Hessian matrix
+H = sp.hessian(eta, (x,y))
+
+# Evaluate determinant at stationary point
+D = sp.det(H).subs({x:0, y:0})
+
+deta_dx, deta_dy, crit, H, D
+```
+
+### Problem 4 — Execution time in resource allocation
+
+The estimated execution time of a program is modeled by
+$$
+T(x,y) = x^{3} + y^{3} - 6xy + 20,
+$$
+where $x$ represents CPU allocation and $y$ represents memory bandwidth (both nondimensional). Find all stationary points, classify them using the second partial derivative test, and identify the point corresponding to minimal execution time.
+
+>**Solution:**
+
+**First partial derivatives**
+
+Compute the first partial derivatives:
+$$
+T_x = \frac{\partial T}{\partial x} = 3x^{2} - 6y, \qquad
+T_y = \frac{\partial T}{\partial y} = 3y^{2} - 6x.
+$$
+
+Set $T_x=0$ and $T_y=0$ to find stationary points:
+
+$$
+3x^2 - 6y = 0 \Rightarrow y = \frac{1}{2} x^2, \\
+3y^2 - 6x = 0 \Rightarrow x = \frac{1}{2} y^2.
+$$
+
+Substitute $y=\frac{1}{2}x^2$ into $x=\frac{1}{2}y^2$:
+
+$$
+x = \frac{1}{2}\left(\frac{1}{2}x^2\right)^2 = \frac{1}{8} x^4.
+$$
+
+Solve:
+- $x=0 \Rightarrow y = \frac{1}{2} \cdot 0^2 = 0$, giving stationary point $(0,0)$.
+- If $x\ne 0$: divide both sides by $x$, $1 = \frac{1}{8} x^3 \Rightarrow x^3 = 8 \Rightarrow x=2$, then $y = \frac{1}{2} (2)^2 = 2$ giving $(2,2)$.
+
+**Stationary points:** $(0,0)$ and $(2,2)$.
+
+**Second partial derivatives**
+
+Compute the second partial derivatives:
+$$
+T_{xx} = 6x, \quad T_{yy} = 6y, \quad T_{xy} = -6.
+$$
+
+Hessian determinant:
+$$
+D = T_{xx}T_{yy} - (T_{xy})^2.
+$$
+
+- At $(0,0)$: $T_{xx}=0$, $T_{yy}=0$, $T_{xy}=-6$  
+  $D = 0\cdot0 - (-6)^2 = -36 < 0$ → **saddle point**.
+
+- At $(2,2)$: $T_{xx}=12$, $T_{yy}=12$, $T_{xy}=-6$  
+  $D = 12\cdot12 - (-6)^2 = 144 - 36 = 108 > 0$ and $T_{xx}=12>0$ → **local minimum**.
+
+Value at $(2,2)$:
+$$
+T(2,2) = 2^3 + 2^3 - 6\cdot2\cdot2 + 20 = 8 + 8 - 24 + 20 = 12.
+$$
+
+
+**Interpretation**
+
+- $(0,0)$ is a **saddle point**: small changes in $x$ or $y$ can increase or decrease execution time.
+- $(2,2)$ is a **local minimum**: allocating CPU and memory according to $(2,2)$ minimizes execution time (locally), giving $T=12$.
+
+Engineers can use this analysis for **resource optimization** to achieve minimal runtime.
+
+**SymPy verification**
+
+```{python}
+import sympy as sp
+
+# Define symbols
+x, y = sp.symbols('x y', real=True)
+
+# Define function
+Tfun = x**3 + y**3 - 6*x*y + 20
+
+# First partial derivatives
+dTx = sp.diff(Tfun, x)
+dTy = sp.diff(Tfun, y)
+
+# Solve for stationary points
+crit = sp.solve([sp.Eq(dTx,0), sp.Eq(dTy,0)], [x,y])
+
+# Hessian matrix
+H = sp.hessian(Tfun, (x,y))
+
+# Evaluate determinant and classify each stationary point
+results = [(pt, sp.simplify(sp.det(H).subs({x:pt[0], y:pt[1]})), sp.simplify(H[0,0].subs({x:pt[0], y:pt[1]}))) for pt in crit]
+
+crit, H, results
+```
+
 ## Module III Summary
 
 *   We've moved from 2D curves to 3D surfaces, or "landscapes."
