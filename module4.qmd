@@ -7,3 +7,645 @@ jupyter: python3
 Double integrals (Cartesian) - Reversing the order of integration - Change of coordinates (Cartesian to  polar) - Finding areas and volume using double integrals - Mass and centre of gravity of inhomogeneous laminas using double integral - Triple integrals - Volume calculated as triple integral - Triple integral in cylindrical and spherical coordinates (computations involving spheres and cylinders only).
 
 ----
+
+## Tutorial 8- Applications of Double Integrals
+
+### Problem 1 
+
+Temperature over a square chip ($2\times2$ cm) is
+$$
+T(x,y) = 100 - 5x^2 - 3y^2,
+$$
+with $x,y$ in cm. Surface heat capacity per unit area is $c = 0.02\ \text{J/cm}^2\!^\circ\text{C}$.  
+Total heat energy is
+$$
+Q = c \iint_R T(x,y)\, dA,\qquad R=[0,2]\times[0,2].
+$$
+
+
+>**Step 1 — Set up the double integral**
+
+Write the integral explicitly (choose any convenient order; here integrate $y$ first):
+$$
+Q = c \int_{x=0}^{2}\int_{y=0}^{2} \bigl(100 - 5x^{2} - 3y^{2}\bigr)\,dy\,dx.
+$$
+
+
+>**Step 2 — Compute the inner integral (with respect to $y$)**
+
+For fixed $x$,
+
+$$
+\begin{aligned}
+\int_{0}^{2} \bigl(100 - 5x^{2} - 3y^{2}\bigr)\,dy
+&= \int_{0}^{2} 100\,dy \;-\; \int_{0}^{2} 5x^{2}\,dy \;-\; \int_{0}^{2} 3y^{2}\,dy \\
+&= 100\cdot(2) \;-\; 5x^{2}\cdot(2) \;-\; 3\cdot\left[\frac{y^{3}}{3}\right]_{0}^{2} \\
+&= 200 - 10x^{2} - 3\cdot\frac{8}{3} \\
+&= 200 - 10x^{2} - 8 \\
+&= 192 - 10x^{2}.
+\end{aligned}
+$$
+
+So the inner integration reduces the problem to a single integral in $x$.
+
+>**Step 3 — Compute the outer integral (with respect to $x$)**
+
+Now integrate $192 - 10x^{2}$ from $0$ to $2$:
+
+$$
+\begin{aligned}
+\iint_R T\,dA &= \int_{0}^{2} \bigl(192 - 10x^{2}\bigr)\,dx
+= \left[192x - 10\cdot\frac{x^{3}}{3}\right]_{0}^{2} \\
+&= 192\cdot 2 - \frac{10}{3}\cdot 8
+= 384 - \frac{80}{3} \\
+&= \frac{1152 - 80}{3} = \frac{1072}{3}.
+\end{aligned}
+$$
+
+Thus the double integral $\iint_R T\,dA = \dfrac{1072}{3}\ \text{(°C·cm}^2\text{)}$.
+
+
+>**Step 4 — Multiply by surface heat capacity $c$**
+
+Since $c=\tfrac{1}{50} = 0.02\ \text{J/cm}^2\!^\circ\text{C}$,
+
+$$
+Q = c\cdot \frac{1072}{3} = \frac{1072}{3}\cdot\frac{1}{50} = \frac{1072}{150} = \frac{536}{75}.
+$$
+
+Numeric value:
+$$
+Q = \frac{536}{75}\ \text{J} \approx 7.14667\ \text{J}.
+$$
+
+**Answer:** $Q = \dfrac{536}{75}\ \text{J} \approx 7.1467\ \text{J}$.
+
+
+>*Physical interpretation*
+
+The chip stores about $7.15$ joules of thermal energy (over its top surface) under the modeled temperature distribution. The largest contribution to $Q$ comes from the constant offset ($100^\circ$C) over the area; the quadratic terms reduce the total.
+
+
+
+**SymPy verification**
+
+Run the following in a Python environment (Jupyter / Quarto) to verify symbolically and numerically:
+
+```{python}
+import sympy as sp
+
+# symbols
+x, y, c = sp.symbols('x y c', real=True)
+c_val = sp.Rational(1,50)  # 0.02
+
+# temperature
+T = 100 - 5*x**2 - 3*y**2
+
+# double integral over R = [0,2]x[0,2]
+integrand = T
+area_integral = sp.integrate(sp.integrate(integrand, (y, 0, 2)), (x, 0, 2))
+Q = sp.simplify(c_val * area_integral)
+
+area_integral, Q, float(Q)
+```
+
+### Problem 2 
+
+The electric potential in a plane is modeled by
+$$
+V(x,y) = x^2 + y^2,
+$$
+over the triangular region $R$ bounded by $y=0$, $y=x$, and $x=1$.  
+Compute the total potential flux through the region:
+$$
+\Phi = \iint_R V(x,y)\,dA .
+$$
+
+
+**Step 1 — Describe the region of integration**
+
+
+The triangle $R$ is
+$$
+R=\{(x,y)\mid 0\le x\le 1,\; 0\le y\le x\}.
+$$
+So a natural order is integrate $y$ first ($0\to x$) and then $x$ ($0\to1$).
+
+
+**Step 2 — Set up the double integral**
+
+$$
+\Phi = \int_{x=0}^{1}\int_{y=0}^{x} (x^2 + y^2)\,dy\,dx.
+$$
+
+
+**Step 3 — Evaluate the inner integral (w.r.t. $y$)**
+
+For fixed $x$,
+
+$$
+\int_{0}^{x} (x^2 + y^2)\,dy
+= \int_{0}^{x} x^2\,dy + \int_{0}^{x} y^2\,dy
+= x^2\cdot x + \left[\frac{y^3}{3}\right]_{0}^{x}
+= x^3 + \frac{x^3}{3}
+= \frac{4}{3}x^3.
+$$
+
+
+**Step 4 — Evaluate the outer integral (w.r.t. $x$)**
+
+$$
+\begin{aligned}
+\Phi &= \int_{0}^{1} \frac{4}{3}x^3\,dx\\
+&= \frac{4}{3}\cdot \left[\frac{x^4}{4}\right]_{0}^{1}\\
+&= \frac{4}{3}\cdot \frac{1}{4}\\
+&= \frac{1}{3}.
+\end{aligned}
+$$
+
+**Answer:** $\displaystyle \Phi = \frac{1}{3}.$
+
+
+>**Alternative: change the order of integration (verification)**
+
+If we integrate in the order $dx\,dy$, describe $R$ as
+$$
+R=\{(x,y)\mid 0\le y\le 1,\; y\le x\le 1\}
+$$
+so
+$$
+\Phi = \int_{y=0}^{1}\int_{x=y}^{1} (x^2 + y^2)\,dx\,dy.
+$$
+
+Compute inner integral (w.r.t. $x$):
+
+$$
+\int_{x=y}^{1} (x^2 + y^2)\,dx = \left[\frac{x^3}{3} + y^2 x\right]_{x=y}^{1}
+= \left(\frac{1}{3} + y^2\right) - \left(\frac{y^3}{3} + y^3\right)
+= \frac{1}{3} + y^2 - \frac{4}{3}y^3.
+$$
+
+Now integrate w.r.t. $y$:
+
+$$
+\Phi = \int_{0}^{1} \left(\frac{1}{3} + y^2 - \frac{4}{3}y^3\right)\,dy
+= \left[\frac{y}{3} + \frac{y^3}{3} - \frac{4}{3}\cdot\frac{y^4}{4}\right]_{0}^{1}
+= \frac{1}{3} + \frac{1}{3} - \frac{1}{3}
+= \frac{1}{3},
+$$
+
+which confirms the previous result.
+
+
+>*Physical interpretation*
+
+The integral $\Phi=\iint_R (x^2+y^2)\,dA$ sums the potential density over the triangular region. The value $\Phi=\tfrac{1}{3}$ (in the chosen units) represents the total "potential content" of that triangular patch. Because $V$ increases with distance from the origin, regions farther from the origin contribute more to the total.
+
+
+**SymPy verification**
+
+
+```{python}
+import sympy as sp
+
+# symbols
+x, y = sp.symbols('x y', real=True)
+
+# integrand
+V = x**2 + y**2
+
+# order 1: dy then dx
+phi1 = sp.integrate(sp.integrate(V, (y, 0, x)), (x, 0, 1))
+
+# order 2: dx then dy
+phi2 = sp.integrate(sp.integrate(V, (x, y, 1)), (y, 0, 1))
+
+phi1_simpl = sp.simplify(phi1)
+phi2_simpl = sp.simplify(phi2)
+
+phi1_simpl, phi2_simpl, float(phi1_simpl)
+```
+
+### Problem 3 
+
+A square sensor array ($1\times 1$) receives light intensity
+$$
+I(x,y) = e^{-x^2 - y^2},\qquad 0\le x\le 1,\;0\le y\le 1.
+$$
+Find the *average light intensity* over the array surface:
+$$
+I_{\text{avg}}=\frac{1}{A}\iint\limits_R I(x,y)\,dA,
+$$
+where $A$ is the area of $R$.
+
+**Step 1 — Area of the region**
+
+The region $R$ is the unit square, so $A=1\cdot1=1$. Thus
+$$
+I_{\text{avg}}=\iint\limits_{R} e^{-x^{2}-y^{2}}\,dA.
+$$
+(We have $A=1$, so average = total integral.)
+
+**Step 2 — Use separability of the integrand**
+
+The integrand is separable:
+$$
+\int\limits_{0}^{1}\int\limits_{0}^{1} e^{-x^{2}-y^{2}}\,dy\,dx
+= \left(\int\limits_{0}^{1} e^{-x^{2}}\,dx\right)\left(\int\limits_{0}^{1} e^{-y^{2}}\,dy\right)
+= \left(\int\limits_{0}^{1} e^{-t^{2}}\,dt\right)^{2}.
+$$
+
+(Here we used the same dummy variable for both 1D integrals.)
+
+**Step 3 — Express the one-dimensional integral in terms of the error function**
+
+The Gaussian integral from $0$ to $1$ is expressed with the error function $\operatorname{erf}$:
+$$
+\int\limits_{0}^{1} e^{-t^{2}}\,dt = \frac{\sqrt{\pi}}{2}\,\operatorname{erf}(1).
+$$
+
+Therefore the double integral is
+$$
+\iint_{R} e^{-x^{2}-y^{2}}\,dA
+= \left(\frac{\sqrt{\pi}}{2}\,\operatorname{erf}(1)\right)^{2}
+= \frac{\pi}{4}\,\operatorname{erf}(1)^{2}.
+$$
+
+
+**Step 4 — Numerical value**
+
+Using known numerical values $\operatorname{erf}(1)\approx 0.8427007929$ and $\sqrt{\pi}/2\approx 0.8862269255$,
+
+$$
+\int_{0}^{1} e^{-t^{2}}\,dt \approx 0.7468241328,
+$$
+
+so
+$$
+I_{\text{avg}}
+= \left(0.7468241328\right)^{2}
+\approx 0.5577462854.
+$$
+
+**Answer:** $I_{\text{avg}} = \dfrac{\pi}{4}\,\operatorname{erf}(1)^{2} \approx 0.5577463.$
+
+
+>*Physical interpretation*
+
+The average intensity over the unit sensor is about $0.558$ (in the same units as $I$). Because the Gaussian decays away from the origin, the center region contributes more, but over the unit square the total/average is reduced from the peak value $I(0,0)=1$.
+
+**SymPy verification**
+
+```{python}
+import sympy as sp
+
+# symbols
+x, y = sp.symbols('x y', real=True)
+
+# integrand
+I = sp.exp(-x**2 - y**2)
+
+# double integral over unit square (separable)
+inner = sp.integrate(sp.exp(-x**2), (x, 0, 1))
+double = sp.simplify(inner**2)
+
+# express in terms of erf
+double_simpl = sp.simplify(double.rewrite(sp.erf))
+
+# numeric value
+numeric = float(sp.N(double, 12))
+
+inner, double_simpl, numeric
+```
+
+### Problem 4
+
+Find the volume of the solid bounded below by the plane $z=0$ and above by the surface
+$$
+z = 4 - x^2 - y^2,
+$$
+over the region $R$ in the first quadrant bounded by $x=0$, $y=0$, and the line $x+y=2$ (i.e. $x\ge0,\ y\ge0,\ x+y\le2$).
+
+**Step 1 — Describe the region $R$**
+
+The triangular region $R$ in the $xy$-plane is
+$$
+R=\{(x,y)\mid 0\le y\le 2,\; 0\le x\le 2-y\},
+$$
+or equivalently $0\le x\le2,\;0\le y\le 2-x$. Either order is fine; here we integrate $x$ first (inner integral), $y$ second (outer integral).
+
+
+**Step 2 — Set up the double integral for volume**
+
+The volume is
+$$
+V=\iint\limits_{R} (4 - x^2 - y^2)\,dA
+= \int\limits_{y=0}^{2}\int\limits_{x=0}^{2-y} \bigl(4 - x^2 - y^2\bigr)\,dx\,dy.
+$$
+
+(We must have $4-x^2-y^2\ge0$ over the region for the surface to lie above $z=0$; here the maximum distance from origin in $R$ is at $(2,0)$ or $(0,2)$ where $4-x^2-y^2=0$, so the surface touches $z=0$ at the triangle corners — the integrand is nonnegative on $R$.)
+
+
+**Step 3 — Evaluate the inner integral (with respect to $x$)**
+
+For fixed $y$,
+$$
+\begin{aligned}
+\int\limits_{0}^{2-y} \bigl(4 - x^2 - y^2\bigr)\,dx
+&= \int\limits_{0}^{2-y} 4\,dx \;-\; \int\limits_{0}^{2-y} x^2\,dx \;-\; \int\limits_{0}^{2-y} y^2\,dx \\
+&= 4(2-y) \;-\; \left[\frac{x^3}{3}\right]_{0}^{2-y} \;-\; y^2(2-y) \\
+&= 4(2-y) - \frac{(2-y)^3}{3} - y^2(2-y).
+\end{aligned}
+$$
+
+You may expand and simplify before integrating in $y$, or integrate the above expression directly.
+
+
+**Step 4 — Simplify the integrand for the outer integral**
+
+Compute (algebraic simplification):
+$$
+\begin{aligned}
+4(2-y) - \frac{(2-y)^3}{3} - y^2(2-y)
+&= \Bigl(8 - 4y\Bigr) - \frac{1}{3}(8 - 12y + 6y^2 - y^3) - (2y^2 - y^3) \\
+&= 8 - 4y - \frac{8}{3} + 4y - 2y^2 + \frac{1}{3}y^3 - 2y^2 + y^3 \\
+&= \left(8 - \frac{8}{3}\right) + \bigl(-4y+4y\bigr) + \bigl(-2y^2-2y^2\bigr) + \left(\frac{1}{3}y^3 + y^3\right) \\
+&= \frac{16}{3} - 4y^2 + \frac{4}{3}y^3.
+\end{aligned}
+$$
+
+So the outer integral becomes
+$$
+V = \int\limits_{0}^{2} \left(\frac{16}{3} - 4y^2 + \frac{4}{3}y^3\right)\,dy.
+$$
+
+
+**Step 5 — Evaluate the outer integral**
+
+Integrate term-by-term:
+
+$$
+\begin{aligned}
+V &= \left[\frac{16}{3}y - \frac{4}{3}y^3 + \frac{4}{3}\cdot\frac{y^4}{4}\right]_{0}^{2}
+= \left[\frac{16}{3}y - \frac{4}{3}y^3 + \frac{1}{3}y^4\right]_{0}^{2} \\
+&= \frac{16}{3}\cdot 2 - \frac{4}{3}\cdot 8 + \frac{1}{3}\cdot 16
+= \frac{32}{3} - \frac{32}{3} + \frac{16}{3}
+= \frac{16}{3}.
+\end{aligned}
+$$
+
+**Answer:**  
+$$
+\boxed{V = \dfrac{16}{3}}
+$$
+(in the appropriate cubic units, e.g. cubic centimeters if $x,y$ were in cm).
+
+>*Physical interpretation*
+
+The solid is the portion of the paraboloid $z=4-x^2-y^2$ above the triangular base in the first quadrant. The volume $\tfrac{16}{3}\approx 5.333\ldots$ is the total amount of space under the curved surface over that triangular footprint.
+
+**SymPy verification**
+
+```{python}
+import sympy as sp
+
+# declare symbols
+x, y = sp.symbols('x y', real=True)
+
+# integrand
+z = 4 - x**2 - y**2
+
+# do the double integral over R: 0 <= y <= 2, 0 <= x <= 2 - y
+V = sp.integrate(sp.integrate(z, (x, 0, 2 - y)), (y, 0, 2))
+sp.simplify(V)
+```
+
+### Problem 5 
+
+Evaluate
+$$
+I = \int\limits_{0}^{2}\int\limits_{x^{2}}^{2x} (x+y)\,dy\,dx
+$$
+by sketching the region of integration, changing the order of integration, and verifying that both orders give the same result.
+
+
+**Step 1 — Describe and sketch the region of integration**
+
+The region $R$ is the set of points $(x,y)$ with
+$$
+0 \le x \le 2,\qquad x^{2} \le y \le 2x.
+$$
+
+Boundaries are the parabola $y=x^{2}$ and the line $y=2x$, intersecting at $x=0$ and $x=2$ (since $x^{2}=2x \Rightarrow x(x-2)=0$).  
+On the $y$-axis the minimum $y$ is $0$ and the maximum $y$ on $R$ is at the intersection point $(2,4)$, so $0\le y\le 4$ overall.
+
+For a fixed $y$ (when changing the order), $x$ runs between the line solved for $x$ ($x = y/2$) and the parabola solved for $x$ ($x=\sqrt{y}$). Thus the region can be described as
+$$
+R=\{(x,y)\mid 0\le y\le 4,\; \frac{y}{2}\le x\le \sqrt{y}\}.
+$$
+
+(Geometric check: for $0\le y\le4$ we have $y/2 \le \sqrt{y}$, so the interval for $x$ is nonempty.)
+
+A quick sketch helps: plot $y=x^{2}$ and $y=2x$ and shade the area between them from $x=0$ to $x=2$.
+
+
+**Step 2 — Evaluate the integral in the original order ($dy$ then $dx$)**
+
+Compute the inner integral first:
+$$
+\begin{aligned}
+\int\limits_{x^{2}}^{2x} (x+y)\,dy
+&= \left[xy + \tfrac{1}{2}y^{2}\right]_{y=x^{2}}^{y=2x} \\
+&= \bigl(x(2x) + \tfrac{1}{2}(2x)^{2}\bigr) - \bigl(x\cdot x^{2} + \tfrac{1}{2}x^{4}\bigr) \\
+&= \bigl(2x^{2} + 2x^{2}\bigr) - \bigl(x^{3} + \tfrac{1}{2}x^{4}\bigr) \\
+&= 4x^{2} - x^{3} - \tfrac{1}{2}x^{4}.
+\end{aligned}
+$$
+
+Now integrate with respect to $x$ from $0$ to $2$:
+$$
+\begin{aligned}
+I &= \int\limits_{0}^{2} \Bigl(4x^{2} - x^{3} - \tfrac{1}{2}x^{4}\Bigr)\,dx \\
+&= \left[\tfrac{4x^{3}}{3} - \tfrac{x^{4}}{4} - \tfrac{1}{2}\cdot\tfrac{x^{5}}{5}\right]_{0}^{2} \\
+&= \frac{4\cdot 8}{3} - \frac{16}{4} - \frac{1}{10}\cdot 32 \\
+&= \frac{32}{3} - 4 - \frac{32}{10} \\
+&= \frac{160 - 60 - 48}{15} = \frac{52}{15}.
+\end{aligned}
+$$
+
+So
+$$
+\boxed{I = \dfrac{52}{15}.}
+$$
+
+
+**Step 3 — Change the order of integration ($dx$ then $dy$) and evaluate**
+
+Using the $y$-first description $0\le y\le 4$ and $y/2 \le x \le \sqrt{y}$, write
+$$
+I = \int\limits_{y=0}^{4}\int\limits_{x=y/2}^{\sqrt{y}} (x+y)\,dx\,dy.
+$$
+
+Evaluate the inner integral (w.r.t. $x$):
+
+$$
+\begin{aligned}
+\int\limits_{y/2}^{\sqrt{y}} (x+y)\,dx
+&= \left[\tfrac{x^{2}}{2} + yx\right]_{x=y/2}^{x=\sqrt{y}} \\
+&= \left(\tfrac{y}{2} + y\sqrt{y}\right) - \left(\tfrac{(y/2)^{2}}{2} + y\cdot\tfrac{y}{2}\right) \\
+&= \tfrac{y}{2} + y^{3/2} - \left(\tfrac{y^{2}}{8} + \tfrac{y^{2}}{2}\right) \\
+&= \tfrac{y}{2} + y^{3/2} - \tfrac{5}{8}y^{2}.
+\end{aligned}
+$$
+
+Now integrate with respect to $y$ from $0$ to $4$:
+$$
+\begin{aligned}
+I &= \int\limits_{0}^{4} \left(\tfrac{y}{2} + y^{3/2} - \tfrac{5}{8}y^{2}\right)\,dy \\
+&= \left[\tfrac{y^{2}}{4} + \tfrac{2}{5}y^{5/2} - \tfrac{5}{24}y^{3}\right]_{0}^{4} \\
+&= \frac{16}{4} + \frac{2}{5}\cdot 4^{5/2} - \frac{5}{24}\cdot 64 \\
+&= 4 + \frac{2}{5}\cdot 32 - \frac{320}{24} \\
+&= 4 + \frac{64}{5} - \frac{40}{3} \\
+&= \frac{60 + 192 - 200}{15} = \frac{52}{15},
+\end{aligned}
+$$
+
+which matches the result from the original order.
+
+
+**Step 4 — Interpretation**
+
+Both integration orders produce the same value $I=\tfrac{52}{15}\approx 3.4667$. Changing the order required correctly expressing the $x$-limits as functions of $y$ (here $x=y/2$ to $x=\sqrt{y}$) — this step comes from solving the boundary equations $y=2x$ and $y=x^{2}$ for $x$.
+
+
+**SymPy verification**
+
+```{python}
+import sympy as sp
+
+# symbols
+x, y = sp.symbols('x y', real=True)
+
+# integrand
+f = x + y
+
+# original order: dy then dx
+I1 = sp.integrate(sp.integrate(f, (y, x**2, 2*x)), (x, 0, 2))
+
+# swapped order: dx then dy (y from 0 to 4, x from y/2 to sqrt(y))
+I2 = sp.integrate(sp.integrate(f, (x, y/2, sp.sqrt(y))), (y, 0, 4))
+
+sp.simplify(I1), sp.simplify(I2), float(I1)
+```
+
+### Problem 6 
+
+The joint function is
+$$
+f(x,y) = \frac{3}{8}(x^2 + y^2),
+$$
+defined on the unit square $0\le x\le1,\;0\le y\le1$. Compute:
+
+1. The total probability $\displaystyle P_{\text{total}}=\iint\limits_{[0,1]^2} f(x,y)\,dA$ (check whether it equals $1$).  
+2. The probability $\displaystyle P\{X+Y\le 1\}=\iint\limits_{x+y\le1} f(x,y)\,dA$.
+
+*(Sketch the triangular region $x\ge 0,y\ge 0,x+y\le 1$ for part 2.)*
+
+
+>**Part 1 — Total probability on the unit square**
+
+**Set up the integral.**  
+$$
+P_{\text{total}}=\int\limits_{x=0}^{1}\int\limits_{y=0}^{1} \frac{3}{8}(x^2 + y^2)\,dy\,dx.
+$$
+
+**Exploit linearity / separability.**  
+Split the double integral:
+
+$$
+\begin{aligned}
+\iint\limits_{[0,1]^2} (x^2+y^2)\,dA
+&= \int\limits_0^1\int\limits_0^1 x^2\,dy\,dx + \int\limits_0^1\int\limits_0^1 y^2\,dy\,dx \\
+&= \int\limits_0^1 x^2\biggl(\int\limits_0^1 dy\biggr)dx + \int\limits_0^1 \biggl(\int\limits_0^1 y^2 dy\biggr)dx \\
+&= \int\limits_0^1 x^2\,dx + \int\limits_0^1 y^2\,dy
+= \frac{1}{3} + \frac{1}{3} = \frac{2}{3}.
+\end{aligned}
+$$
+
+Multiply by the prefactor $\tfrac{3}{8}$:
+$$
+P_{\text{total}} = \frac{3}{8}\cdot\frac{2}{3} = \frac{1}{4} = 0.25.
+$$
+
+**Conclusion:** $P_{\text{total}}=\dfrac{1}{4}\neq 1$.  
+Therefore $f(x,y)$ as given is **not** a normalized probability density on $[0,1]^2$ (it integrates to $1/4$). To make it a valid pdf one would divide $f$ by $1/4$ (i.e. multiply by $4$) or choose the normalization constant accordingly.
+
+>**Part 2 — Probability that $X+Y\le 1$*
+
+**Region:** the triangle $R = \{(x,y)\mid 0\le x\le1,\ 0\le y\le 1-x\}$.
+
+**Set up the integral (integrate $y$ first):**
+$$
+P\{X+Y\le1\} = \int\limits_{x=0}^{1}\int\limits_{y=0}^{1-x} \frac{3}{8}(x^2 + y^2)\,dy\,dx.
+$$
+
+**Evaluate inner integral (w.r.t. $y$):**
+$$
+\begin{aligned}
+\int\limits_{0}^{1-x} (x^2 + y^2)\,dy
+&= x^2(1-x) + \left[\frac{y^3}{3}\right]_{0}^{1-x} \\
+&= x^2(1-x) + \frac{(1-x)^3}{3}.
+\end{aligned}
+$$
+
+**Now integrate w.r.t. $x$:**
+$$
+\begin{aligned}
+\iint\limits_{R} (x^2+y^2)\,dA
+&= \int\limits_{0}^{1} \left( x^2(1-x) + \frac{(1-x)^3}{3} \right)\,dx.
+\end{aligned}
+$$
+
+Compute the two parts separately:
+
+- $\displaystyle \int\limits_{0}^{1} x^2(1-x)\,dx = \int\limits_0^1 (x^2 - x^3)\,dx = \left[\frac{x^3}{3} - \frac{x^4}{4}\right]_0^1 = \frac{1}{3} - \frac{1}{4} = \frac{1}{12}.$
+
+- $\displaystyle \int\limits_{0}^{1} \frac{(1-x)^3}{3}\,dx = \frac{1}{3}\int\limits_0^1 (1-x)^3 dx = \frac{1}{3}\cdot\frac{1}{4} = \frac{1}{12}.$
+
+So
+$$
+\iint\limits_{R} (x^2+y^2)\,dA = \frac{1}{12} + \frac{1}{12} = \frac{1}{6}.
+$$
+
+Multiply by the prefactor $\tfrac{3}{8}$:
+$$
+P\{X+Y\le1\} = \frac{3}{8}\cdot\frac{1}{6} = \frac{3}{48} = \frac{1}{16} = 0.0625.
+$$
+
+**Answer:** $P\{X+Y\le1\}=\dfrac{1}{16}\ ($approximately $0.0625)$.
+
+
+>*Interpretation*
+
+- The joint function integrates to $1/4$ over the unit square, so it is not normalized. The probability $P\{X+Y\le1\}=\tfrac{1}{16}$ is the mass of the given (unnormalized) density over the triangle. If you first normalized $f$ by dividing by $1/4$ (i.e. using $f_{\text{norm}}=4f$), then the normalized probabilities would be $1$ (total) and $4\cdot\tfrac{1}{16}=\tfrac{1}{4}$ respectively.
+
+
+**SymPy verification**
+
+
+```{python}
+import sympy as sp
+
+# symbols
+x, y = sp.symbols('x y', real=True)
+
+# density
+f = sp.Rational(3,8)*(x**2 + y**2)
+
+# Part 1: total probability over unit square
+P_total = sp.integrate(sp.integrate(f, (y, 0, 1)), (x, 0, 1))
+# Part 2: probability X+Y <= 1 (triangle)
+P_triangle = sp.integrate(sp.integrate(f, (y, 0, 1 - x)), (x, 0, 1))
+
+sp.simplify(P_total), sp.simplify(P_triangle), float(P_total), float(P_triangle)
+```
